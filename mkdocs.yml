@@ -1,0 +1,13 @@
+site_name: Gon Docs
+site_url: https://gonkun.github.io
+site_author: Gon
+site_description: My personal documentation because I'm a disaster
+
+nav:
+  - About: index.md
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
