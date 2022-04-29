@@ -4,7 +4,12 @@ site_author: Gon
 site_description: My personal documentation because I'm a disaster
 
 nav:
-  - About: index.md
+  - Home: index.md
+  - User Guide:
+    - Kubernetes: k8s.md
+    - DataStax: dse.md
+    - Terraform: terraform.md
+    - AWS: aws.md
 
 theme:
   name: readthedocs
