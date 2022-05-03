@@ -7,6 +7,8 @@
 `kubectl cluster-info`
 * Get all pods<br>
 `kubectl get pods -A`
+* Get resource yaml<br>
+`kubectl get <resource> -n <namespace> <resource_name> -o yaml`
 * List pods Docker images in a specific namespace<br>
 `kubectl get pods -n <namespace> -o jsonpath="{.items[*].spec.containers[*].image}" ` 
 * List all running pods in a specific namespace<br>
