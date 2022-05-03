@@ -1,7 +1,7 @@
 # Kubernetes
 
 
-## Commands
+## Basic Commands
 
 * Get info about cluster<br>
 `kubectl cluster-info`
@@ -33,3 +33,12 @@
 `kubectl -n <namespace> logs -f -l app=nginx`
 * Copy secrets from a namespace to another<br>
 `kubectl get secrets -o json --namespace <namespace_source> | jq '.items[].metadata.namespace = "<namespace_destiny>"' | kubectl create-f  -`
+
+## Logging Commands
+### Stern
+* Tail logs all pods on specific namespace<br>
+`stern -n <namespace> .`
+* Tail logs all pods with excludeds<br>
+`stern -n <namespace> --exclude-container <pattern_string> .`
+* Tail logs specific pods<br>
+`stern -n <namespace> --container <pattern_string>`
