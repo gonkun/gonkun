@@ -97,6 +97,8 @@
 <code>kubectl cluster-info</code></li>
 <li>Get all pods<br>
 <code>kubectl get pods -A</code></li>
+<li>Get resource yaml<br>
+<code>kubectl get &lt;resource&gt; -n &lt;namespace&gt; &lt;resource_name&gt; -o yaml</code></li>
 <li>List pods Docker images in a specific namespace<br>
 <code>kubectl get pods -n &lt;namespace&gt; -o jsonpath="{.items[*].spec.containers[*].image}"</code> </li>
 <li>List all running pods in a specific namespace<br>
