@@ -49,7 +49,13 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Kubernetes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#basic-commands">Basic Commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#logging-commands">Logging Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#stern">Stern</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -85,7 +91,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="kubernetes">Kubernetes</h1>
-<h2 id="commands">Commands</h2>
+<h2 id="basic-commands">Basic Commands</h2>
 <ul>
 <li>Get info about cluster<br>
 <code>kubectl cluster-info</code></li>
@@ -117,6 +123,16 @@
 <code>kubectl -n &lt;namespace&gt; logs -f -l app=nginx</code></li>
 <li>Copy secrets from a namespace to another<br>
 <code>kubectl get secrets -o json --namespace &lt;namespace_source&gt; | jq '.items[].metadata.namespace = "&lt;namespace_destiny&gt;"' | kubectl create-f  -</code></li>
+</ul>
+<h2 id="logging-commands">Logging Commands</h2>
+<h3 id="stern">Stern</h3>
+<ul>
+<li>Tail logs all pods on specific namespace<br>
+<code>stern -n &lt;namespace&gt; .</code></li>
+<li>Tail logs all pods with excludeds<br>
+<code>stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .</code></li>
+<li>Tail logs specific pods<br>
+<code>stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;</code></li>
 </ul>
               
             </div>
