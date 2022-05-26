@@ -49,10 +49,14 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Kubernetes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#basic-commands">Basic Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#common-commands">Common Commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-commands">Advanced Commands</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#logging-commands">Logging Commands</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#kubectl">Kubectl</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#stern">Stern</a>
     </li>
         </ul>
@@ -64,6 +68,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../terraform/">Terraform</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
                   </li>
               </ul>
       </div>
@@ -91,7 +97,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="kubernetes">Kubernetes</h1>
-<h2 id="basic-commands">Basic Commands</h2>
+<h2 id="common-commands">Common Commands</h2>
 <ul>
 <li>Get info about cluster<br>
 <code>kubectl cluster-info</code></li>
@@ -102,11 +108,18 @@
 <li>Get list of CRD applied<br>
 <code>kubectl get customresourcedefinitions</code></li>
 <li>List pods Docker images in a specific namespace<br>
-<code>kubectl get pods -n &lt;namespace&gt; -o jsonpath="{.items[*].spec.containers[*].image}"</code> </li>
+<code>kubectl get pods -n &lt;namespace&gt; -o jsonpath="{.items[*].spec.containers[*].image}"</code></li>
+<li>Restart all deployments in a namespace<br>
+<code>kubectl rollout restart deployment -n &lt;namespace&gt;</code></li>
 <li>List all running pods in a specific namespace<br>
 <code>kubectl get pods -n &lt;namespace&gt; --field-selector=status.phase=Running</code></li>
 <li>List all non-running pods in a specific namespace<br>
 <code>kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete</code></li>
+<li>Create tunnel to a service using port-forward (like a SSH tunnel)<br>
+<code>kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;</code></li>
+</ul>
+<h2 id="advanced-commands">Advanced Commands</h2>
+<ul>
 <li>List of nodes and their memory size<br>
 <code>kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'</code></li>
 <li>List of nodes and the number of pods running on them<br>
@@ -121,14 +134,17 @@
 <code>kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'</code></li>
 <li>Print all services and their respective nodePorts<br>
 <code>kubectl get --all-namespaces svc -o json | jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join("|"))]| @tsv'</code></li>
-<li>Print logs with human-readable timestamp<br>
-<code>kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps</code></li>
-<li>Getting logs from all pods using  alabel to filter<br>
-<code>kubectl -n &lt;namespace&gt; logs -f -l app=nginx</code></li>
 <li>Copy secrets from a namespace to another<br>
 <code>kubectl get secrets -o json --namespace &lt;namespace_source&gt; | jq '.items[].metadata.namespace = "&lt;namespace_destiny&gt;"' | kubectl create-f  -</code></li>
 </ul>
 <h2 id="logging-commands">Logging Commands</h2>
+<h3 id="kubectl">Kubectl</h3>
+<ul>
+<li>Print logs with human-readable timestamp<br>
+<code>kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps</code></li>
+<li>Getting logs from all pods using  alabel to filter<br>
+<code>kubectl -n &lt;namespace&gt; logs -f -l app=nginx</code></li>
+</ul>
 <h3 id="stern">Stern</h3>
 <ul>
 <li>Tail logs all pods on specific namespace<br>

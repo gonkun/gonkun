@@ -1,17 +1,6 @@
-# Welcome to MkDocs
+# Gon Personal Docs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This documentation is a remainder of all tools and technologie sthat I use on my job.<br>
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Most of the documentation may be is a mix off commands and explanations that I wrote quickly and dirty, but it helps me to remind all these stuff.<br
+>

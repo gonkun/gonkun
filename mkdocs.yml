@@ -10,6 +10,7 @@ nav:
     - DataStax: dse.md
     - Terraform: terraform.md
     - AWS: aws.md
+    - Istio: istio.md
 
 theme:
   name: readthedocs
