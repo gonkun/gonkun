@@ -21,6 +21,8 @@
 `kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete`
 * Create tunnel to a service using port-forward (like a SSH tunnel)<br>
 `kubectl port-forward -n <namespace> svc/<service_name> <localhost_port>:<service_port>`
+* List all PVC associated with their respective pod<br>
+`kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null`
 
 ## Advanced Commands
 

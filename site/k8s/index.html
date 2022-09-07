@@ -119,6 +119,8 @@
 <code>kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete</code></li>
 <li>Create tunnel to a service using port-forward (like a SSH tunnel)<br>
 <code>kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;</code></li>
+<li>List all PVC associated with their respective pod<br>
+<code>kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null</code></li>
 </ul>
 <h2 id="advanced-commands">Advanced Commands</h2>
 <ul>
