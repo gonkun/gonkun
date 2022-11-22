@@ -58,3 +58,13 @@
 `stern -n <namespace> --exclude-container <pattern_string> .`
 * Tail logs specific pods<br>
 `stern -n <namespace> --container <pattern_string>`
+
+
+## Tutorials and Guides
+
+### Networking
+- [The Kubernetes Networking Guide](https://www.tkng.io/)
+- [An Illustrated Guide to Kubernetes Networking [Part 1]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727)
+- [An Illustrated Guide to Kubernetes Networking [Part 2]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c)
+- [An Illustrated Guide to Kubernetes Networking [Part 3]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-3-f35957784c8e)
+- [ALB Ingress Controller on AWS EKS](https://medium.com/tensult/alb-ingress-controller-on-aws-eks-45bf8e36020d)
