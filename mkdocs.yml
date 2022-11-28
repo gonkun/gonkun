@@ -12,7 +12,7 @@ nav:
     - AWS: aws.md
     - Istio: istio.md
     - BASH: bash.md
-    - GitHub Actions: github-actions-md
+    - GitHub Actions: github-actions.md
     - Others: others.md
 
 theme:
