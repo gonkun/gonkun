@@ -131,6 +131,12 @@
 <code>kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;</code></li>
 <li>List all PVC associated with their respective pod<br>
 <code>kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null</code></li>
+<li>List aal pods with events related to them<br>
+<code>kubectl get pods --watch --output-watch-events -A</code></li>
+<li>List all events with filter "type=Warning"<br>
+<code>kubectl get events -w --field-selector=type=Warning -A</code></li>
+<li>List all environment variables of specific pod<br>
+<code>kubectl set env -n &lt;namespace&gt; pod/&lt;podname&gt; --list</code></li>
 </ul>
 <h2 id="advanced-commands">Advanced Commands</h2>
 <ul>
@@ -138,10 +144,10 @@
 <code>kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'</code></li>
 <li>List of nodes and the number of pods running on them<br>
 <code>kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({"nodeName": .[0].spec.nodeName, "count": length}) | sort_by(.count)'</code></li>
-<li>List of pods that eat up CPU<br>
-<code>kubectl top pods -A | sort --reverse --key 3 --numeric</code></li>
-<li>List of pods that eat up memoryCPU<br>
-<code>kubectl top pods -A | sort --reverse --key 4 --numeric</code></li>
+<li>List all pods sort by memory usage<br>
+<code>k top pods -A --sort-by='memory'</code> </li>
+<li>List all pods sorted by cpu usage<br>
+<code>k top pods -A --sort-by='cpu'</code></li>
 <li>Sorting list of pods (in this case, by the number of restarts)
 <code>kubectl get pods --sort-by=.status.containerStatuses[0].restartCount</code></li>
 <li>Print <strong>limits</strong> and <strong>requests</strong> for each pod<br>
