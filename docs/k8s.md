@@ -75,3 +75,7 @@
 - [An Illustrated Guide to Kubernetes Networking [Part 2]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c)
 - [An Illustrated Guide to Kubernetes Networking [Part 3]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-3-f35957784c8e)
 - [ALB Ingress Controller on AWS EKS](https://medium.com/tensult/alb-ingress-controller-on-aws-eks-45bf8e36020d)
+- [What Actually Happens When You Publish a Container Port](https://iximiuz.com/en/posts/docker-publish-container-ports/?z=101&utm_source=newsletter&utm_medium=email&utm_campaign=devopsbulletin&utm_content=devopsbulletin)
+
+### Secrets
+- [State of Kubernetes Secrets Management in 2022](https://medium.com/4th-coffee/state-of-kubernetes-secrets-management-in-2022-6148af91e7b5)
