@@ -69,6 +69,9 @@
 
 ## Tutorials and Guides
 
+### DNS
+- [The lide of a DNS query in Kubernetes](https://www.nslookup.io/learning/the-life-of-a-dns-query-in-kubernetes/)
+
 ### Networking
 - [The Kubernetes Networking Guide](https://www.tkng.io/)
 - [An Illustrated Guide to Kubernetes Networking [Part 1]](https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727)
