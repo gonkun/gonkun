@@ -69,8 +69,10 @@
 
 ## Tutorials and Guides
 
+### Ingresses
+- [Native EKS Ingress with AWS Load Balancer Controller](https://blog.antoinechoula.ga/native-eks-ingress-with-aws-load-balancer-controller)
 ### DNS
-- [The lide of a DNS query in Kubernetes](https://www.nslookup.io/learning/the-life-of-a-dns-query-in-kubernetes/)
+- [The life of a DNS query in Kubernetes](https://www.nslookup.io/learning/the-life-of-a-dns-query-in-kubernetes/)
 
 ### Networking
 - [The Kubernetes Networking Guide](https://www.tkng.io/)
