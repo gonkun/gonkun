@@ -3,6 +3,10 @@
 
 ## Common Commands
 
+* Run pod
+`kubectl run <pod_name> --image <image> -n <namespace>`
+* Run pod and passing a command
+`kubectl run -i --tty <pod_name> --image=<image> -n <namespace> -- <command>`
 * Get info about cluster<br>
 `kubectl cluster-info`
 * Get all pods<br>
