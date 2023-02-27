@@ -6,13 +6,17 @@ site_description: My personal documentation because I'm a disaster
 nav:
   - Home: index.md
   - User Guide:
-    - Kubernetes: k8s.md
+    - Kubernetes:
+      - k8s.md
     - DataStax: dse.md
     - Terraform: terraform.md
     - AWS: aws.md
     - Istio: istio.md
     - BASH: bash.md
     - GitHub Actions: github-actions.md
+    - Courses:
+      - CKA: CKA/cka_1.md
+      - Golang for DevOps: Golang_DevOps/example1.md
     - Others: others.md
 
 theme:
