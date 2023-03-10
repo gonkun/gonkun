@@ -62,6 +62,14 @@
 `kubectl -n <namespace> logs -f <pod_name> --timestamps`
 * Getting logs from all pods using  alabel to filter<br>
 `kubectl -n <namespace> logs -f -l app=nginx`
+
+### Kubetail
+* Tail logs specific container<br>
+`kubetail <pod_name> -c <container_name>`
+* Tail logs from all containers on specific namespace<br>
+`kubetail -n <namespace>`
+
+
 ### Stern
 * Tail logs all pods on specific namespace<br>
 `stern -n <namespace> .`
