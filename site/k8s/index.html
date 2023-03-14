@@ -47,32 +47,40 @@
               </ul>
               <p class="caption"><span class="caption-text">User Guide</span></p>
               <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Kubernetes</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Kubernetes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#common-commands">Common Commands</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Kubernetes</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#common-commands">Common Commands</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#advanced-commands">Advanced Commands</a>
+    <li class="toctree-l3"><a class="reference internal" href="#advanced-commands">Advanced Commands</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#logging-commands">Logging Commands</a>
+    <li class="toctree-l3"><a class="reference internal" href="#logging-commands">Logging Commands</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#kubectl">Kubectl</a>
+    <li class="toctree-l4"><a class="reference internal" href="#kubectl">Kubectl</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stern">Stern</a>
+    <li class="toctree-l4"><a class="reference internal" href="#kubetail">Kubetail</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#stern">Stern</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
+    <li class="toctree-l3"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ingresses">Ingresses</a>
+    <li class="toctree-l4"><a class="reference internal" href="#ingresses">Ingresses</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dns">DNS</a>
+    <li class="toctree-l4"><a class="reference internal" href="#dns">DNS</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#networking">Networking</a>
+    <li class="toctree-l4"><a class="reference internal" href="#networking">Networking</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#secrets">Secrets</a>
+    <li class="toctree-l4"><a class="reference internal" href="#secrets">Secrets</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
     </li>
         </ul>
     </li>
+    </ul>
+                </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
@@ -86,6 +94,14 @@
                   <li class="toctree-l1"><a class="reference internal" href="../bash/">BASH</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../github-actions/">GitHub Actions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Courses</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../CKA/cka_1/">CKA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../Golang_DevOps/example1/">Golang for DevOps</a>
+                </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../others/">Others</a>
                   </li>
@@ -104,7 +120,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>User Guide &raquo;</li><li>Kubernetes</li>
+          <li>User Guide &raquo;</li>
+          <li>Kubernetes &raquo;</li><li>Kubernetes</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -175,6 +192,13 @@
 <li>Getting logs from all pods using  alabel to filter<br>
 <code>kubectl -n &lt;namespace&gt; logs -f -l app=nginx</code></li>
 </ul>
+<h3 id="kubetail">Kubetail</h3>
+<ul>
+<li>Tail logs specific container<br>
+<code>kubetail &lt;pod_name&gt; -c &lt;container_name&gt;</code></li>
+<li>Tail logs from all containers on specific namespace<br>
+<code>kubetail -n &lt;namespace&gt;</code></li>
+</ul>
 <h3 id="stern">Stern</h3>
 <ul>
 <li>Tail logs all pods on specific namespace<br>
@@ -207,6 +231,10 @@
 <li><a href="https://medium.com/4th-coffee/state-of-kubernetes-secrets-management-in-2022-6148af91e7b5">State of Kubernetes Secrets Management in 2022</a></li>
 <li><a href="https://blog.container-solutions.com/tutorial-how-to-set-external-secrets-with-aws">How to Set External-Secrets with AWS</a></li>
 <li><a href="https://blog.container-solutions.com/tutorialexternal-secrets-with-hashicorp-vault">How to Set External-Secrets with Hashicorp Vault</a></li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><a href="https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three?utm_source=devopsbulletin&amp;utm_id=newsletter">How to identify and troubleshoot common Kubernetes errors</a></li>
 </ul>
               
             </div>
