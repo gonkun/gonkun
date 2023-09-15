@@ -83,6 +83,10 @@
 
 ### Ingresses
 - [Native EKS Ingress with AWS Load Balancer Controller](https://blog.antoinechoula.ga/native-eks-ingress-with-aws-load-balancer-controller)
+
+### Certificates
+- [Ingress + Cert-Manager](https://www.youtube.com/watch?v=ZKrC261Rxqo)
+
 ### DNS
 - [The life of a DNS query in Kubernetes](https://www.nslookup.io/learning/the-life-of-a-dns-query-in-kubernetes/)
 
@@ -98,6 +102,9 @@
 - [State of Kubernetes Secrets Management in 2022](https://medium.com/4th-coffee/state-of-kubernetes-secrets-management-in-2022-6148af91e7b5)
 - [How to Set External-Secrets with AWS](https://blog.container-solutions.com/tutorial-how-to-set-external-secrets-with-aws)
 - [How to Set External-Secrets with Hashicorp Vault](https://blog.container-solutions.com/tutorialexternal-secrets-with-hashicorp-vault)
+
+### Virtual Kubernetes
+- [Testing GitOps on Virtual Kubernetes Clusters with ArgoCD](https://piotrminkowski.com/2023/06/29/testing-gitops-on-virtual-kubernetes-clusters-with-argocd/)
 
 ### Troubleshooting
 - [How to identify and troubleshoot common Kubernetes errors](https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three?utm_source=devopsbulletin&utm_id=newsletter)
