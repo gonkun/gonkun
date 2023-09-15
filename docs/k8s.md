@@ -104,7 +104,7 @@
 - [How to Set External-Secrets with Hashicorp Vault](https://blog.container-solutions.com/tutorialexternal-secrets-with-hashicorp-vault)
 
 ### Virtual Kubernetes
-- [Testing GitOps on Virtual Kubernetes Clusters with ArgoCD](https://piotrminkowski.com/2023/06/29/testing-gitops-on-virtual-kubernetes-clusters-with-argocd/)
+- [Testing GitOps on Virtual Kubernetes Clusters with ArgoCD (Ephimeral k8s clusters)](https://piotrminkowski.com/2023/06/29/testing-gitops-on-virtual-kubernetes-clusters-with-argocd/)
 
 ### Troubleshooting
 - [How to identify and troubleshoot common Kubernetes errors](https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three?utm_source=devopsbulletin&utm_id=newsletter)
