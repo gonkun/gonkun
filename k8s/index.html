@@ -139,7 +139,8 @@
 <h2 id="common-commands">Common Commands</h2>
 <ul>
 <li>Run pod
-<code>kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;</code></li>
+<code>kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;</code>
+ Example: <code>kubectl run -it --tty --rm debug --image=alpine --restart=Never -- sh --namespace=&lt;namespace&gt;</code></li>
 <li>Run pod and passing a command
 <code>kubectl run -i --tty &lt;pod_name&gt; --image=&lt;image&gt; -n &lt;namespace&gt; -- &lt;command&gt;</code></li>
 <li>Get info about cluster<br>
