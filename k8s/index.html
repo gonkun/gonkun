@@ -172,6 +172,8 @@
 </ul>
 <h2 id="advanced-commands">Advanced Commands</h2>
 <ul>
+<li>Run pod <code>multitool</code> for testing/debugging on k8s
+<code>kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh</code></li>
 <li>List of nodes and their memory size<br>
 <code>kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'</code></li>
 <li>List of nodes and the number of pods running on them<br>
