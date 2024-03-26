@@ -38,6 +38,8 @@
 
 ## Advanced Commands
 
+* Run pod `multitool` for testing/debugging on k8s
+`kubectl run multitool --namespace <namespace> --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh`
 * List of nodes and their memory size<br>
 `kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'`
 * List of nodes and the number of pods running on them<br>
