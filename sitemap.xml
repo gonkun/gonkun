@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://gonkun.github.io/cka_tips/</loc>
+         <lastmod>2024-04-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://gonkun.github.io/dse/</loc>
          <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
@@ -47,21 +52,6 @@
     </url>
     <url>
          <loc>https://gonkun.github.io/terraform/</loc>
-         <lastmod>2024-04-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://gonkun.github.io/CKA/cka_1/</loc>
-         <lastmod>2024-04-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://gonkun.github.io/CKA/examples/example1/</loc>
-         <lastmod>2024-04-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://gonkun.github.io/Golang_DevOps/example1/</loc>
          <lastmod>2024-04-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
