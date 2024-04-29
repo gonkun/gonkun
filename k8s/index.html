@@ -131,83 +131,196 @@
                 <h1 id="kubernetes">Kubernetes</h1>
 <h2 id="common-commands">Common Commands</h2>
 <ul>
-<li>Run pod
-<code>kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;</code>
- Example: <code>kubectl run -it --tty --rm debug --image=alpine --restart=Never -- sh --namespace=&lt;namespace&gt;</code></li>
-<li>Run pod and passing a command
-<code>kubectl run -i --tty &lt;pod_name&gt; --image=&lt;image&gt; -n &lt;namespace&gt; -- &lt;command&gt;</code></li>
-<li>Get info about cluster<br>
-<code>kubectl cluster-info</code></li>
-<li>Get all pods<br>
-<code>kubectl get pods -A</code></li>
-<li>Get resource yaml<br>
-<code>kubectl get &lt;resource&gt; -n &lt;namespace&gt; &lt;resource_name&gt; -o yaml</code></li>
-<li>Get list of CRD applied<br>
-<code>kubectl get customresourcedefinitions</code></li>
-<li>List pods Docker images in a specific namespace<br>
-<code>kubectl get pods -n &lt;namespace&gt; -o jsonpath="{.items[*].spec.containers[*].image}"</code></li>
-<li>Restart all deployments in a namespace<br>
-<code>kubectl rollout restart deployment -n &lt;namespace&gt;</code></li>
-<li>List all running pods in a specific namespace<br>
-<code>kubectl get pods -n &lt;namespace&gt; --field-selector=status.phase=Running</code></li>
-<li>List all non-running pods in a specific namespace<br>
-<code>kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete</code></li>
-<li>Create tunnel to a service using port-forward (like a SSH tunnel)<br>
-<code>kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;</code></li>
-<li>List all PVC associated with their respective pod<br>
-<code>kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null</code></li>
-<li>List aal pods with events related to them<br>
-<code>kubectl get pods --watch --output-watch-events -A</code></li>
-<li>List all events with filter "type=Warning"<br>
-<code>kubectl get events -w --field-selector=type=Warning -A</code></li>
-<li>List all environment variables of specific pod<br>
-<code>kubectl set env -n &lt;namespace&gt; pod/&lt;podname&gt; --list</code></li>
+<li>Run pod</li>
 </ul>
+<pre><code>  kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;
+</code></pre>
+<p><br></p>
+<ul>
+<li>Run pod and passing a command</li>
+</ul>
+<pre><code>  kubectl run -i --tty &lt;pod_name&gt; --image=&lt;image&gt; -n &lt;namespace&gt; -- &lt;command&gt;
+</code></pre>
+<p><br></p>
+<ul>
+<li>Get info about cluster</li>
+</ul>
+<pre><code>  kubectl cluster-info
+</code></pre>
+<p><br></p>
+<ul>
+<li>Get all pods</li>
+</ul>
+<pre><code>  kubectl get pods -A
+</code></pre>
+<p><br></p>
+<ul>
+<li>Get resource yaml</li>
+</ul>
+<pre><code>  kubectl get &lt;resource&gt; -n &lt;namespace&gt; &lt;resource_name&gt; -o yaml
+</code></pre>
+<p><br></p>
+<ul>
+<li>Get list of CRD applied</li>
+</ul>
+<pre><code>  kubectl get customresourcedefinitions
+</code></pre>
+<p><br></p>
+<ul>
+<li>List pods Docker images in a specific namespace</li>
+</ul>
+<pre><code>  kubectl get pods -n &lt;namespace&gt; -o jsonpath=&quot;{.items[*].spec.containers[*].image}&quot;
+</code></pre>
+<p><br></p>
+<ul>
+<li>Restart all deployments in a namespace</li>
+</ul>
+<pre><code>  kubectl rollout restart deployment -n &lt;namespace&gt;
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all running pods in a specific namespace</li>
+</ul>
+<pre><code>  kubectl get pods -n &lt;namespace&gt; --field-selector=status.phase=Running
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all non-running pods in a specific namespace</li>
+</ul>
+<pre><code>  kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete
+</code></pre>
+<p><br></p>
+<ul>
+<li>Create tunnel to a service using port-forward (like a SSH tunnel)</li>
+</ul>
+<pre><code>  kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all PVC associated with their respective pod</li>
+</ul>
+<pre><code>  kubectl get po -o json --all-namespaces | jq -j '.items[] | &quot;\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n&quot;' | grep -v null
+</code></pre>
+<p><br></p>
+<ul>
+<li>List aal pods with events related to them</li>
+</ul>
+<pre><code>  kubectl get pods --watch --output-watch-events -A
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all events with filter "type=Warning"</li>
+</ul>
+<pre><code>  kubectl get events -w --field-selector=type=Warning -A
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all environment variables of specific pod<br></li>
+</ul>
+<pre><code>  kubectl set env -n &lt;namespace&gt; pod/&lt;podname&gt; --list
+</code></pre>
+<p><br></p>
 <h2 id="advanced-commands">Advanced Commands</h2>
 <ul>
-<li>Run pod <code>multitool</code> for testing/debugging on k8s
-<code>kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh</code></li>
-<li>List of nodes and their memory size<br>
-<code>kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'</code></li>
-<li>List of nodes and the number of pods running on them<br>
-<code>kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({"nodeName": .[0].spec.nodeName, "count": length}) | sort_by(.count)'</code></li>
-<li>List all pods sort by memory usage<br>
-<code>k top pods -A --sort-by='memory'</code> </li>
-<li>List all pods sorted by cpu usage<br>
-<code>k top pods -A --sort-by='cpu'</code></li>
-<li>Sorting list of pods (in this case, by the number of restarts)
-<code>kubectl get pods --sort-by=.status.containerStatuses[0].restartCount</code></li>
-<li>Print <strong>limits</strong> and <strong>requests</strong> for each pod<br>
-<code>kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'</code></li>
-<li>Print all services and their respective nodePorts<br>
-<code>kubectl get --all-namespaces svc -o json | jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join("|"))]| @tsv'</code></li>
-<li>Copy secrets from a namespace to another<br>
-<code>kubectl get secrets -o json --namespace &lt;namespace_source&gt; | jq '.items[].metadata.namespace = "&lt;namespace_destiny&gt;"' | kubectl create-f  -</code></li>
+<li>Run pod <code>multitool</code> for testing/debugging on k8s</li>
 </ul>
+<pre><code>  kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh
+</code></pre>
+<p><br></p>
+<ul>
+<li>List of nodes and their memory size</li>
+</ul>
+<pre><code>  kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'
+</code></pre>
+<p><br></p>
+<ul>
+<li>List of nodes and the number of pods running on them</li>
+</ul>
+<pre><code>kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({&quot;nodeName&quot;: .[0].spec.nodeName, &quot;count&quot;: length}) | sort_by(.count)'
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all pods sort by memory usage</li>
+</ul>
+<pre><code>  k top pods -A --sort-by='memory'
+</code></pre>
+<p><br></p>
+<ul>
+<li>List all pods sorted by cpu usage</li>
+</ul>
+<pre><code>  k top pods -A --sort-by='cpu'
+</code></pre>
+<p><br></p>
+<ul>
+<li>Sorting list of pods (in this case, by the number of restarts)</li>
+</ul>
+<pre><code>  kubectl get pods --sort-by=.status.containerStatuses[0].restartCount
+</code></pre>
+<p><br></p>
+<ul>
+<li>Print <strong>limits</strong> and <strong>requests</strong> for each pod</li>
+</ul>
+<pre><code>  kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'
+</code></pre>
+<p><br></p>
+<ul>
+<li>Print all services and their respective nodePorts</li>
+</ul>
+<pre><code>  kubectl get --all-namespaces svc -o json | jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join(&quot;|&quot;))]| @tsv'
+</code></pre>
+<p><br></p>
+<ul>
+<li>Copy secrets from a namespace to another</li>
+</ul>
+<pre><code>  kubectl get secrets -o json --namespace &lt;namespace_source&gt; | jq '.items[].metadata.namespace = &quot;&lt;namespace_destiny&gt;&quot;' | kubectl create-f  -
+</code></pre>
+<p><br></p>
 <h2 id="logging-commands">Logging Commands</h2>
 <h3 id="kubectl">Kubectl</h3>
 <ul>
-<li>Print logs with human-readable timestamp<br>
-<code>kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps</code></li>
-<li>Getting logs from all pods using  alabel to filter<br>
-<code>kubectl -n &lt;namespace&gt; logs -f -l app=nginx</code></li>
+<li>Print logs with human-readable timestamp</li>
 </ul>
+<pre><code>  kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps
+</code></pre>
+<p><br></p>
+<ul>
+<li>Getting logs from all pods using  alabel to filter</li>
+</ul>
+<pre><code>  kubectl -n &lt;namespace&gt; logs -f -l app=nginx
+</code></pre>
+<p><br></p>
 <h3 id="kubetail">Kubetail</h3>
 <ul>
-<li>Tail logs specific container<br>
-<code>kubetail &lt;pod_name&gt; -c &lt;container_name&gt;</code></li>
-<li>Tail logs from all containers on specific namespace<br>
-<code>kubetail -n &lt;namespace&gt;</code></li>
+<li>Tail logs specific container</li>
 </ul>
+<pre><code>  kubetail &lt;pod_name&gt; -c &lt;container_name&gt;
+</code></pre>
+<p><br></p>
+<ul>
+<li>Tail logs from all containers on specific namespace</li>
+</ul>
+<pre><code>  kubetail -n &lt;namespace&gt;
+</code></pre>
+<p><br></p>
 <h3 id="stern">Stern</h3>
 <ul>
-<li>Tail logs all pods on specific namespace<br>
-<code>stern -n &lt;namespace&gt; .</code></li>
-<li>Tail logs all pods with excludeds<br>
-<code>stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .</code></li>
-<li>Tail logs specific pods<br>
-<code>stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;</code></li>
+<li>Tail logs all pods on specific namespace</li>
 </ul>
+<pre><code>  stern -n &lt;namespace&gt; .
+</code></pre>
+<p><br></p>
+<ul>
+<li>Tail logs all pods with excludeds</li>
+</ul>
+<pre><code>  stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .
+</code></pre>
+<p><br></p>
+<ul>
+<li>Tail logs specific pods</li>
+</ul>
+<pre><code>  stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;
+</code></pre>
+<p><br></p>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
 <h3 id="ingresses">Ingresses</h3>
 <ul>
