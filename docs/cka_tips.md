@@ -1,6 +1,15 @@
 # CKA Tips
+Some tips for prepare/use on CKA exam
 
+## Generate YAML template/files for most common k8s resources objects 
 
-## Common Commands
+* Generate a POD YAML file
+```
+    kubectl run nginx --image=nginx --dry-run=client -o yaml
+```
+<br>
 
-zxczxc
+* Generate Deployment YAML file
+```
+    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+```
