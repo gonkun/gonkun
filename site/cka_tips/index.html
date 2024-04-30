@@ -52,7 +52,7 @@
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">CKA Tips</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#common-commands">Common Commands</a>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-yaml-templatefiles-for-most-common-k8s-resources-objects">Generate YAML template/files for most common k8s resources objects</a>
     </li>
     </ul>
                 </li>
@@ -99,8 +99,19 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="cka-tips">CKA Tips</h1>
-<h2 id="common-commands">Common Commands</h2>
-<p>zxczxc</p>
+<p>Some tips for prepare/use on CKA exam</p>
+<h2 id="generate-yaml-templatefiles-for-most-common-k8s-resources-objects">Generate YAML template/files for most common k8s resources objects</h2>
+<ul>
+<li>Generate a POD YAML file</li>
+</ul>
+<pre><code>    kubectl run nginx --image=nginx --dry-run=client -o yaml
+</code></pre>
+<p><br></p>
+<ul>
+<li>Generate Deployment YAML file</li>
+</ul>
+<pre><code>    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+</code></pre>
               
             </div>
           </div><footer>
