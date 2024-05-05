@@ -112,6 +112,12 @@
 </ul>
 <pre><code>    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
 </code></pre>
+<p><br></p>
+<ul>
+<li>Generate Service YAML file</li>
+</ul>
+<pre><code>    kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+</code></pre>
               
             </div>
           </div><footer>

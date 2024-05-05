@@ -200,6 +200,11 @@ kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName)
 <br>
 
 
+## Definitions
+### External DNS
+Service which manages DNS records, in our case, on Route53. External DNS check annotations on `Service` and `Ingress` objects. On UserTesting we configured External DNS just for checking annotations on `Ingress` objects
+
+
 ## Tutorials and Guides
 
 ### Ingresses

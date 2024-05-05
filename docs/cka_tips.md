@@ -13,3 +13,9 @@ Some tips for prepare/use on CKA exam
 ```
     kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
 ```
+<br>
+
+* Generate Service YAML file
+```
+    kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+```

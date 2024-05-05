@@ -106,11 +106,17 @@
                 <h1 id="bash">BASH</h1>
 <h2 id="common-commands">Common Commands</h2>
 <ul>
-<li>Find files with an specific name and execute <code>gsed</code> for replace a string for another<br>
-<code>find . -type f -name 'filename' | xargs gsed -i 's/&lt;pattern_A&gt;/&lt;pattern_B&gt;/g'</code></li>
-<li>Find files with an specific name and execute <code>gsed</code> for delete a line where a string pattern is matched<br>
-<code>find . -type f -name 'filename' | xargs gsed -i '/&lt;pattern&gt;/d'</code></li>
+<li>Find files with an specific name and execute <code>gsed</code> for replace a string for another</li>
 </ul>
+<pre><code>  find . -type f -name 'filename' | xargs gsed -i 's/&lt;pattern_A&gt;/&lt;pattern_B&gt;/g'
+</code></pre>
+<p><br></p>
+<ul>
+<li>Find files with an specific name and execute <code>gsed</code> for delete a line where a string pattern is matched</li>
+</ul>
+<pre><code>  find . -type f -name 'filename' | xargs gsed -i '/&lt;pattern&gt;/d'
+</code></pre>
+<p><br></p>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
 <h3 id="best-practices">Best Practices</h3>
 <ul>

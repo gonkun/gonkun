@@ -64,6 +64,12 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#definitions">Definitions</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#external-dns">External DNS</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#ingresses">Ingresses</a>
@@ -321,6 +327,9 @@
 <pre><code>  stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;
 </code></pre>
 <p><br></p>
+<h2 id="definitions">Definitions</h2>
+<h3 id="external-dns">External DNS</h3>
+<p>Service which manages DNS records, in our case, on Route53. External DNS check annotations on <code>Service</code> and <code>Ingress</code> objects. On UserTesting we configured External DNS just for checking annotations on <code>Ingress</code> objects</p>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
 <h3 id="ingresses">Ingresses</h3>
 <ul>
