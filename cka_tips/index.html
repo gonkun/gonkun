@@ -118,6 +118,12 @@
 </ul>
 <pre><code>    kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
 </code></pre>
+<p><br></p>
+<ul>
+<li>Create Service named 'redis-service' exposing pod 'redis'</li>
+</ul>
+<pre><code>    kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+</code></pre>
               
             </div>
           </div><footer>

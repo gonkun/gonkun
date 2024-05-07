@@ -68,6 +68,10 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#external-dns">External DNS</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#aws-load-balancer-controller">AWS Load Balancer Controller</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#emissary-ingress">Emissary Ingress</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
@@ -329,7 +333,15 @@
 <p><br></p>
 <h2 id="definitions">Definitions</h2>
 <h3 id="external-dns">External DNS</h3>
-<p>Service which manages DNS records, in our case, on Route53. External DNS check annotations on <code>Service</code> and <code>Ingress</code> objects. On UserTesting we configured External DNS just for checking annotations on <code>Ingress</code> objects</p>
+<p>Service which manages DNS records, in our case, on Route53. External DNS check annotations on <code>Service</code> and <code>Ingress</code> objects. On UserTesting we configured External DNS just for checking annotations on <code>Ingress</code> objects.
+External DNS search domain names on  <code>annotations</code> or <code>host</code> on <code>rules</code>  and creates a register on Hosted Zones which we configure or matching with domain name which we configured.</p>
+<h3 id="aws-load-balancer-controller">AWS Load Balancer Controller</h3>
+<p>Service which manages <code>Ingress</code> and <code>Services</code> k8s objects.<br>
+For <code>Ingress</code> it creates an ALB by default, but can be configured to create a NLB.<br>
+For <code>Service</code> it creates NLB only, no ALB.<br>
+We can configure the Load Balancer parameters using <code>annotations</code>. On the other hand, for configure Listener Rules we use the parameter <code>rules</code> of <code>Ingress</code> object.</p>
+<h3 id="emissary-ingress">Emissary Ingress</h3>
+<p>IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes requests using different paths. It works like a AWS Listener Rule but with a lot of extra options. </p>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
 <h3 id="ingresses">Ingresses</h3>
 <ul>
