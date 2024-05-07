@@ -19,3 +19,10 @@ Some tips for prepare/use on CKA exam
 ```
     kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
 ```
+<br>
+
+* Create Service named 'redis-service' exposing pod 'redis'
+```
+    kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+```
+ 

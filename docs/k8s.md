@@ -202,7 +202,17 @@ kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName)
 
 ## Definitions
 ### External DNS
-Service which manages DNS records, in our case, on Route53. External DNS check annotations on `Service` and `Ingress` objects. On UserTesting we configured External DNS just for checking annotations on `Ingress` objects
+Service which manages DNS records, in our case, on Route53. External DNS check annotations on `Service` and `Ingress` objects. On UserTesting we configured External DNS just for checking annotations on `Ingress` objects.
+External DNS search domain names on  `annotations` or `host` on `rules`  and creates a register on Hosted Zones which we configure or matching with domain name which we configured.
+
+### AWS Load Balancer Controller
+Service which manages `Ingress` and `Services` k8s objects.<br>
+For `Ingress` it creates an ALB by default, but can be configured to create a NLB.<br>
+For `Service` it creates NLB only, no ALB.<br>
+We can configure the Load Balancer parameters using `annotations`. On the other hand, for configure Listener Rules we use the parameter `rules` of `Ingress` object.
+
+### Emissary Ingress
+IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes requests using different paths. It works like a AWS Listener Rule but with a lot of extra options. 
 
 
 ## Tutorials and Guides
