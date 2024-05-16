@@ -15,6 +15,7 @@ nav:
     - Istio: istio.md
     - BASH: bash.md
     - GitHub Actions: github-actions.md
+    - AI for DevOps: ai-for-devops.md
     - Others: others.md
 
 theme:
