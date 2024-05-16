@@ -2,13 +2,13 @@
 
 
 ## K8sGPT
-https://k8sgpt.ai/<br> 
+[https://k8sgpt.ai/](https://k8sgpt.ai/)<br> 
 K8sGPT is a tool for scanning your kubernetes clusters, diagnosing and triaging issues.
 
 * [AI for Kubernetes with ChatGPT and k8sgpt](https://www.youtube.com/watch?v=3Mmw2PyY9j0)
 
 ## Cast AI
-https://cast.ai/<br> 
+[https://cast.ai/](https://cast.ai/)<br> 
 Tool for cuts cloud costs, monitoring k8s costs and detect vulnerabilities.
 
 * [CAST.AI - Ahorrando dinero en Kubernetes](https://www.youtube.com/watch?v=5tfdw0I1PHE&t=27s)
@@ -16,7 +16,7 @@ Tool for cuts cloud costs, monitoring k8s costs and detect vulnerabilities.
 * [Automate BIG Savings For You Kubernetes Cluster](https://www.youtube.com/watch?v=phpq3P4H1Uw)
 
 ## Kubiya
-https://www.kubiya.ai/<br> 
+[https://www.kubiya.ai/](https://www.kubiya.ai/)<br> 
 ChatGPT for DevOps. A lot of useful integrations like GitHub, AWS, K8s, Terraform, etc...
 
 
