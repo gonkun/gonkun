@@ -126,6 +126,86 @@
 </ul>
 <pre><code>    kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 </code></pre>
+<p>## Upgrade Kubernetes Process
+ Example how to upgrade a Kubernetes cluster. In this case is using tool <code>kubeadm</code> and upgrading from version <code>1.28</code> to <code>1.29</code>.</p>
+<p>On the <code>controlplane</code> node:<br>
+* Drain node</p>
+<pre><code>kubectl drain controlplane --ignore-daemonsets
+</code></pre>
+<ul>
+<li>Open the file that defines the Kubernetes apt repository:</li>
+</ul>
+<pre><code>vim /etc/apt/sources.list.d/kubernetes.list
+</code></pre>
+<ul>
+<li>Update the version in the URL to the next available minor release, i.e v1.29.</li>
+</ul>
+<pre><code>deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+</code></pre>
+<ul>
+<li>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</li>
+</ul>
+<pre><code>root@controlplane:~# apt update
+root@controlplane:~# apt-cache madison kubeadm
+</code></pre>
+<ul>
+<li>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.29.0, the available package version is 1.29.0-1.1. Therefore, to install kubeadm for Kubernetes v1.29.0, use the following command:</li>
+</ul>
+<pre><code>root@controlplane:~# apt-get install kubeadm=1.29.0-1.1
+</code></pre>
+<ul>
+<li>Run the following command to upgrade the Kubernetes cluster.</li>
+</ul>
+<pre><code>root@controlplane:~# kubeadm upgrade plan v1.29.0
+root@controlplane:~# kubeadm upgrade apply v1.29.0
+</code></pre>
+<ul>
+<li>Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the "controlplane" node) as schedulable.</li>
+</ul>
+<pre><code>root@controlplane:~# apt-get install kubelet=1.29.0-1.1
+root@controlplane:~# systemctl daemon-reload
+root@controlplane:~# systemctl restart kubelet
+root@controlplane:~# kubectl uncordon controlplane
+</code></pre>
+<ul>
+<li>Uncordon node</li>
+</ul>
+<pre><code>kubectl uncordon controlplane
+</code></pre>
+<p>On the <code>node01</code> node:<br>
+* Drain node</p>
+<pre><code>kubectl drain node01 --ignore-daemonsets
+</code></pre>
+<ul>
+<li>Use any text editor you prefer to open the file that defines the Kubernetes apt repository.</li>
+</ul>
+<pre><code>vim /etc/apt/sources.list.d/kubernetes.list
+</code></pre>
+<ul>
+<li>Update the version in the URL to the next available minor release, i.e v1.29.</li>
+</ul>
+<pre><code>deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+</code></pre>
+<ul>
+<li>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</li>
+</ul>
+<pre><code>root@node01:~# apt update
+root@node01:~# apt-cache madison kubeadm
+</code></pre>
+<ul>
+<li>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.29.0, the available package version is 1.29.0-1.1. Therefore, to install kubeadm for Kubernetes v1.29.0, use the following command:</li>
+</ul>
+<pre><code>root@node01:~# apt-get install kubeadm=1.29.0-1.1
+# Upgrade the node 
+root@node01:~# kubeadm upgrade node
+</code></pre>
+<ul>
+<li>Now, upgrade the version and restart Kubelet.</li>
+</ul>
+<pre><code>root@node01:~# apt-get install kubelet=1.29.0-1.1
+root@node01:~# systemctl daemon-reload
+root@node01:~# systemctl restart kubelet
+</code></pre>
               
             </div>
           </div><footer>
