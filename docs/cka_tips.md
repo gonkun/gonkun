@@ -26,7 +26,7 @@ Some tips for prepare/use on CKA exam
     kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 ```
  
- ## Upgrade Kubernetes Process
+## Upgrade Kubernetes Process
  Example how to upgrade a Kubernetes cluster. In this case is using tool `kubeadm` and upgrading from version `1.28` to `1.29`.
 
 On the `controlplane` node:<br>
@@ -109,4 +109,15 @@ root@node01:~# kubeadm upgrade node
 root@node01:~# apt-get install kubelet=1.29.0-1.1
 root@node01:~# systemctl daemon-reload
 root@node01:~# systemctl restart kubelet
+```
+
+## Managing etcd service
+After login on `etcd-server`, get the list of endpoints for to know if etcd server is  acluster and how many nodes has:
+```
+ETCDCTL_API=3 etcdctl \
+ --endpoints=https://127.0.0.1:2379 \
+ --cacert=/etc/etcd/pki/ca.pem \
+ --cert=/etc/etcd/pki/etcd.pem \
+ --key=/etc/etcd/pki/etcd-key.pem \
+  member list
 ```
