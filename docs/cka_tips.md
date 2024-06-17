@@ -112,12 +112,24 @@ root@node01:~# systemctl restart kubelet
 ```
 
 ## Managing etcd service
+* Get list of members of a cluster **etcd**<br>
 After login on `etcd-server`, get the list of endpoints for to know if etcd server is  acluster and how many nodes has:
 ```
 ETCDCTL_API=3 etcdctl \
- --endpoints=https://127.0.0.1:2379 \
- --cacert=/etc/etcd/pki/ca.pem \
- --cert=/etc/etcd/pki/etcd.pem \
- --key=/etc/etcd/pki/etcd-key.pem \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=<CA_public_cert> \
+--cert=<server_public_cert> \
+--key=<server_private_key> \
   member list
+```
+**NOTE:** We have to find certificate's path on `etcd` process
+
+* Backup database **etcd**
+```
+ETCDCTL_API=3 etcdctl \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=<CA_public_cert> \
+--cert=<server_public_cert> \
+--key=<server_private_key> \
+snapshot save <backup-file-location>
 ```
