@@ -211,13 +211,27 @@ root@node01:~# systemctl daemon-reload
 root@node01:~# systemctl restart kubelet
 </code></pre>
 <h2 id="managing-etcd-service">Managing etcd service</h2>
-<p>After login on <code>etcd-server</code>, get the list of endpoints for to know if etcd server is  acluster and how many nodes has:</p>
+<ul>
+<li>Get list of members of a cluster <strong>etcd</strong><br>
+After login on <code>etcd-server</code>, get the list of endpoints for to know if etcd server is  acluster and how many nodes has:</li>
+</ul>
 <pre><code>ETCDCTL_API=3 etcdctl \
- --endpoints=https://127.0.0.1:2379 \
- --cacert=/etc/etcd/pki/ca.pem \
- --cert=/etc/etcd/pki/etcd.pem \
- --key=/etc/etcd/pki/etcd-key.pem \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=&lt;CA_public_cert&gt; \
+--cert=&lt;server_public_cert&gt; \
+--key=&lt;server_private_key&gt; \
   member list
+</code></pre>
+<p><strong>NOTE:</strong> We have to find certificate's path on <code>etcd</code> process</p>
+<ul>
+<li>Backup database <strong>etcd</strong></li>
+</ul>
+<pre><code>ETCDCTL_API=3 etcdctl \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=&lt;CA_public_cert&gt; \
+--cert=&lt;server_public_cert&gt; \
+--key=&lt;server_private_key&gt; \
+snapshot save &lt;backup-file-location&gt;
 </code></pre>
               
             </div>
