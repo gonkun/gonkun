@@ -133,3 +133,30 @@ ETCDCTL_API=3 etcdctl \
 --key=<server_private_key> \
 snapshot save <backup-file-location>
 ```
+
+## Certificates API
+* Example CertificateSigningRequest resource
+```
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: akshay
+spec:
+  groups:
+  - system:authenticated
+  request: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQW5lMU5DamI4RFR1VWp2Ky9MT3d4Rnl4bTMvdHVuNVN3N0hoWVhhR3Q1N3dMClB5Q0dnZXB0WGFqV1U2V2JjbnhhK1Myb3pNU0hnMmxSaVB3T2MzN3dBOFZJMi9NaEpTRUtscHBsdWdmRzdJTS8KNytNVEdiSUE0RVQ4Ykt0RzcxUGt3NWNuTjdCWmFmME1lT2gyakErN09SREtnelh5QUQ4d0haanZwTFppMFI3cgowM1hqK3F1MUI2emZoeFRmZ2VmRExUV05XNTdKR2phenhISkZybkFCWkR2RG84OTkwcXdmbDY4MHZScW9lcURYCkhvWFRmWVA2aERwcTRicjBRaUd2aDZpYmZYU2V3L25tUzdvaGtIcGhxMXBTNk96K2JsMExVb3NQSDRBR2p2ZDIKZ0FlanNaMnJPN1RMcCsvalovdUwzazlua281R1B0TzhnTE8xTFVXcTB3SURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBQ09Yc0Jhe
+nlSYkZ0LzVQTHdBTFBLNFpuWStLcFlJeG5ONzYxaGsxQU1Za2R2R1ZOdkIzCkx5dTBDZjJaeE5ZWVM3OWxwL0tWV2w4cjByTjk4RjdIZUM2RXkzM3gvYUtzYi9Ma2FLMFp1UVVPcW9IQ3JZb24KVVhHQ0dlOC9ud00xMFZFb05xNnBHZCtPZXB6MkdJTitpcUdPeVNMUWhYL0cwSnRnMHlrS0hvRE5OL2Nvc29kLwp0eUlTbXNDTzdhRlY0a2M1Q1ZPU2FSWC9kazRPSjkyVXB6N1F4alh2V0c1NEFFZXV6ZzNBdjdoc1JCTVlSc1I0CjQ1U1hKK3dCVlZXS1FtRDM3NXNMTDVTb2ZjTGdvdkcyUTB6ZmVlU0pkSGNadlNwSnYrSmFvNVZrT25HbldxOWcKblg0WVFDRVdtczZmVGo1SnMveHZvQ0k3UCtHeDQ2MlljNG89Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo="
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+```
+
+* Approve a CertficateSigningRrequest
+```
+kubectl certificate approve <certificate_name>
+```
+
+* Deny/Reject a CertficateSigningRrequest
+```
+kubectl certificate deny <certificate_name>
+```
