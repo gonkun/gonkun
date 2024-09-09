@@ -217,6 +217,9 @@ IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes 
 
 ## Tutorials and Guides
 
+## Debugging Kubernetes Issues
+- [Debugging Kubernetes Issues in Production: A technical guide](https://hervekhg.medium.com/debugging-kubernetes-issues-in-production-a-technical-guide-9e3d26e27180)
+
 ### Ingresses
 - [Native EKS Ingress with AWS Load Balancer Controller](https://blog.antoinechoula.ga/native-eks-ingress-with-aws-load-balancer-controller)
 
