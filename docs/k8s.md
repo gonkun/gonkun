@@ -224,6 +224,7 @@ IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes 
 
 ### Load Balancing Strategies
 - [Powerful Load Balancing Strategies: Kubernetes Gateway API](https://cloudnativeengineer.substack.com/p/powerful-load-balancing-strategies-kubernetes)
+- [Getting Started with Kubernetes Gateway API and Traefik](https://community.traefik.io/t/getting-started-with-kubernetes-gateway-api-and-traefik/23601)
 
 ### Debugging Kubernetes Issues
 - [Debugging Kubernetes Issues in Production: A technical guide](https://hervekhg.medium.com/debugging-kubernetes-issues-in-production-a-technical-guide-9e3d26e27180)
