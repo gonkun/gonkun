@@ -219,6 +219,7 @@ IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes 
 
 ### Local Cluster
 - [Create local cluster for gomelab with k3d](https://iamunnip.medium.com/building-a-local-kubernetes-cluster-using-k3d-3ec96a802e48)
+- [Spin up a local cluster with k3d](https://akyriako.medium.com/provision-a-high-availability-k3s-cluster-with-k3d-a7519f476c9c)
 
 ### Load Balancing Strategies
 - [Powerful Load Balancing Strategies: Kubernetes Gateway API](https://cloudnativeengineer.substack.com/p/powerful-load-balancing-strategies-kubernetes)
