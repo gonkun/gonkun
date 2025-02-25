@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Gon" /><link rel="canonical" href="https://gonkun.github.io/bash/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Gon" /><link rel="canonical" href="https://gonkun.github.io/networking/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>BASH - Gon Docs</title>
+    <title>Networking - Gon Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "BASH";
-        var mkdocs_page_input_path = "bash.md";
-        var mkdocs_page_url = "/bash/";
+        var mkdocs_page_name = "Networking";
+        var mkdocs_page_input_path = "networking.md";
+        var mkdocs_page_url = "/networking/";
       </script>
     
     <!--[if lt IE 9]>
@@ -62,23 +62,25 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">BASH</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#common-commands">Common Commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#best-practices">Best Practices</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../bash/">BASH</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../github-actions/">GitHub Actions</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ai-for-devops/">AI for DevOps</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../networking/">Networking</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Networking</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-router-mikrotik-replacing-router-hgu-movistaro2">Configure Router Mikrotik Replacing Router HGU Movistar/O2</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#home-network-map">Home Network Map</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../others/">Others</a>
                   </li>
@@ -98,7 +100,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">User Guide</li>
-      <li class="breadcrumb-item active">BASH</li>
+      <li class="breadcrumb-item active">Networking</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -107,31 +109,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="bash">BASH</h1>
-<h2 id="common-commands">Common Commands</h2>
-<ul>
-<li>Find files with an specific name and execute <code>gsed</code> for replace a string for another</li>
-</ul>
-<pre><code>  find . -type f -name 'filename' | xargs gsed -i 's/&lt;pattern_A&gt;/&lt;pattern_B&gt;/g'
-</code></pre>
-<p><br></p>
-<ul>
-<li>Find files with an specific name and execute <code>gsed</code> for delete a line where a string pattern is matched</li>
-</ul>
-<pre><code>  find . -type f -name 'filename' | xargs gsed -i '/&lt;pattern&gt;/d'
-</code></pre>
-<p><br></p>
+                <h1 id="networking">Networking</h1>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
-<h3 id="best-practices">Best Practices</h3>
-<ul>
-<li><a href="https://sharats.me/posts/shell-script-best-practices/">Shell Script Best Practices</a></li>
-</ul>
+<h3 id="configure-router-mikrotik-replacing-router-hgu-movistaro2">Configure Router Mikrotik Replacing Router HGU Movistar/O2</h3>
+<p>This guide explains different steps for configure my router Miktrotik hEX S replacing Movistar/O2 router HGU. this one will be used as ONT only.</p>
+<h4 id="home-network-map">Home Network Map</h4>
+<p><img alt="Home Network Map" src="../images/home_network.png" title="Home Network Map" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../istio/" class="btn btn-neutral float-left" title="Istio"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../github-actions/" class="btn btn-neutral float-right" title="GitHub Actions">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ai-for-devops/" class="btn btn-neutral float-left" title="AI for DevOps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../others/" class="btn btn-neutral float-right" title="Others">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -154,10 +143,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../istio/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../ai-for-devops/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../github-actions/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../others/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

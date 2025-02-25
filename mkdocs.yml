@@ -16,6 +16,7 @@ nav:
     - BASH: bash.md
     - GitHub Actions: github-actions.md
     - AI for DevOps: ai-for-devops.md
+    - Networking: networking.md
     - Others: others.md
 
 theme:
