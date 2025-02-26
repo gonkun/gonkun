@@ -37,22 +37,20 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 ##### CLI
 ###### Change default IP address
 
-* Get list of Address on interfaces
-```bash
-ip/address/print
-```
+Setting up a new Default IP for router on `bridge` interface using its id which is `0`
 
-* Modify IP for `bridge` interface which has id `0`
 ```bash
+ip/address/print where interface=bridge
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.88.1/24  192.168.88.0  bridge
+
 ip/address/set numbers=0 address=192.168.2.1/24
-```
 
-* Check if change has be done
-```bash
-ip/address/print
-```
-
-* Reboot router to force getting new IP
-```bash
-system/reboot
+ip/address/print where interface=bridge
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.2.1/24  192.168.2.0  bridge
 ```
