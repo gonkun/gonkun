@@ -135,35 +135,39 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <ul>
 <li>Go to <code>IP</code> &gt; <code>Addresses</code></li>
 <li>Select interface with name <code>bridge</code></li>
-<li>Modify <code>Address</code> and <code>Network</code>. In this case:<ul>
+<li>Modify <code>Address</code> and <code>Network</code>. In this case:</li>
 <li><code>Address: 192.168.2.1/24</code></li>
 <li><code>Network: 192.168.2.0</code></li>
-</ul>
-</li>
 <li>Click on <code>Apply</code> and <code>OK</code>
-  <img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
+<img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
 <li>Go to <code>System</code> &gt; <code>Reboot</code></li>
 </ul>
 <h5 id="cli">CLI</h5>
 <h6 id="change-default-ip-address_2">Change default IP address</h6>
 <ul>
-<li>
-<p>Get list of Address on interfaces
-  <code>ip/address/print</code>
-  <br></p>
-</li>
-<li>
-<p>Modify IP for <code>bridge</code> interface which has id <code>0</code>
-  <code>ip/address/set numbers=0 address=192.168.2.1/24</code>
-  <br></p>
-</li>
-<li>Check if change has be done
-  <code>ip/address/print</code>
-  <br></li>
-<li>Reboot router to force getting new IP
-  <code>system/reboot</code>
-  <br></li>
+<li>Get list of Address on interfaces</li>
 </ul>
+<pre><code>ip/address/print
+</code></pre>
+<p><br></p>
+<ul>
+<li>Modify IP for <code>bridge</code> interface which has id <code>0</code></li>
+</ul>
+<pre><code>ip/address/set numbers=0 address=192.168.2.1/24
+</code></pre>
+<p><br></p>
+<ul>
+<li>Check if change has be done</li>
+</ul>
+<pre><code>ip/address/print
+  ```
+&lt;br&gt;
+
+* Reboot router to force getting new IP
+</code></pre>
+<p>system/reboot
+```
+<br></p>
               
             </div>
           </div><footer>
