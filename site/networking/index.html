@@ -131,8 +131,8 @@ This is the network map which I configured following this guide.</p>
 <p>Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
 <h5 id="winbox">WinBox</h5>
-<ol>
-<li>Change default IP address</li>
+<h6 id="change-default-ip-address_1">Change default IP address</h6>
+<ul>
 <li>Go to <code>IP</code> &gt; <code>Addresses</code></li>
 <li>Select interface with name <code>bridge</code></li>
 <li>Modify <code>Address</code> and <code>Network</code>. In this case:<ul>
@@ -143,20 +143,24 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <li>Click on <code>Apply</code> and <code>OK</code>
   <img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
 <li>Go to <code>System</code> &gt; <code>Reboot</code></li>
-</ol>
+</ul>
 <h5 id="cli">CLI</h5>
-<ol>
-<li>Change default IP address</li>
-<li>Get list of Address on interfaces<br>
-    <code>ip/address/print</code></li>
-<li>Modify IP for <code>bridge</code> interface which has id <code>0</code>
-    <code>ip/address/set numbers=0 address=192.168.2.1/24
-    asdasda</code></li>
+<h6 id="change-default-ip-address_2">Change default IP address</h6>
+<ul>
+<li>
+<p>Get list of Address on interfaces
+    <code>ip/address/print</code>
+    <br></p>
+</li>
+<li>
+<p>Modify IP for <code>bridge</code> interface which has id <code>0</code>
+    <code>ip/address/set numbers=0 address=192.168.2.1/24</code></p>
+</li>
 <li>Check if change has be done
     <code>ip/address/print</code></li>
 <li>Reboot router to force getting new IP
     <code>system/reboot</code></li>
-</ol>
+</ul>
               
             </div>
           </div><footer>

@@ -24,32 +24,36 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 
 
 ##### WinBox
-1. Change default IP address
-  - Go to `IP` > `Addresses`
-  - Select interface with name `bridge`
-  - Modify `Address` and `Network`. In this case:
-    - `Address: 192.168.2.1/24`
-    - `Network: 192.168.2.0`
-  - Click on `Apply` and `OK`
+###### Change default IP address
+  * Go to `IP` > `Addresses`
+  * Select interface with name `bridge`
+  * Modify `Address` and `Network`. In this case:
+    * `Address: 192.168.2.1/24`
+    * `Network: 192.168.2.0`
+  * Click on `Apply` and `OK`
   ![Setting default IP](./images/change_default_IP.png)
-  - Go to `System` > `Reboot`
+  * Go to `System` > `Reboot`
 
 ##### CLI
-1. Change default IP address
-  - Get list of Address on interfaces<br>
-    ```
-    ip/address/print
-    ```
-  - Modify IP for `bridge` interface which has id `0`
-    ```
-    ip/address/set numbers=0 address=192.168.2.1/24
-    asdasda
-    ```
-  - Check if change has be done
-    ```
-    ip/address/print
-    ```
-  - Reboot router to force getting new IP
-    ```
-    system/reboot
-    ```
+###### Change default IP address
+  * Get list of Address on interfaces
+  ```
+  ip/address/print
+  ```
+  <br>
+
+  * Modify IP for `bridge` interface which has id `0`
+  ```
+  ip/address/set numbers=0 address=192.168.2.1/24
+  ```
+  <br>
+  * Check if change has be done
+  ```
+  ip/address/print
+  ```
+  <br>
+  * Reboot router to force getting new IP
+  ```
+  system/reboot
+  ```
+  <br>
