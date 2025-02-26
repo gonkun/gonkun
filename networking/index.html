@@ -146,25 +146,21 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 </ul>
 <h5 id="cli">CLI</h5>
 <h6 id="change-default-ip-address_2">Change default IP address</h6>
-<ul>
-<li>Get list of Address on interfaces</li>
-</ul>
-<pre><code class="language-bash">ip/address/print
-</code></pre>
-<ul>
-<li>Modify IP for <code>bridge</code> interface which has id <code>0</code></li>
-</ul>
-<pre><code class="language-bash">ip/address/set numbers=0 address=192.168.2.1/24
-</code></pre>
-<ul>
-<li>Check if change has be done</li>
-</ul>
-<pre><code class="language-bash">ip/address/print
-</code></pre>
-<ul>
-<li>Reboot router to force getting new IP</li>
-</ul>
-<pre><code class="language-bash">system/reboot
+<p>Setting up a new Default IP for router on <code>bridge</code> interface</p>
+<pre><code class="language-bash">ip/address/print where interface=bridge
+
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.88.1/24  192.168.88.0  bridge
+
+ip/address/set numbers=0 address=192.168.2.1/24
+ip/address/print where interface=bridge
+
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.2.1/24  192.168.2.0  bridge
 </code></pre>
               
             </div>
