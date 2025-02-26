@@ -36,19 +36,20 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 
 ##### CLI
 1. Change default IP address
-  - Get list of Address on interfaces
-    ```get_list_ip_interfaces
+  - Get list of Address on interfaces<br>
+    ```
     ip/address/print
     ```
   - Modify IP for `bridge` interface which has id `0`
-    ```modify_default_ip_interface_bridge
+    ```
     ip/address/set numbers=0 address=192.168.2.1/24
+    asdasda
     ```
   - Check if change has be done
-    ```get_list_ip_interfaces
+    ```
     ip/address/print
     ```
   - Reboot router to force getting new IP
-    ```reboot
+    ```
     system/reboot
     ```
