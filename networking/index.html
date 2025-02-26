@@ -148,16 +148,16 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <ol>
 <li>Change default IP address</li>
 <li>Get list of Address on interfaces
-    <code>get_list_ip_interfaces
+    <code>bash
     ip/address/print</code></li>
 <li>Modify IP for <code>bridge</code> interface which has id <code>0</code>
-    <code>modify_default_ip_interface_bridge
+    <code>bash
     ip/address/set numbers=0 address=192.168.2.1/24</code></li>
 <li>Check if change has be done
-    <code>get_list_ip_interfaces
+    <code>bash
     ip/address/print</code></li>
 <li>Reboot router to force getting new IP
-    <code>reboot
+    <code>bash
     system/reboot</code></li>
 </ol>
               
