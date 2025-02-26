@@ -147,25 +147,18 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <h5 id="cli">CLI</h5>
 <ol>
 <li>Change default IP address</li>
-<li>
-<p>Get list of Address on interfaces
-    <code>ip/address/print
-        12312312
-        12312312
-        12312312</code></p>
-</li>
-<li>
-<p>Modify IP for <code>bridge</code> interface which has id <code>0</code>
-    <code>ip/address/set numbers=0 address=192.168.2.1/24</code></p>
-</li>
-<li>
-<p>Check if change has be done
-    <code>ip/address/print</code></p>
-</li>
-<li>
-<p>Reboot router to force getting new IP
-    <code>system/reboot</code></p>
-</li>
+<li>Get list of Address on interfaces
+      ```bash
+      ip/address/print</li>
+<li>Modify IP for <code>bridge</code> interface which has id <code>0</code>
+      ```bash
+      ip/address/set numbers=0 address=192.168.2.1/24</li>
+<li>Check if change has be done
+      ```bash
+      ip/address/print</li>
+<li>Reboot router to force getting new IP
+      ```bash
+      system/reboot</li>
 </ol>
               
             </div>
