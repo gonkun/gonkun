@@ -16,11 +16,10 @@ This is optional. I did it because I configured this router years ago and I didn
 2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. [More info](https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering)
 3. After router reboots, I can access to router config with IP `192.168.88.1` and credentials `username: admin` and no password. We need to modify our IP and set another inside CIDR `192.168.88.0/24`
 
-#### Change default IP address
-Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
-I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.
 
 ##### Change default IP address
+Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
+I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.
 ###### WinBox
 - Go to `IP` > `Addresses`
 - Select interface with name `bridge`
@@ -51,10 +50,8 @@ Columns: ADDRESS, NETWORK, INTERFACE
 0 192.168.2.1/24  192.168.2.0  bridge
 ```
 
-#### Basic configuration for connect router Mikrotik with Movistar/O2 ONT
-First of all, we need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
-
 ##### Change HGU mode to bridge
+We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
 * Connect to HGU web panel http://192.168.1.1/
 * Disable DHCP service and Wi-Fi
 * Change mode form "**Multipuesto**" to "**Monopuesto**"
