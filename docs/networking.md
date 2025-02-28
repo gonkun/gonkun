@@ -17,10 +17,10 @@ This is optional. I did it because I configured this router years ago and I didn
 3. After router reboots, I can access to router config with IP `192.168.88.1` and credentials `username: admin` and no password. We need to modify our IP and set another inside CIDR `192.168.88.0/24`
 
 
-##### Change default IP address
+#### Change default IP address
 Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.
-###### WinBox
+##### WinBox
 - Go to `IP` > `Addresses`
 - Select interface with name `bridge`
 - Modify `Address` and `Network`. In this case:
@@ -31,7 +31,7 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 - Go to `System` > `Reboot`
 
 
-###### CLI
+##### CLI
 Setting up a new Default IP for router on `bridge` interface using its id which is `0`
 
 ```bash
@@ -50,16 +50,16 @@ Columns: ADDRESS, NETWORK, INTERFACE
 0 192.168.2.1/24  192.168.2.0  bridge
 ```
 
-##### Change HGU mode to bridge
+#### Change HGU mode to bridge
 We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
 * Connect to HGU web panel http://192.168.1.1/
 * Disable DHCP service and Wi-Fi
 * Change mode form "**Multipuesto**" to "**Monopuesto**"
 * Connect cable from `eth1`port of this router to `eth1`port of Mikrotik router
 
-##### Configure VLAN
+#### Configure VLAN
 Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is `6`
-###### WinBox
+##### WinBox
 * Go to `Interfaces` > Select tab `VLAN`
 * Click on `New`
 * Set next parameters/config:
@@ -71,7 +71,7 @@ Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just nee
 
 ![VLAN Config](./images/vlan_config.png "VLAN Config")
 
-###### CLI
+##### CLI
 ```bash
 interface/vlan/add name=vlan_internet_movistar mtu=1492 vlan-id=6 interface=ether1
 
@@ -82,9 +82,9 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 0 R vlan_internet_movistar  1492  enabled        6  ether1
 ```
 
-##### Configure PPPoE Client (WAN)
+#### Configure PPPoE Client (WAN)
 **PPPoE** (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.
-###### WinBox
+##### WinBox
 * Go to `PPP` 
 * Click on `New` > `PPPoE Client`
 * On tab/section `General`:
@@ -98,7 +98,7 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 
 ![WAN with PPPoE Config](./images/wan_pppoe_config.png "WAN with PPPoE Config")
 
-###### CLI
+##### CLI
 ```bash
 interface/pppoe-client/add name=internet_movistar interface=ether1 user=adslppp@telefonicanetpa password=adslppp add-default-route=yes disabled=no
 
