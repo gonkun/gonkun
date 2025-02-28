@@ -78,10 +78,6 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#hard-reset">Hard Reset</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#change-default-ip-address">Change default IP address</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#basic-configuration-for-connect-router-mikrotik-with-movistaro2-ont">Basic configuration for connect router Mikrotik with Movistar/O2 ONT</a>
-    </li>
         </ul>
     </li>
         </ul>
@@ -127,10 +123,9 @@ This is the network map which I configured following this guide.</p>
 1. With unplugged router, press "Reset" button and plug it again.
 2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. <a href="https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering">More info</a>
 3. After router reboots, I can access to router config with IP <code>192.168.88.1</code> and credentials <code>username: admin</code> and no password. We need to modify our IP and set another inside CIDR <code>192.168.88.0/24</code></p>
-<h4 id="change-default-ip-address">Change default IP address</h4>
+<h5 id="change-default-ip-address">Change default IP address</h5>
 <p>Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
-<h5 id="change-default-ip-address_1">Change default IP address</h5>
 <h6 id="winbox">WinBox</h6>
 <ul>
 <li>Go to <code>IP</code> &gt; <code>Addresses</code></li>
@@ -160,15 +155,12 @@ Columns: ADDRESS, NETWORK, INTERFACE
 ;;; defconf
 0 192.168.2.1/24  192.168.2.0  bridge
 </code></pre>
-<h4 id="basic-configuration-for-connect-router-mikrotik-with-movistaro2-ont">Basic configuration for connect router Mikrotik with Movistar/O2 ONT</h4>
-<p>First of all, we need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.</p>
 <h5 id="change-hgu-mode-to-bridge">Change HGU mode to bridge</h5>
-<ul>
-<li>Connect to HGU web panel http://192.168.1.1/</li>
-<li>Disable DHCP service and Wi-Fi</li>
-<li>Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"</li>
-<li>Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</li>
-</ul>
+<p>We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
+* Connect to HGU web panel http://192.168.1.1/
+* Disable DHCP service and Wi-Fi
+* Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"
+* Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</p>
 <h5 id="configure-vlan">Configure VLAN</h5>
 <p>Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is <code>6</code></p>
 <h6 id="winbox_1">WinBox</h6>
