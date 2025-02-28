@@ -78,6 +78,14 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#hard-reset">Hard Reset</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-default-ip-address">Change default IP address</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-hgu-mode-to-bridge">Change HGU mode to bridge</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-vlan">Configure VLAN</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-pppoe-client-wan">Configure PPPoE Client (WAN)</a>
+    </li>
         </ul>
     </li>
         </ul>
@@ -123,10 +131,10 @@ This is the network map which I configured following this guide.</p>
 1. With unplugged router, press "Reset" button and plug it again.
 2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. <a href="https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering">More info</a>
 3. After router reboots, I can access to router config with IP <code>192.168.88.1</code> and credentials <code>username: admin</code> and no password. We need to modify our IP and set another inside CIDR <code>192.168.88.0/24</code></p>
-<h5 id="change-default-ip-address">Change default IP address</h5>
+<h4 id="change-default-ip-address">Change default IP address</h4>
 <p>Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
-<h6 id="winbox">WinBox</h6>
+<h5 id="winbox">WinBox</h5>
 <ul>
 <li>Go to <code>IP</code> &gt; <code>Addresses</code></li>
 <li>Select interface with name <code>bridge</code></li>
@@ -139,7 +147,7 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
 <li>Go to <code>System</code> &gt; <code>Reboot</code></li>
 </ul>
-<h6 id="cli">CLI</h6>
+<h5 id="cli">CLI</h5>
 <p>Setting up a new Default IP for router on <code>bridge</code> interface using its id which is <code>0</code></p>
 <pre><code class="language-bash">ip/address/print where interface=bridge
 Columns: ADDRESS, NETWORK, INTERFACE
@@ -155,15 +163,15 @@ Columns: ADDRESS, NETWORK, INTERFACE
 ;;; defconf
 0 192.168.2.1/24  192.168.2.0  bridge
 </code></pre>
-<h5 id="change-hgu-mode-to-bridge">Change HGU mode to bridge</h5>
+<h4 id="change-hgu-mode-to-bridge">Change HGU mode to bridge</h4>
 <p>We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
 * Connect to HGU web panel http://192.168.1.1/
 * Disable DHCP service and Wi-Fi
 * Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"
 * Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</p>
-<h5 id="configure-vlan">Configure VLAN</h5>
+<h4 id="configure-vlan">Configure VLAN</h4>
 <p>Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is <code>6</code></p>
-<h6 id="winbox_1">WinBox</h6>
+<h5 id="winbox_1">WinBox</h5>
 <ul>
 <li>Go to <code>Interfaces</code> &gt; Select tab <code>VLAN</code></li>
 <li>Click on <code>New</code></li>
@@ -177,7 +185,7 @@ Columns: ADDRESS, NETWORK, INTERFACE
 <li>Click on <code>Apply</code> and <code>OK</code></li>
 </ul>
 <p><img alt="VLAN Config" src="../images/vlan_config.png" title="VLAN Config" /></p>
-<h6 id="cli_1">CLI</h6>
+<h5 id="cli_1">CLI</h5>
 <pre><code class="language-bash">interface/vlan/add name=vlan_internet_movistar mtu=1492 vlan-id=6 interface=ether1
 
 interface/vlan/print
@@ -186,9 +194,9 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 #   NAME                     MTU  ARP      VLAN-ID  INTERFACE
 0 R vlan_internet_movistar  1492  enabled        6  ether1
 </code></pre>
-<h5 id="configure-pppoe-client-wan">Configure PPPoE Client (WAN)</h5>
+<h4 id="configure-pppoe-client-wan">Configure PPPoE Client (WAN)</h4>
 <p><strong>PPPoE</strong> (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.</p>
-<h6 id="winbox_2">WinBox</h6>
+<h5 id="winbox_2">WinBox</h5>
 <ul>
 <li>Go to <code>PPP</code> </li>
 <li>Click on <code>New</code> &gt; <code>PPPoE Client</code></li>
@@ -206,7 +214,7 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 <li>Click on <code>Apply</code> and <code>OK</code></li>
 </ul>
 <p><img alt="WAN with PPPoE Config" src="../images/wan_pppoe_config.png" title="WAN with PPPoE Config" /></p>
-<h6 id="cli_2">CLI</h6>
+<h5 id="cli_2">CLI</h5>
 <pre><code class="language-bash">interface/pppoe-client/add name=internet_movistar interface=ether1 user=adslppp@telefonicanetpa password=adslppp add-default-route=yes disabled=no
 
 interface/pppoe-client/print
