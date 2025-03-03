@@ -95,7 +95,6 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
     * Password: `adslppp`
     * Enable option `Add Default Route`
 * Click on `Apply` and `OK`
-
 ![WAN with PPPoE Config](./images/wan_pppoe_config.png "WAN with PPPoE Config")
 
 ##### CLI
@@ -107,4 +106,52 @@ Flags: X - disabled, I - invalid; R - running
  0  R name="internet_movistar" max-mtu=auto max-mru=auto mrru=disabled interface=ether1 user="adslppp@telefonicanetpa>
       password="adslppp" profile=default keepalive-timeout=10 service-name="" ac-name="" add-default-route=yes
       default-route-distance=1 dial-on-demand=no use-peer-dns=no allow=pap,chap,mschap1,mschap2
+```
+
+#### Configure DHCP Server on LAN
+Configure DHCP range IP which router Mikrotik will lease to different hosts. Mikrotik offer a DHCP Server configured on virtual interface `bridge`.
+I just want to set range IP.
+
+##### WinBox
+* Go to `IP` > `DHCP Server`
+* Select tab `Networks` and select network with name `defconf`:
+    * Address: `192.168.2.0/24`
+    * Gateway: `192.168.2.1`
+    * DNS servers:
+        * `192.168.2.1`
+        * `1.1.1.1`
+        * `1.0.0.1`
+        * `8.8.8.8`
+        * `8.8.4.4`
+* Click on `Apply` and `OK`
+
+![DHCP Server Config 1](./images/dhcp_server_config_1.png "DHCP Server Config 1")
+* Go to `IP` > `Pool`
+* Select IP pool named `dhcp-default`:
+    * Address: `192.168.2.10-192.168.2.254`
+* Click on `Apply` and `OK`
+
+![DHCP Server Config 2](./images/dhcp_server_config_2.png "DHCP Server Config 2")
+
+##### CLI
+```bash
+ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1
+,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4
+
+ip/dhcp-server/network/print
+Columns: ADDRESS, GATEWAY, DNS-SERVER
+# ADDRESS         GATEWAY      DNS-SERVER
+;;; defconf
+0 192.168.2.0/24  192.168.2.1  192.168.2.1
+                               1.1.1.1
+                               1.0.0.1
+                               8.8.8.8
+                               8.8.4.4
+
+ip/pool/set numbers=0 ranges=192.168.2.10-192.168.2.254
+
+ip/pool/print
+Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
+#  NAME          RANGES                      TOTAL  USED  AVAILABLE
+0  default-dhcp  192.168.2.10-192.168.2.254    245     8        237
 ```
