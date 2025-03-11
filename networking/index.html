@@ -236,14 +236,7 @@ I just want to set range IP.</p>
 <li>Select tab <code>Networks</code> and select network with name <code>defconf</code>:<ul>
 <li>Address: <code>192.168.2.0/24</code></li>
 <li>Gateway: <code>192.168.2.1</code></li>
-<li>DNS servers:<ul>
-<li><code>192.168.2.1</code></li>
-<li><code>1.1.1.1</code></li>
-<li><code>1.0.0.1</code></li>
-<li><code>8.8.8.8</code></li>
-<li><code>8.8.4.4</code></li>
-</ul>
-</li>
+<li>DNS servers: <code>192.168.2.1</code></li>
 </ul>
 </li>
 <li>Click on <code>Apply</code> and <code>OK</code></li>
@@ -260,7 +253,6 @@ I just want to set range IP.</p>
 <p><img alt="DHCP Server Config 2" src="../images/dhcp_server_config_2.png" title="DHCP Server Config 2" /></p>
 <h5 id="cli_3">CLI</h5>
 <pre><code class="language-bash">ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1
-,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4
 
 ip/dhcp-server/network/print
 Columns: ADDRESS, GATEWAY, DNS-SERVER
