@@ -246,11 +246,15 @@ I just want to set range IP.</p>
 </li>
 <li>Click on <code>Apply</code> and <code>OK</code></li>
 </ul>
-<p><img alt="DHCP Server Config 1" src="../images/dhcp_server_config_1.png" title="DHCP Server Config 1" />
-* Go to <code>IP</code> &gt; <code>Pool</code>
-* Select IP pool named <code>dhcp-default</code>:
-    * Address: <code>192.168.2.10-192.168.2.254</code>
-* Click on <code>Apply</code> and <code>OK</code></p>
+<p><img alt="DHCP Server Config 1" src="../images/dhcp_server_config_1.png" title="DHCP Server Config 1" /></p>
+<ul>
+<li>Go to <code>IP</code> &gt; <code>Pool</code></li>
+<li>Select IP pool named <code>dhcp-default</code>:<ul>
+<li>Address: <code>192.168.2.10-192.168.2.254</code></li>
+</ul>
+</li>
+<li>Click on <code>Apply</code> and <code>OK</code></li>
+</ul>
 <p><img alt="DHCP Server Config 2" src="../images/dhcp_server_config_2.png" title="DHCP Server Config 2" /></p>
 <h5 id="cli_3">CLI</h5>
 <pre><code class="language-bash">ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1

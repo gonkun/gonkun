@@ -126,6 +126,7 @@ I just want to set range IP.
 * Click on `Apply` and `OK`
 
 ![DHCP Server Config 1](./images/dhcp_server_config_1.png "DHCP Server Config 1")
+
 * Go to `IP` > `Pool`
 * Select IP pool named `dhcp-default`:
     * Address: `192.168.2.10-192.168.2.254`
@@ -155,3 +156,9 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 #  NAME          RANGES                      TOTAL  USED  AVAILABLE
 0  default-dhcp  192.168.2.10-192.168.2.254    245     8        237
 ```
+
+#### Configure NAT on Firewall
+Just check if a NAT rule for Masquerade is configured
+
+##### WinBox
+* Go to 
