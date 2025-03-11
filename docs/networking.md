@@ -117,12 +117,7 @@ I just want to set range IP.
 * Select tab `Networks` and select network with name `defconf`:
     * Address: `192.168.2.0/24`
     * Gateway: `192.168.2.1`
-    * DNS servers:
-        * `192.168.2.1`
-        * `1.1.1.1`
-        * `1.0.0.1`
-        * `8.8.8.8`
-        * `8.8.4.4`
+    * DNS servers: `192.168.2.1`
 * Click on `Apply` and `OK`
 
 ![DHCP Server Config 1](./images/dhcp_server_config_1.png "DHCP Server Config 1")
@@ -137,7 +132,6 @@ I just want to set range IP.
 ##### CLI
 ```bash
 ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1
-,1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4
 
 ip/dhcp-server/network/print
 Columns: ADDRESS, GATEWAY, DNS-SERVER
