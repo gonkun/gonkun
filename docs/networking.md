@@ -138,10 +138,6 @@ Columns: ADDRESS, GATEWAY, DNS-SERVER
 # ADDRESS         GATEWAY      DNS-SERVER
 ;;; defconf
 0 192.168.2.0/24  192.168.2.1  192.168.2.1
-                               1.1.1.1
-                               1.0.0.1
-                               8.8.8.8
-                               8.8.4.4
 
 ip/pool/set numbers=0 ranges=192.168.2.10-192.168.2.254
 
