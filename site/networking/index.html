@@ -271,8 +271,26 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 <p>Just check if a NAT rule for Masquerade is configured</p>
 <h5 id="winbox_4">WinBox</h5>
 <ul>
-<li>Go to </li>
+<li>Go to <code>IP</code> &gt; <code>Firewall</code></li>
+<li>Select tab <code>NAT</code></li>
+<li>Check if a rule exists with next config:<ul>
+<li>On <code>General</code><ul>
+<li>Chain: <code>srcnat</code></li>
+<li>Out. Interface List: <code>WAN</code></li>
 </ul>
+</li>
+<li>On <code>Action</code><ul>
+<li>Action: <code>masquerade</code></li>
+</ul>
+</li>
+<li>Checkbox <code>Enabled</code> marked</li>
+</ul>
+</li>
+</ul>
+<p>If not exists, creates a new one with this config.
+<img alt="Firewall NAT rule Masquerade General" src="../images/firewall_NAT_rule_1.png" title="Firewall NAT rule Masquerade General" />
+<img alt="Firewall NAT rule Masquerade Action" src="../images/firewall_NAT_rule_2.png" title="Firewall NAT rule Masquerade Action" /></p>
+<h5 id="cli_4">CLI</h5>
               
             </div>
           </div><footer>

@@ -151,4 +151,18 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 Just check if a NAT rule for Masquerade is configured
 
 ##### WinBox
-* Go to 
+* Go to `IP` > `Firewall`
+* Select tab `NAT`
+* Check if a rule exists with next config:
+    * On `General`
+        * Chain: `srcnat`
+        * Out. Interface List: `WAN`
+    * On `Action`
+        * Action: `masquerade`
+    * Checkbox `Enabled` marked
+
+If not exists, creates a new one with this config.
+![Firewall NAT rule Masquerade General](./images/firewall_NAT_rule_1.png "Firewall NAT rule Masquerade General")
+![Firewall NAT rule Masquerade Action](./images/firewall_NAT_rule_2.png "Firewall NAT rule Masquerade Action")
+
+##### CLI
