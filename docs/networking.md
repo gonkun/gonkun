@@ -21,14 +21,14 @@ This is optional. I did it because I configured this router years ago and I didn
 Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.
 ##### WinBox
-- Go to `IP` > `Addresses`
+- Go to **IP** > **Addresses**
 - Select interface with name `bridge`
-- Modify `Address` and `Network`. In this case:
-    - `Address: 192.168.2.1/24`
-    - `Network: 192.168.2.0`
-- Click on `Apply` and `OK`
+- Modify **Address** and **Network**. In this case:
+    - **Address**: `192.168.2.1/24`
+    - **Network**: `192.168.2.0`
+- Click on **Apply** and **OK**
 ![Setting default IP](./images/change_default_IP.png)
-- Go to `System` > `Reboot`
+- Go to **System** > **Reboot**
 
 
 ##### CLI
@@ -60,14 +60,14 @@ We need to change how our Movistar/O2 HGU router is working. At the moment is wo
 #### Configure VLAN
 Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is `6`
 ##### WinBox
-* Go to `Interfaces` > Select tab `VLAN`
-* Click on `New`
+* Go to **Interfaces** > Select tab **VLAN**
+* Click on **New**
 * Set next parameters/config:
-    * Name: `vlan_internet_movistar`
-    * MTU: `1492`
-    * VLAN ID: `6`
-    * Interface: `ether1`
-* Click on `Apply` and `OK`
+    * **Name**: `vlan_internet_movistar`
+    * **MTU**: `1492`
+    * **VLAN ID**: `6`
+    * **Interface**: `ether1`
+* Click on **Apply** and **OK**
 
 ![VLAN Config](./images/vlan_config.png "VLAN Config")
 
@@ -85,16 +85,16 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 #### Configure PPPoE Client (WAN)
 **PPPoE** (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.
 ##### WinBox
-* Go to `PPP` 
-* Click on `New` > `PPPoE Client`
-* On tab/section `General`:
-    * Name: `internet_movistar`
-    * Interface: `ether1`
-* On tab/section `Dial Out`:
-    * User: `adslppp@telefonicanetpa`
-    * Password: `adslppp`
-    * Enable option `Add Default Route`
-* Click on `Apply` and `OK`
+* Go to **PPP** 
+* Click on **New** > **PPPoE Client**
+* On tab/section **General**:
+    * **Name**: `internet_movistar`
+    * **Interface**: `ether1`
+* On tab/section **Dial Out**:
+    * **User**: `adslppp@telefonicanetpa`
+    * **Password**: `adslppp`
+    * **Enable option** `Add Default Route`
+* Click on **Apply** and **OK**
 ![WAN with PPPoE Config](./images/wan_pppoe_config.png "WAN with PPPoE Config")
 
 ##### CLI
@@ -113,19 +113,19 @@ Configure DHCP range IP which router Mikrotik will lease to different hosts. Mik
 I just want to set range IP.
 
 ##### WinBox
-* Go to `IP` > `DHCP Server`
-* Select tab `Networks` and select network with name `defconf`:
-    * Address: `192.168.2.0/24`
-    * Gateway: `192.168.2.1`
-    * DNS servers: `192.168.2.1`
-* Click on `Apply` and `OK`
+* Go to **IP** > **DHCP Server**
+* Select tab **Networks** and select network with name `defconf`:
+    * **Address**: `192.168.2.0/24`
+    * **Gateway**: `192.168.2.1`
+    * **DNS servers**: `192.168.2.1`
+* Click on **Apply** and **OK**
 
 ![DHCP Server Config 1](./images/dhcp_server_config_1.png "DHCP Server Config 1")
 
-* Go to `IP` > `Pool`
+* Go to **IP** > **Pool**
 * Select IP pool named `dhcp-default`:
-    * Address: `192.168.2.10-192.168.2.254`
-* Click on `Apply` and `OK`
+    * **Address**: `192.168.2.10-192.168.2.254`
+* Click on **Apply** and **OK**
 
 ![DHCP Server Config 2](./images/dhcp_server_config_2.png "DHCP Server Config 2")
 
@@ -151,18 +151,69 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 Just check if a NAT rule for Masquerade is configured
 
 ##### WinBox
-* Go to `IP` > `Firewall`
-* Select tab `NAT`
+* Go to **IP** > **Firewall**
+* Select tab **NAT**
 * Check if a rule exists with next config:
-    * On `General`
-        * Chain: `srcnat`
-        * Out. Interface List: `WAN`
-    * On `Action`
-        * Action: `masquerade`
-    * Checkbox `Enabled` marked
+    * On **General**
+        * **Chain**: `srcnat`
+        * **Out. Interface List**: `WAN`
+    * On **Action**
+        * **Action**: `masquerade`
+    * Checkbox **Enabled** marked
 
 If not exists, creates a new one with this config.
 ![Firewall NAT rule Masquerade General](./images/firewall_NAT_rule_1.png "Firewall NAT rule Masquerade General")
 ![Firewall NAT rule Masquerade Action](./images/firewall_NAT_rule_2.png "Firewall NAT rule Masquerade Action")
 
 ##### CLI
+```bash
+ip/firewall/nat/add chain=srcnat action=masquerade out-interface=WAN comment="defconf:masquerade"
+
+ip/firewall/nat/print
+Flags: X - disabled, I - invalid; D - dynamic
+ 0    ;;; defconf: masquerade
+      chain=srcnat action=masquerade out-interface-list=WAN ipsec-policy=out,none
+```
+
+#### Configure DNS Server
+Configure router Mikrotik as DNS server
+
+##### WinBox
+Configure DNS server
+* Go to **IP** > **DNS**
+    * On **Servers** add next DNS servers:
+        * `1.1.1.1`
+        * `1.0.0.1`
+        * `8.8.8.8`
+        * `8.8.4.4`
+    * Check option **Allow Remote Requests**
+    * **Cache Max TTL**: `06:00:00` (Optional)
+![DNS Server Config](./images/DNS_server_1.png "DNS Server Config")
+
+Add Firewall rules for DNS requests
+* Go to **IP** > **Firewall**
+* Check or Add a rule allowing DNS traffic for TCP and UDP
+    * Click on **New**:
+        * **Chain**: `input`
+        * **Protocol**: `tcp`
+        * **Dst. Port**: `53`
+        * **Action**: `accept`
+    * Click on **Apply** and **OK**
+    * Click on **New**:
+        * **Chain**: `input`
+        * **Protocol**: `udp`
+        * **Dst. Port**: `53`
+        * **Action**: `accept`
+    * Click on **Apply** and **OK**
+    * Check both new rules are after rule allowing ICMP requests
+![DNS Server Firewall Rules](./images/DNS_server_2.png "DNS Server Firewall Rules")
+
+
+Configure DNS by DHCP clients
+* Go to **IP** > **DHCP Server**
+* Go to tab **Networks**
+* Select network `defconf`
+    * **DNS Servers**: `192.168.2.1` (Mikrotik local IP)
+    * **Domain**: `lan`
+* Click on **Apply** and **OK**
+![DNS Server DHCP Clients](./images/DNS_server_3.png "DNS Server DHCP Clients")

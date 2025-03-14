@@ -90,6 +90,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#configure-nat-on-firewall">Configure NAT on Firewall</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-dns-server">Configure DNS Server</a>
+    </li>
         </ul>
     </li>
         </ul>
@@ -140,16 +142,16 @@ This is the network map which I configured following this guide.</p>
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
 <h5 id="winbox">WinBox</h5>
 <ul>
-<li>Go to <code>IP</code> &gt; <code>Addresses</code></li>
+<li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong></li>
 <li>Select interface with name <code>bridge</code></li>
-<li>Modify <code>Address</code> and <code>Network</code>. In this case:<ul>
-<li><code>Address: 192.168.2.1/24</code></li>
-<li><code>Network: 192.168.2.0</code></li>
+<li>Modify <strong>Address</strong> and <strong>Network</strong>. In this case:<ul>
+<li><strong>Address</strong>: <code>192.168.2.1/24</code></li>
+<li><strong>Network</strong>: <code>192.168.2.0</code></li>
 </ul>
 </li>
-<li>Click on <code>Apply</code> and <code>OK</code>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
-<li>Go to <code>System</code> &gt; <code>Reboot</code></li>
+<li>Go to <strong>System</strong> &gt; <strong>Reboot</strong></li>
 </ul>
 <h5 id="cli">CLI</h5>
 <p>Setting up a new Default IP for router on <code>bridge</code> interface using its id which is <code>0</code></p>
@@ -177,16 +179,16 @@ Columns: ADDRESS, NETWORK, INTERFACE
 <p>Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is <code>6</code></p>
 <h5 id="winbox_1">WinBox</h5>
 <ul>
-<li>Go to <code>Interfaces</code> &gt; Select tab <code>VLAN</code></li>
-<li>Click on <code>New</code></li>
+<li>Go to <strong>Interfaces</strong> &gt; Select tab <strong>VLAN</strong></li>
+<li>Click on <strong>New</strong></li>
 <li>Set next parameters/config:<ul>
-<li>Name: <code>vlan_internet_movistar</code></li>
-<li>MTU: <code>1492</code></li>
-<li>VLAN ID: <code>6</code></li>
-<li>Interface: <code>ether1</code></li>
+<li><strong>Name</strong>: <code>vlan_internet_movistar</code></li>
+<li><strong>MTU</strong>: <code>1492</code></li>
+<li><strong>VLAN ID</strong>: <code>6</code></li>
+<li><strong>Interface</strong>: <code>ether1</code></li>
 </ul>
 </li>
-<li>Click on <code>Apply</code> and <code>OK</code></li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="VLAN Config" src="../images/vlan_config.png" title="VLAN Config" /></p>
 <h5 id="cli_1">CLI</h5>
@@ -202,20 +204,20 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 <p><strong>PPPoE</strong> (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.</p>
 <h5 id="winbox_2">WinBox</h5>
 <ul>
-<li>Go to <code>PPP</code> </li>
-<li>Click on <code>New</code> &gt; <code>PPPoE Client</code></li>
-<li>On tab/section <code>General</code>:<ul>
-<li>Name: <code>internet_movistar</code></li>
-<li>Interface: <code>ether1</code></li>
+<li>Go to <strong>PPP</strong> </li>
+<li>Click on <strong>New</strong> &gt; <strong>PPPoE Client</strong></li>
+<li>On tab/section <strong>General</strong>:<ul>
+<li><strong>Name</strong>: <code>internet_movistar</code></li>
+<li><strong>Interface</strong>: <code>ether1</code></li>
 </ul>
 </li>
-<li>On tab/section <code>Dial Out</code>:<ul>
-<li>User: <code>adslppp@telefonicanetpa</code></li>
-<li>Password: <code>adslppp</code></li>
-<li>Enable option <code>Add Default Route</code></li>
+<li>On tab/section <strong>Dial Out</strong>:<ul>
+<li><strong>User</strong>: <code>adslppp@telefonicanetpa</code></li>
+<li><strong>Password</strong>: <code>adslppp</code></li>
+<li><strong>Enable option</strong> <code>Add Default Route</code></li>
 </ul>
 </li>
-<li>Click on <code>Apply</code> and <code>OK</code>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="WAN with PPPoE Config" src="../images/wan_pppoe_config.png" title="WAN with PPPoE Config" /></li>
 </ul>
 <h5 id="cli_2">CLI</h5>
@@ -232,23 +234,23 @@ Flags: X - disabled, I - invalid; R - running
 I just want to set range IP.</p>
 <h5 id="winbox_3">WinBox</h5>
 <ul>
-<li>Go to <code>IP</code> &gt; <code>DHCP Server</code></li>
-<li>Select tab <code>Networks</code> and select network with name <code>defconf</code>:<ul>
-<li>Address: <code>192.168.2.0/24</code></li>
-<li>Gateway: <code>192.168.2.1</code></li>
-<li>DNS servers: <code>192.168.2.1</code></li>
+<li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
+<li>Select tab <strong>Networks</strong> and select network with name <code>defconf</code>:<ul>
+<li><strong>Address</strong>: <code>192.168.2.0/24</code></li>
+<li><strong>Gateway</strong>: <code>192.168.2.1</code></li>
+<li><strong>DNS servers</strong>: <code>192.168.2.1</code></li>
 </ul>
 </li>
-<li>Click on <code>Apply</code> and <code>OK</code></li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="DHCP Server Config 1" src="../images/dhcp_server_config_1.png" title="DHCP Server Config 1" /></p>
 <ul>
-<li>Go to <code>IP</code> &gt; <code>Pool</code></li>
+<li>Go to <strong>IP</strong> &gt; <strong>Pool</strong></li>
 <li>Select IP pool named <code>dhcp-default</code>:<ul>
-<li>Address: <code>192.168.2.10-192.168.2.254</code></li>
+<li><strong>Address</strong>: <code>192.168.2.10-192.168.2.254</code></li>
 </ul>
 </li>
-<li>Click on <code>Apply</code> and <code>OK</code></li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="DHCP Server Config 2" src="../images/dhcp_server_config_2.png" title="DHCP Server Config 2" /></p>
 <h5 id="cli_3">CLI</h5>
@@ -271,19 +273,19 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 <p>Just check if a NAT rule for Masquerade is configured</p>
 <h5 id="winbox_4">WinBox</h5>
 <ul>
-<li>Go to <code>IP</code> &gt; <code>Firewall</code></li>
-<li>Select tab <code>NAT</code></li>
+<li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
+<li>Select tab <strong>NAT</strong></li>
 <li>Check if a rule exists with next config:<ul>
-<li>On <code>General</code><ul>
-<li>Chain: <code>srcnat</code></li>
-<li>Out. Interface List: <code>WAN</code></li>
+<li>On <strong>General</strong><ul>
+<li><strong>Chain</strong>: <code>srcnat</code></li>
+<li><strong>Out. Interface List</strong>: <code>WAN</code></li>
 </ul>
 </li>
-<li>On <code>Action</code><ul>
-<li>Action: <code>masquerade</code></li>
+<li>On <strong>Action</strong><ul>
+<li><strong>Action</strong>: <code>masquerade</code></li>
 </ul>
 </li>
-<li>Checkbox <code>Enabled</code> marked</li>
+<li>Checkbox <strong>Enabled</strong> marked</li>
 </ul>
 </li>
 </ul>
@@ -291,6 +293,51 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 <img alt="Firewall NAT rule Masquerade General" src="../images/firewall_NAT_rule_1.png" title="Firewall NAT rule Masquerade General" />
 <img alt="Firewall NAT rule Masquerade Action" src="../images/firewall_NAT_rule_2.png" title="Firewall NAT rule Masquerade Action" /></p>
 <h5 id="cli_4">CLI</h5>
+<pre><code class="language-bash">ip/firewall/nat/add chain=srcnat action=masquerade out-interface=WAN comment=&quot;defconf:masquerade&quot;
+
+ip/firewall/nat/print
+Flags: X - disabled, I - invalid; D - dynamic
+ 0    ;;; defconf: masquerade
+      chain=srcnat action=masquerade out-interface-list=WAN ipsec-policy=out,none
+</code></pre>
+<h4 id="configure-dns-server">Configure DNS Server</h4>
+<p>Configure router Mikrotik as DNS server</p>
+<h5 id="winbox_5">WinBox</h5>
+<p>Configure DNS server
+* Go to <strong>IP</strong> &gt; <strong>DNS</strong>
+    * On <strong>Servers</strong> add next DNS servers:
+        * <code>1.1.1.1</code>
+        * <code>1.0.0.1</code>
+        * <code>8.8.8.8</code>
+        * <code>8.8.4.4</code>
+    * Check option <strong>Allow Remote Requests</strong>
+    * <strong>Cache Max TTL</strong>: <code>06:00:00</code> (Optional)
+<img alt="DNS Server Config" src="../images/DNS_server_1.png" title="DNS Server Config" /></p>
+<p>Add Firewall rules for DNS requests
+* Go to <strong>IP</strong> &gt; <strong>Firewall</strong>
+* Check or Add a rule allowing DNS traffic for TCP and UDP
+    * Click on <strong>New</strong>:
+        * <strong>Chain</strong>: <code>input</code>
+        * <strong>Protocol</strong>: <code>tcp</code>
+        * <strong>Dst. Port</strong>: <code>53</code>
+        * <strong>Action</strong>: <code>accept</code>
+    * Click on <strong>Apply</strong> and <strong>OK</strong>
+    * Click on <strong>New</strong>:
+        * <strong>Chain</strong>: <code>input</code>
+        * <strong>Protocol</strong>: <code>udp</code>
+        * <strong>Dst. Port</strong>: <code>53</code>
+        * <strong>Action</strong>: <code>accept</code>
+    * Click on <strong>Apply</strong> and <strong>OK</strong>
+    * Check both new rules are after rule allowing ICMP requests
+<img alt="DNS Server Firewall Rules" src="../images/DNS_server_2.png" title="DNS Server Firewall Rules" /></p>
+<p>Configure DNS by DHCP clients
+* Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong>
+* Go to tab <strong>Networks</strong>
+* Select network <code>defconf</code>
+    * <strong>DNS Servers</strong>: <code>192.168.2.1</code> (Mikrotik local IP)
+    * <strong>Domain</strong>: <code>lan</code>
+* Click on <strong>Apply</strong> and <strong>OK</strong>
+<img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></p>
               
             </div>
           </div><footer>
