@@ -217,3 +217,35 @@ Configure DNS by DHCP clients
     * **Domain**: `lan`
 * Click on **Apply** and **OK**
 ![DNS Server DHCP Clients](./images/DNS_server_3.png "DNS Server DHCP Clients")
+
+##### CLI
+```bash
+ip/dns/set servers="1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4" allow-remote-requests=yes cache-max-ttl=6h
+
+ip/dns/print
+
+ip/dns/print
+                      servers: 1.1.1.1
+                               1.0.0.1
+                               8.8.8.8
+                               8.8.4.4
+              dynamic-servers:
+               use-doh-server:
+              verify-doh-cert: no
+   doh-max-server-connections: 5
+   doh-max-concurrent-queries: 50
+                  doh-timeout: 5s
+        allow-remote-requests: yes
+          max-udp-packet-size: 4096
+         query-server-timeout: 2s
+          query-total-timeout: 10s
+       max-concurrent-queries: 100
+  max-concurrent-tcp-sessions: 20
+                   cache-size: 2048KiB
+                cache-max-ttl: 6h
+      address-list-extra-time: 0s
+                          vrf: main
+           mdns-repeat-ifaces:
+                   cache-used: 120KiB
+
+```

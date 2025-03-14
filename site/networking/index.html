@@ -338,6 +338,36 @@ Flags: X - disabled, I - invalid; D - dynamic
     * <strong>Domain</strong>: <code>lan</code>
 * Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></p>
+<h5 id="cli_5">CLI</h5>
+<pre><code class="language-bash">ip/dns/set servers=&quot;1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4&quot; allow-remote-requests=yes cache-max-ttl=6h
+
+ip/dns/print
+
+ip/dns/print
+                      servers: 1.1.1.1
+                               1.0.0.1
+                               8.8.8.8
+                               8.8.4.4
+              dynamic-servers:
+               use-doh-server:
+              verify-doh-cert: no
+   doh-max-server-connections: 5
+   doh-max-concurrent-queries: 50
+                  doh-timeout: 5s
+        allow-remote-requests: yes
+          max-udp-packet-size: 4096
+         query-server-timeout: 2s
+          query-total-timeout: 10s
+       max-concurrent-queries: 100
+  max-concurrent-tcp-sessions: 20
+                   cache-size: 2048KiB
+                cache-max-ttl: 6h
+      address-list-extra-time: 0s
+                          vrf: main
+           mdns-repeat-ifaces:
+                   cache-used: 120KiB
+
+</code></pre>
               
             </div>
           </div><footer>
