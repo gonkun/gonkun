@@ -92,6 +92,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#configure-dns-server">Configure DNS Server</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-wireguard-vpn">Configure WireGuard VPN</a>
+    </li>
         </ul>
     </li>
         </ul>
@@ -303,41 +305,59 @@ Flags: X - disabled, I - invalid; D - dynamic
 <h4 id="configure-dns-server">Configure DNS Server</h4>
 <p>Configure router Mikrotik as DNS server</p>
 <h5 id="winbox_5">WinBox</h5>
-<p>Configure DNS server
-* Go to <strong>IP</strong> &gt; <strong>DNS</strong>
-    * On <strong>Servers</strong> add next DNS servers:
-        * <code>1.1.1.1</code>
-        * <code>1.0.0.1</code>
-        * <code>8.8.8.8</code>
-        * <code>8.8.4.4</code>
-    * Check option <strong>Allow Remote Requests</strong>
-    * <strong>Cache Max TTL</strong>: <code>06:00:00</code> (Optional)
-<img alt="DNS Server Config" src="../images/DNS_server_1.png" title="DNS Server Config" /></p>
-<p>Add Firewall rules for DNS requests
-* Go to <strong>IP</strong> &gt; <strong>Firewall</strong>
-* Check or Add a rule allowing DNS traffic for TCP and UDP
-    * Click on <strong>New</strong>:
-        * <strong>Chain</strong>: <code>input</code>
-        * <strong>Protocol</strong>: <code>tcp</code>
-        * <strong>Dst. Port</strong>: <code>53</code>
-        * <strong>Action</strong>: <code>accept</code>
-    * Click on <strong>Apply</strong> and <strong>OK</strong>
-    * Click on <strong>New</strong>:
-        * <strong>Chain</strong>: <code>input</code>
-        * <strong>Protocol</strong>: <code>udp</code>
-        * <strong>Dst. Port</strong>: <code>53</code>
-        * <strong>Action</strong>: <code>accept</code>
-    * Click on <strong>Apply</strong> and <strong>OK</strong>
-    * Check both new rules are after rule allowing ICMP requests
-<img alt="DNS Server Firewall Rules" src="../images/DNS_server_2.png" title="DNS Server Firewall Rules" /></p>
-<p>Configure DNS by DHCP clients
-* Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong>
-* Go to tab <strong>Networks</strong>
-* Select network <code>defconf</code>
-    * <strong>DNS Servers</strong>: <code>192.168.2.1</code> (Mikrotik local IP)
-    * <strong>Domain</strong>: <code>lan</code>
-* Click on <strong>Apply</strong> and <strong>OK</strong>
-<img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></p>
+<p>Configure DNS server</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DNS</strong><ul>
+<li>On <strong>Servers</strong> add next DNS servers:<ul>
+<li><code>1.1.1.1</code></li>
+<li><code>1.0.0.1</code></li>
+<li><code>8.8.8.8</code></li>
+<li><code>8.8.4.4</code></li>
+</ul>
+</li>
+<li>Check option <strong>Allow Remote Requests</strong></li>
+<li><strong>Cache Max TTL</strong>: <code>06:00:00</code> (Optional)
+<img alt="DNS Server Config" src="../images/DNS_server_1.png" title="DNS Server Config" /></li>
+</ul>
+</li>
+</ul>
+<p>Add Firewall rules for DNS requests</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
+<li>Check or Add a rule allowing DNS traffic for TCP and UDP<ul>
+<li>Click on <strong>New</strong>:<ul>
+<li><strong>Chain</strong>: <code>input</code></li>
+<li><strong>Protocol</strong>: <code>tcp</code></li>
+<li><strong>Dst. Port</strong>: <code>53</code></li>
+<li><strong>Action</strong>: <code>accept</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+<li>Click on <strong>New</strong>:<ul>
+<li><strong>Chain</strong>: <code>input</code></li>
+<li><strong>Protocol</strong>: <code>udp</code></li>
+<li><strong>Dst. Port</strong>: <code>53</code></li>
+<li><strong>Action</strong>: <code>accept</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+<li>Check both new rules are after rule allowing ICMP requests
+<img alt="DNS Server Firewall Rules" src="../images/DNS_server_2.png" title="DNS Server Firewall Rules" /></li>
+</ul>
+</li>
+</ul>
+<p>Configure DNS by DHCP clients</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
+<li>Go to tab <strong>Networks</strong></li>
+<li>Select network <code>defconf</code><ul>
+<li><strong>DNS Servers</strong>: <code>192.168.2.1</code> (Mikrotik local IP)</li>
+<li><strong>Domain</strong>: <code>lan</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
+<img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></li>
+</ul>
 <h5 id="cli_5">CLI</h5>
 <pre><code class="language-bash">ip/dns/set servers=&quot;1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4&quot; allow-remote-requests=yes cache-max-ttl=6h
 
@@ -368,6 +388,11 @@ ip/dns/print
                    cache-used: 120KiB
 
 </code></pre>
+<h4 id="configure-wireguard-vpn">Configure WireGuard VPN</h4>
+<p>Mikrotik supports WireGuard VPNs since RouterOS version <strong>7.1</strong>, so we need to upgrade RouterOS before if our version is older.
+In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.</p>
+<h5 id="winbox_6">WinBox</h5>
+<p>Staring configure a VPN WireGuard server.</p>
               
             </div>
           </div><footer>

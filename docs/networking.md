@@ -180,6 +180,7 @@ Configure router Mikrotik as DNS server
 
 ##### WinBox
 Configure DNS server
+
 * Go to **IP** > **DNS**
     * On **Servers** add next DNS servers:
         * `1.1.1.1`
@@ -191,6 +192,7 @@ Configure DNS server
 ![DNS Server Config](./images/DNS_server_1.png "DNS Server Config")
 
 Add Firewall rules for DNS requests
+
 * Go to **IP** > **Firewall**
 * Check or Add a rule allowing DNS traffic for TCP and UDP
     * Click on **New**:
@@ -210,6 +212,7 @@ Add Firewall rules for DNS requests
 
 
 Configure DNS by DHCP clients
+
 * Go to **IP** > **DHCP Server**
 * Go to tab **Networks**
 * Select network `defconf`
@@ -249,3 +252,10 @@ ip/dns/print
                    cache-used: 120KiB
 
 ```
+
+#### Configure WireGuard VPN
+Mikrotik supports WireGuard VPNs since RouterOS version **7.1**, so we need to upgrade RouterOS before if our version is older.
+In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.
+
+##### WinBox
+Staring configure a VPN WireGuard server.
