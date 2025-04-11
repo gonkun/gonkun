@@ -257,5 +257,36 @@ ip/dns/print
 Mikrotik supports WireGuard VPNs since RouterOS version **7.1**, so we need to upgrade RouterOS before if our version is older.
 In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.
 
+This video help me a lot:
+https://www.youtube.com/watch?v=x409B6SO3as
+
 ##### WinBox
-Staring configure a VPN WireGuard server.
+Starting configure a VPN WireGuard server.
+
+* Go to **WireGuard** > **New**
+* On tab **General**:
+    * **Name**: `wireguard1`
+    * **Listen Port**: `13231`
+    * **MTU**: `1420`
+    * Click on **Apply** and **Private Key** and **Private Key** will be generated randomly 
+![WireGuard Server](./images/WireGuard_server_1.png "WireGuard Server")
+
+Create Addres IP for new interface
+
+* Go to **IP** > **Addresses** > **New**
+* Configure next parameters:
+    * **Enabled**: marked
+    * **Address**:`192.168.100.1/24`
+    * **Network**: `192.189.100.0`
+    * **Interface**: `wireguard1`
+
+Create Peers on server.
+In this case I created a peer for my mobile phone, so I've created a peer on my mobile phone. 
+
+* Go to **WireGuard**
+* On tab **Peers** > **New**
+    * **Enabled**: marked
+    * **Name**: `realme_gon`
+    * **interface**: `wireguard1`
+    * **Public Key**: `<Public Key client created on my mobile phoen when I created a peer there>`
+    * **Allowed Address**: `192.168.100.10/32` This IP I assigned on my phone when I created a peer there
