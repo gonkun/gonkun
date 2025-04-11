@@ -391,8 +391,45 @@ ip/dns/print
 <h4 id="configure-wireguard-vpn">Configure WireGuard VPN</h4>
 <p>Mikrotik supports WireGuard VPNs since RouterOS version <strong>7.1</strong>, so we need to upgrade RouterOS before if our version is older.
 In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.</p>
+<p>This video help me a lot:
+https://www.youtube.com/watch?v=x409B6SO3as</p>
 <h5 id="winbox_6">WinBox</h5>
-<p>Staring configure a VPN WireGuard server.</p>
+<p>Starting configure a VPN WireGuard server.</p>
+<ul>
+<li>Go to <strong>WireGuard</strong> &gt; <strong>New</strong></li>
+<li>On tab <strong>General</strong>:<ul>
+<li><strong>Name</strong>: <code>wireguard1</code></li>
+<li><strong>Listen Port</strong>: <code>13231</code></li>
+<li><strong>MTU</strong>: <code>1420</code></li>
+<li>Click on <strong>Apply</strong> and <strong>Private Key</strong> and <strong>Private Key</strong> will be generated randomly 
+<img alt="WireGuard Server" src="../images/WireGuard_server_1.png" title="WireGuard Server" /></li>
+</ul>
+</li>
+</ul>
+<p>Create Addres IP for new interface</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong> &gt; <strong>New</strong></li>
+<li>Configure next parameters:<ul>
+<li><strong>Enabled</strong>: marked</li>
+<li><strong>Address</strong>:<code>192.168.100.1/24</code></li>
+<li><strong>Network</strong>: <code>192.189.100.0</code></li>
+<li><strong>Interface</strong>: <code>wireguard1</code></li>
+</ul>
+</li>
+</ul>
+<p>Create Peers on server.
+In this case I created a peer for my mobile phone, so I've created a peer on my mobile phone. </p>
+<ul>
+<li>Go to <strong>WireGuard</strong></li>
+<li>On tab <strong>Peers</strong> &gt; <strong>New</strong><ul>
+<li><strong>Enabled</strong>: marked</li>
+<li><strong>Name</strong>: <code>realme_gon</code></li>
+<li><strong>interface</strong>: <code>wireguard1</code></li>
+<li><strong>Public Key</strong>: <code>&lt;Public Key client created on my mobile phoen when I created a peer there&gt;</code></li>
+<li><strong>Allowed Address</strong>: <code>192.168.100.10/32</code> This IP I assigned on my phone when I created a peer there</li>
+</ul>
+</li>
+</ul>
               
             </div>
           </div><footer>
