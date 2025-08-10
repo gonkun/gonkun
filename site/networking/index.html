@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Gon" /><link rel="canonical" href="https://gonkun.github.io/networking/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Networking - Gon Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Networking";
+        var mkdocs_page_input_path = "networking.md";
+        var mkdocs_page_url = "/networking/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Gon Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" >Kubernetes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../k8s/">Kubernetes</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../cka_tips/">CKA Tips</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../terraform/">Terraform</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bash/">BASH</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../github-actions/">GitHub Actions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ai-for-devops/">AI for DevOps</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Networking</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-router-mikrotik-replacing-router-hgu-movistaro2">Configure Router Mikrotik Replacing Router HGU Movistar/O2</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#home-network-map">Home Network Map</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#hard-reset">Hard Reset</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-default-ip-address">Change default IP address</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-hgu-mode-to-bridge">Change HGU mode to bridge</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-vlan">Configure VLAN</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-pppoe-client-wan">Configure PPPoE Client (WAN)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-dhcp-server-on-lan">Configure DHCP Server on LAN</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-nat-on-firewall">Configure NAT on Firewall</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-dns-server">Configure DNS Server</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#configure-wireguard-vpn">Configure WireGuard VPN</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../others/">Others</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Gon Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">User Guide</li>
+      <li class="breadcrumb-item active">Networking</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="networking">Networking</h1>
+<h2 id="tutorials-and-guides">Tutorials and Guides</h2>
+<h3 id="configure-router-mikrotik-replacing-router-hgu-movistaro2">Configure Router Mikrotik Replacing Router HGU Movistar/O2</h3>
+<p>This guide explains different steps for configure my router Miktrotik hEX S replacing Movistar/O2 router HGU. this one will be used as ONT only.</p>
+<h4 id="home-network-map">Home Network Map</h4>
+<p><img alt="Home Network Map" src="../images/home_network.png" title="Home Network Map" />
+This is the network map which I configured following this guide.</p>
+<h4 id="hard-reset">Hard Reset</h4>
+<p>This is optional. I did it because I configured this router years ago and I didn't remember which CIDR I've configured and credentials for login on it:
+1. With unplugged router, press "Reset" button and plug it again.
+2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. <a href="https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering">More info</a>
+3. After router reboots, I can access to router config with IP <code>192.168.88.1</code> and credentials <code>username: admin</code> and no password. We need to modify our IP and set another inside CIDR <code>192.168.88.0/24</code></p>
+<h4 id="change-default-ip-address">Change default IP address</h4>
+<p>Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
+I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
+<h5 id="winbox">WinBox</h5>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong></li>
+<li>Select interface with name <code>bridge</code></li>
+<li>Modify <strong>Address</strong> and <strong>Network</strong>. In this case:<ul>
+<li><strong>Address</strong>: <code>192.168.2.1/24</code></li>
+<li><strong>Network</strong>: <code>192.168.2.0</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
+<img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
+<li>Go to <strong>System</strong> &gt; <strong>Reboot</strong></li>
+</ul>
+<h5 id="cli">CLI</h5>
+<p>Setting up a new Default IP for router on <code>bridge</code> interface using its id which is <code>0</code></p>
+<pre><code class="language-bash">ip/address/print where interface=bridge
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.88.1/24  192.168.88.0  bridge
+
+ip/address/set numbers=0 address=192.168.2.1/24
+
+ip/address/print where interface=bridge
+Columns: ADDRESS, NETWORK, INTERFACE
+# ADDRESS         NETWORK      INTERFACE
+;;; defconf
+0 192.168.2.1/24  192.168.2.0  bridge
+</code></pre>
+<h4 id="change-hgu-mode-to-bridge">Change HGU mode to bridge</h4>
+<p>We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
+* Connect to HGU web panel http://192.168.1.1/
+* Disable DHCP service and Wi-Fi
+* Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"
+* Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</p>
+<h4 id="configure-vlan">Configure VLAN</h4>
+<p>Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is <code>6</code></p>
+<h5 id="winbox_1">WinBox</h5>
+<ul>
+<li>Go to <strong>Interfaces</strong> &gt; Select tab <strong>VLAN</strong></li>
+<li>Click on <strong>New</strong></li>
+<li>Set next parameters/config:<ul>
+<li><strong>Name</strong>: <code>vlan_internet_movistar</code></li>
+<li><strong>MTU</strong>: <code>1492</code></li>
+<li><strong>VLAN ID</strong>: <code>6</code></li>
+<li><strong>Interface</strong>: <code>ether1</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+</ul>
+<p><img alt="VLAN Config" src="../images/vlan_config.png" title="VLAN Config" /></p>
+<h5 id="cli_1">CLI</h5>
+<pre><code class="language-bash">interface/vlan/add name=vlan_internet_movistar mtu=1492 vlan-id=6 interface=ether1
+
+interface/vlan/print
+Flags: R - RUNNING
+Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
+#   NAME                     MTU  ARP      VLAN-ID  INTERFACE
+0 R vlan_internet_movistar  1492  enabled        6  ether1
+</code></pre>
+<h4 id="configure-pppoe-client-wan">Configure PPPoE Client (WAN)</h4>
+<p><strong>PPPoE</strong> (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.</p>
+<h5 id="winbox_2">WinBox</h5>
+<ul>
+<li>Go to <strong>PPP</strong> </li>
+<li>Click on <strong>New</strong> &gt; <strong>PPPoE Client</strong></li>
+<li>On tab/section <strong>General</strong>:<ul>
+<li><strong>Name</strong>: <code>internet_movistar</code></li>
+<li><strong>Interface</strong>: <code>ether1</code></li>
+</ul>
+</li>
+<li>On tab/section <strong>Dial Out</strong>:<ul>
+<li><strong>User</strong>: <code>adslppp@telefonicanetpa</code></li>
+<li><strong>Password</strong>: <code>adslppp</code></li>
+<li><strong>Enable option</strong> <code>Add Default Route</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
+<img alt="WAN with PPPoE Config" src="../images/wan_pppoe_config.png" title="WAN with PPPoE Config" /></li>
+</ul>
+<h5 id="cli_2">CLI</h5>
+<pre><code class="language-bash">interface/pppoe-client/add name=internet_movistar interface=ether1 user=adslppp@telefonicanetpa password=adslppp add-default-route=yes disabled=no
+
+interface/pppoe-client/print
+Flags: X - disabled, I - invalid; R - running
+ 0  R name=&quot;internet_movistar&quot; max-mtu=auto max-mru=auto mrru=disabled interface=ether1 user=&quot;adslppp@telefonicanetpa&gt;
+      password=&quot;adslppp&quot; profile=default keepalive-timeout=10 service-name=&quot;&quot; ac-name=&quot;&quot; add-default-route=yes
+      default-route-distance=1 dial-on-demand=no use-peer-dns=no allow=pap,chap,mschap1,mschap2
+</code></pre>
+<h4 id="configure-dhcp-server-on-lan">Configure DHCP Server on LAN</h4>
+<p>Configure DHCP range IP which router Mikrotik will lease to different hosts. Mikrotik offer a DHCP Server configured on virtual interface <code>bridge</code>.
+I just want to set range IP.</p>
+<h5 id="winbox_3">WinBox</h5>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
+<li>Select tab <strong>Networks</strong> and select network with name <code>defconf</code>:<ul>
+<li><strong>Address</strong>: <code>192.168.2.0/24</code></li>
+<li><strong>Gateway</strong>: <code>192.168.2.1</code></li>
+<li><strong>DNS servers</strong>: <code>192.168.2.1</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+</ul>
+<p><img alt="DHCP Server Config 1" src="../images/dhcp_server_config_1.png" title="DHCP Server Config 1" /></p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Pool</strong></li>
+<li>Select IP pool named <code>dhcp-default</code>:<ul>
+<li><strong>Address</strong>: <code>192.168.2.10-192.168.2.254</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+</ul>
+<p><img alt="DHCP Server Config 2" src="../images/dhcp_server_config_2.png" title="DHCP Server Config 2" /></p>
+<h5 id="cli_3">CLI</h5>
+<pre><code class="language-bash">ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1
+
+ip/dhcp-server/network/print
+Columns: ADDRESS, GATEWAY, DNS-SERVER
+# ADDRESS         GATEWAY      DNS-SERVER
+;;; defconf
+0 192.168.2.0/24  192.168.2.1  192.168.2.1
+
+ip/pool/set numbers=0 ranges=192.168.2.10-192.168.2.254
+
+ip/pool/print
+Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
+#  NAME          RANGES                      TOTAL  USED  AVAILABLE
+0  default-dhcp  192.168.2.10-192.168.2.254    245     8        237
+</code></pre>
+<h4 id="configure-nat-on-firewall">Configure NAT on Firewall</h4>
+<p>Just check if a NAT rule for Masquerade is configured</p>
+<h5 id="winbox_4">WinBox</h5>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
+<li>Select tab <strong>NAT</strong></li>
+<li>Check if a rule exists with next config:<ul>
+<li>On <strong>General</strong><ul>
+<li><strong>Chain</strong>: <code>srcnat</code></li>
+<li><strong>Out. Interface List</strong>: <code>WAN</code></li>
+</ul>
+</li>
+<li>On <strong>Action</strong><ul>
+<li><strong>Action</strong>: <code>masquerade</code></li>
+</ul>
+</li>
+<li>Checkbox <strong>Enabled</strong> marked</li>
+</ul>
+</li>
+</ul>
+<p>If not exists, creates a new one with this config.
+<img alt="Firewall NAT rule Masquerade General" src="../images/firewall_NAT_rule_1.png" title="Firewall NAT rule Masquerade General" />
+<img alt="Firewall NAT rule Masquerade Action" src="../images/firewall_NAT_rule_2.png" title="Firewall NAT rule Masquerade Action" /></p>
+<h5 id="cli_4">CLI</h5>
+<pre><code class="language-bash">ip/firewall/nat/add chain=srcnat action=masquerade out-interface=WAN comment=&quot;defconf:masquerade&quot;
+
+ip/firewall/nat/print
+Flags: X - disabled, I - invalid; D - dynamic
+ 0    ;;; defconf: masquerade
+      chain=srcnat action=masquerade out-interface-list=WAN ipsec-policy=out,none
+</code></pre>
+<h4 id="configure-dns-server">Configure DNS Server</h4>
+<p>Configure router Mikrotik as DNS server</p>
+<h5 id="winbox_5">WinBox</h5>
+<p>Configure DNS server</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DNS</strong><ul>
+<li>On <strong>Servers</strong> add next DNS servers:<ul>
+<li><code>1.1.1.1</code></li>
+<li><code>1.0.0.1</code></li>
+<li><code>8.8.8.8</code></li>
+<li><code>8.8.4.4</code></li>
+</ul>
+</li>
+<li>Check option <strong>Allow Remote Requests</strong></li>
+<li><strong>Cache Max TTL</strong>: <code>06:00:00</code> (Optional)
+<img alt="DNS Server Config" src="../images/DNS_server_1.png" title="DNS Server Config" /></li>
+</ul>
+</li>
+</ul>
+<p>Add Firewall rules for DNS requests</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
+<li>Check or Add a rule allowing DNS traffic for TCP and UDP<ul>
+<li>Click on <strong>New</strong>:<ul>
+<li><strong>Chain</strong>: <code>input</code></li>
+<li><strong>Protocol</strong>: <code>tcp</code></li>
+<li><strong>Dst. Port</strong>: <code>53</code></li>
+<li><strong>Action</strong>: <code>accept</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+<li>Click on <strong>New</strong>:<ul>
+<li><strong>Chain</strong>: <code>input</code></li>
+<li><strong>Protocol</strong>: <code>udp</code></li>
+<li><strong>Dst. Port</strong>: <code>53</code></li>
+<li><strong>Action</strong>: <code>accept</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
+<li>Check both new rules are after rule allowing ICMP requests
+<img alt="DNS Server Firewall Rules" src="../images/DNS_server_2.png" title="DNS Server Firewall Rules" /></li>
+</ul>
+</li>
+</ul>
+<p>Configure DNS by DHCP clients</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
+<li>Go to tab <strong>Networks</strong></li>
+<li>Select network <code>defconf</code><ul>
+<li><strong>DNS Servers</strong>: <code>192.168.2.1</code> (Mikrotik local IP)</li>
+<li><strong>Domain</strong>: <code>lan</code></li>
+</ul>
+</li>
+<li>Click on <strong>Apply</strong> and <strong>OK</strong>
+<img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></li>
+</ul>
+<h5 id="cli_5">CLI</h5>
+<pre><code class="language-bash">ip/dns/set servers=&quot;1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4&quot; allow-remote-requests=yes cache-max-ttl=6h
+
+ip/dns/print
+
+ip/dns/print
+                      servers: 1.1.1.1
+                               1.0.0.1
+                               8.8.8.8
+                               8.8.4.4
+              dynamic-servers:
+               use-doh-server:
+              verify-doh-cert: no
+   doh-max-server-connections: 5
+   doh-max-concurrent-queries: 50
+                  doh-timeout: 5s
+        allow-remote-requests: yes
+          max-udp-packet-size: 4096
+         query-server-timeout: 2s
+          query-total-timeout: 10s
+       max-concurrent-queries: 100
+  max-concurrent-tcp-sessions: 20
+                   cache-size: 2048KiB
+                cache-max-ttl: 6h
+      address-list-extra-time: 0s
+                          vrf: main
+           mdns-repeat-ifaces:
+                   cache-used: 120KiB
+
+</code></pre>
+<h4 id="configure-wireguard-vpn">Configure WireGuard VPN</h4>
+<p>Mikrotik supports WireGuard VPNs since RouterOS version <strong>7.1</strong>, so we need to upgrade RouterOS before if our version is older.
+In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.</p>
+<p>This video help me a lot:
+https://www.youtube.com/watch?v=x409B6SO3as</p>
+<h5 id="winbox_6">WinBox</h5>
+<p>Starting configure a VPN WireGuard server.</p>
+<ul>
+<li>Go to <strong>WireGuard</strong> &gt; <strong>New</strong></li>
+<li>On tab <strong>General</strong>:<ul>
+<li><strong>Name</strong>: <code>wireguard1</code></li>
+<li><strong>Listen Port</strong>: <code>13231</code></li>
+<li><strong>MTU</strong>: <code>1420</code></li>
+<li>Click on <strong>Apply</strong> and <strong>Private Key</strong> and <strong>Private Key</strong> will be generated randomly 
+<img alt="WireGuard Server" src="../images/WireGuard_server_1.png" title="WireGuard Server" /></li>
+</ul>
+</li>
+</ul>
+<p>Create Addres IP for new interface</p>
+<ul>
+<li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong> &gt; <strong>New</strong></li>
+<li>Configure next parameters:<ul>
+<li><strong>Enabled</strong>: marked</li>
+<li><strong>Address</strong>:<code>192.168.100.1/24</code></li>
+<li><strong>Network</strong>: <code>192.189.100.0</code></li>
+<li><strong>Interface</strong>: <code>wireguard1</code></li>
+</ul>
+</li>
+</ul>
+<p>Create Peers on server.
+In this case I created a peer for my mobile phone, so I've created a peer on my mobile phone. </p>
+<ul>
+<li>Go to <strong>WireGuard</strong></li>
+<li>On tab <strong>Peers</strong> &gt; <strong>New</strong><ul>
+<li><strong>Enabled</strong>: marked</li>
+<li><strong>Name</strong>: <code>realme_gon</code></li>
+<li><strong>interface</strong>: <code>wireguard1</code></li>
+<li><strong>Public Key</strong>: <code>&lt;Public Key client created on my mobile phoen when I created a peer there&gt;</code></li>
+<li><strong>Allowed Address</strong>: <code>192.168.100.10/32</code> This IP I assigned on my phone when I created a peer there</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ai-for-devops/" class="btn btn-neutral float-left" title="AI for DevOps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../others/" class="btn btn-neutral float-right" title="Others">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ai-for-devops/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../others/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
