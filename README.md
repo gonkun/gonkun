@@ -5,10 +5,10 @@ I'm **Gonzalo Sánchez Terrones**, a DevOps engineer with a career that started 
 
 ## 🧑‍💻 Professional Background
 
-Since 2017, I've specialized in building and operating scalable, resilient platforms. My day-to-day work revolves around **AWS, Terraform, ArgoCD, Helm, and Kubernetes**, and I’m deeply familiar with the entire ecosystem these technologies enable.  
-I also have significant experience with **GitHub Actions, Python, shell scripting, Kafka, SaltStack, and Datadog**.
+Since 2017, I've specialized in building and operating scalable, resilient platforms. My day-to-day work revolves around **AWS ☁️, Terraform 🌍, ArgoCD 🔄, Helm ⛵, and Kubernetes 🐳**, and I’m deeply familiar with CI/CD and modern ops.  
+I also have significant experience with **GitHub Actions ⚡, Python 🐍, shell scripting 💻, Kafka 🦒, SaltStack 🧂, and Datadog 📊**.
 
-At my current company, I led the transformation from a monolithic, on-premise system to a cloud-based, highly available, auto-scalable platform on AWS. We now leverage microservices orchestrated by EKS (Kubernetes), managed through Infrastructure as Code (Terraform), and deployed using GitOps methodologies with ArgoCD.
+At my current company, I led the transformation from a monolithic, on-premise system to a cloud-based, highly available, auto-scalable platform on AWS. We now leverage microservices orchestrated by Kubernetes.
 
 A key part of my role is empowering developer teams: I design policies and configure tools to enable teams to autonomously create and maintain infrastructure components tailored to their applications.
 
