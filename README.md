@@ -1,7 +1,7 @@
 # Hi there 👋
 
 Welcome to my GitHub profile!  
-I'm **Gonzalo Sánchez Terrones**, a DevOps engineer with a career that started in traditional SysAdmin roles and evolved into cloud-native automation and modern infrastructure.
+I'm **Gonzalo Sánchez Terrones**, a **DevOps engineer** with a career that started in traditional SysAdmin roles and evolved into cloud-native automation and modern infrastructure.
 
 ## 🧑‍💻 Professional Background
 
