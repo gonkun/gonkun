@@ -231,6 +231,7 @@ IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes 
 
 ### Ingresses
 - [Native EKS Ingress with AWS Load Balancer Controller](https://blog.antoinechoula.ga/native-eks-ingress-with-aws-load-balancer-controller)
+- [Why I'm moving from Kubernetes Ingress to Gateway API](https://blog.devops.dev/why-im-moving-from-kubernetes-ingress-to-gateway-api-9aa303127002)
 
 ### Certificates
 - [Ingress + Cert-Manager](https://www.youtube.com/watch?v=ZKrC261Rxqo)
