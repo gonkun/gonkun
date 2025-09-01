@@ -44,44 +44,63 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">User Guide</span></p>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../k8s/">Kubernetes</a>
+                </li>
+              </ul>
               <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" >Kubernetes</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">CKA Tips</a>
     <ul class="current">
-                <li class="toctree-l2"><a class="reference internal" href="../k8s/">Kubernetes</a>
-                </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">CKA Tips</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#generate-yaml-templatefiles-for-most-common-k8s-resources-objects">Generate YAML template/files for most common k8s resources objects</a>
+    <li class="toctree-l2"><a class="reference internal" href="#alias">Alias</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#upgrade-kubernetes-process">Upgrade Kubernetes Process</a>
+    <li class="toctree-l2"><a class="reference internal" href="#autocompletion">Autocompletion</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#managing-etcd-service">Managing etcd service</a>
+    <li class="toctree-l2"><a class="reference internal" href="#editor">Editor</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#certificates-api">Certificates API</a>
+    <li class="toctree-l2"><a class="reference internal" href="#output-format">Output Format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-dry-run">--dry-run</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#force-deletion">Force Deletion</a>
     </li>
     </ul>
                 </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../terraform/">Terraform</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bash/">BASH</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../github-actions/">GitHub Actions</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ai-for-devops/">AI for DevOps</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../networking/">Networking</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../others/">Others</a>
-                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../terraform/">Terraform</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bash/">BASH</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../github-actions/">GitHub Actions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ai-for-devops/">AI for DevOps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../networking/">Networking</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../others/">Others</a>
+                </li>
               </ul>
       </div>
     </div>
@@ -97,8 +116,6 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">User Guide</li>
-          <li class="breadcrumb-item">Kubernetes</li>
       <li class="breadcrumb-item active">CKA Tips</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -108,161 +125,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cka-tips">CKA Tips</h1>
-<p>Some tips for prepare/use on CKA exam</p>
-<h2 id="generate-yaml-templatefiles-for-most-common-k8s-resources-objects">Generate YAML template/files for most common k8s resources objects</h2>
-<ul>
-<li>Generate a POD YAML file</li>
-</ul>
-<pre><code>    kubectl run nginx --image=nginx --dry-run=client -o yaml
+                <h1 id="cka-tips">CKA tips</h1>
+<h2 id="alias">Alias</h2>
+<p><strong>Set a shorter alias for kubectl</strong></p>
+<pre><code class="language-bash">alias k=kubectl
 </code></pre>
-<p><br></p>
-<ul>
-<li>Generate Deployment YAML file</li>
-</ul>
-<pre><code>    kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+<h2 id="autocompletion">Autocompletion</h2>
+<p><strong>Enable kubectl autocompletion for the current session</strong></p>
+<pre><code class="language-bash">source &lt;(kubectl completion bash)
 </code></pre>
-<p><br></p>
-<ul>
-<li>Generate Service YAML file</li>
-</ul>
-<pre><code>    kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+<p><strong>Enable kubectl autocompletion permanently</strong></p>
+<pre><code class="language-bash">echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc
 </code></pre>
-<p><br></p>
-<ul>
-<li>Create Service named 'redis-service' exposing pod 'redis'</li>
-</ul>
-<pre><code>    kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
+<p><strong>Enable autocompletion for the 'k' alias</strong></p>
+<pre><code class="language-bash">source &lt;(kubectl completion bash | sed 's/kubectl/k/g')
+echo &quot;source &lt;(kubectl completion bash | sed 's/kubectl/k/g')&quot; &gt;&gt; ~/.bashrc
 </code></pre>
-<h2 id="upgrade-kubernetes-process">Upgrade Kubernetes Process</h2>
-<p>Example how to upgrade a Kubernetes cluster. In this case is using tool <code>kubeadm</code> and upgrading from version <code>1.28</code> to <code>1.29</code>.</p>
-<p>On the <code>controlplane</code> node:<br>
-* Drain node</p>
-<pre><code>kubectl drain controlplane --ignore-daemonsets
+<h2 id="editor">Editor</h2>
+<p><strong>Set your preferred editor for <code>kubectl edit</code></strong></p>
+<pre><code class="language-bash">export KUBE_EDITOR=&quot;nano&quot;
 </code></pre>
-<ul>
-<li>Open the file that defines the Kubernetes apt repository:</li>
-</ul>
-<pre><code>vim /etc/apt/sources.list.d/kubernetes.list
+<h2 id="output-format">Output Format</h2>
+<p><strong>Get pods with more details</strong></p>
+<pre><code class="language-bash">k get pods -o wide
 </code></pre>
-<ul>
-<li>Update the version in the URL to the next available minor release, i.e v1.29.</li>
-</ul>
-<pre><code>deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
+<p><strong>Get the full resource definition in YAML</strong></p>
+<pre><code class="language-bash">k get pod &lt;pod-name&gt; -o yaml
 </code></pre>
-<ul>
-<li>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</li>
-</ul>
-<pre><code>root@controlplane:~# apt update
-root@controlplane:~# apt-cache madison kubeadm
+<h2 id="-dry-run">--dry-run</h2>
+<p><strong>Generate the YAML for a resource without creating it</strong></p>
+<pre><code class="language-bash">k run nginx --image=nginx --dry-run=client -o yaml
 </code></pre>
-<ul>
-<li>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.29.0, the available package version is 1.29.0-1.1. Therefore, to install kubeadm for Kubernetes v1.29.0, use the following command:</li>
-</ul>
-<pre><code>root@controlplane:~# apt-get install kubeadm=1.29.0-1.1
-</code></pre>
-<ul>
-<li>Run the following command to upgrade the Kubernetes cluster.</li>
-</ul>
-<pre><code>root@controlplane:~# kubeadm upgrade plan v1.29.0
-root@controlplane:~# kubeadm upgrade apply v1.29.0
-</code></pre>
-<ul>
-<li>Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the "controlplane" node) as schedulable.</li>
-</ul>
-<pre><code>root@controlplane:~# apt-get install kubelet=1.29.0-1.1
-root@controlplane:~# systemctl daemon-reload
-root@controlplane:~# systemctl restart kubelet
-root@controlplane:~# kubectl uncordon controlplane
-</code></pre>
-<ul>
-<li>Uncordon node</li>
-</ul>
-<pre><code>kubectl uncordon controlplane
-</code></pre>
-<p>On the <code>node01</code> node:<br>
-* Drain node</p>
-<pre><code>kubectl drain node01 --ignore-daemonsets
-</code></pre>
-<ul>
-<li>Use any text editor you prefer to open the file that defines the Kubernetes apt repository.</li>
-</ul>
-<pre><code>vim /etc/apt/sources.list.d/kubernetes.list
-</code></pre>
-<ul>
-<li>Update the version in the URL to the next available minor release, i.e v1.29.</li>
-</ul>
-<pre><code>deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /
-</code></pre>
-<ul>
-<li>After making changes, save the file and exit from your text editor. Proceed with the next instruction.</li>
-</ul>
-<pre><code>root@node01:~# apt update
-root@node01:~# apt-cache madison kubeadm
-</code></pre>
-<ul>
-<li>Based on the version information displayed by apt-cache madison, it indicates that for Kubernetes version 1.29.0, the available package version is 1.29.0-1.1. Therefore, to install kubeadm for Kubernetes v1.29.0, use the following command:</li>
-</ul>
-<pre><code>root@node01:~# apt-get install kubeadm=1.29.0-1.1
-# Upgrade the node 
-root@node01:~# kubeadm upgrade node
-</code></pre>
-<ul>
-<li>Now, upgrade the version and restart Kubelet.</li>
-</ul>
-<pre><code>root@node01:~# apt-get install kubelet=1.29.0-1.1
-root@node01:~# systemctl daemon-reload
-root@node01:~# systemctl restart kubelet
-</code></pre>
-<h2 id="managing-etcd-service">Managing etcd service</h2>
-<ul>
-<li>Get list of members of a cluster <strong>etcd</strong><br>
-After login on <code>etcd-server</code>, get the list of endpoints for to know if etcd server is  acluster and how many nodes has:</li>
-</ul>
-<pre><code>ETCDCTL_API=3 etcdctl \
---endpoints=https://127.0.0.1:2379 \
---cacert=&lt;CA_public_cert&gt; \
---cert=&lt;server_public_cert&gt; \
---key=&lt;server_private_key&gt; \
-  member list
-</code></pre>
-<p><strong>NOTE:</strong> We have to find certificate's path on <code>etcd</code> process</p>
-<ul>
-<li>Backup database <strong>etcd</strong></li>
-</ul>
-<pre><code>ETCDCTL_API=3 etcdctl \
---endpoints=https://127.0.0.1:2379 \
---cacert=&lt;CA_public_cert&gt; \
---cert=&lt;server_public_cert&gt; \
---key=&lt;server_private_key&gt; \
-snapshot save &lt;backup-file-location&gt;
-</code></pre>
-<h2 id="certificates-api">Certificates API</h2>
-<ul>
-<li>Example CertificateSigningRequest resource</li>
-</ul>
-<pre><code>apiVersion: certificates.k8s.io/v1
-kind: CertificateSigningRequest
-metadata:
-  name: akshay
-spec:
-  groups:
-  - system:authenticated
-  request: &quot;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQW5lMU5DamI4RFR1VWp2Ky9MT3d4Rnl4bTMvdHVuNVN3N0hoWVhhR3Q1N3dMClB5Q0dnZXB0WGFqV1U2V2JjbnhhK1Myb3pNU0hnMmxSaVB3T2MzN3dBOFZJMi9NaEpTRUtscHBsdWdmRzdJTS8KNytNVEdiSUE0RVQ4Ykt0RzcxUGt3NWNuTjdCWmFmME1lT2gyakErN09SREtnelh5QUQ4d0haanZwTFppMFI3cgowM1hqK3F1MUI2emZoeFRmZ2VmRExUV05XNTdKR2phenhISkZybkFCWkR2RG84OTkwcXdmbDY4MHZScW9lcURYCkhvWFRmWVA2aERwcTRicjBRaUd2aDZpYmZYU2V3L25tUzdvaGtIcGhxMXBTNk96K2JsMExVb3NQSDRBR2p2ZDIKZ0FlanNaMnJPN1RMcCsvalovdUwzazlua281R1B0TzhnTE8xTFVXcTB3SURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBQ09Yc0Jhe
-nlSYkZ0LzVQTHdBTFBLNFpuWStLcFlJeG5ONzYxaGsxQU1Za2R2R1ZOdkIzCkx5dTBDZjJaeE5ZWVM3OWxwL0tWV2w4cjByTjk4RjdIZUM2RXkzM3gvYUtzYi9Ma2FLMFp1UVVPcW9IQ3JZb24KVVhHQ0dlOC9ud00xMFZFb05xNnBHZCtPZXB6MkdJTitpcUdPeVNMUWhYL0cwSnRnMHlrS0hvRE5OL2Nvc29kLwp0eUlTbXNDTzdhRlY0a2M1Q1ZPU2FSWC9kazRPSjkyVXB6N1F4alh2V0c1NEFFZXV6ZzNBdjdoc1JCTVlSc1I0CjQ1U1hKK3dCVlZXS1FtRDM3NXNMTDVTb2ZjTGdvdkcyUTB6ZmVlU0pkSGNadlNwSnYrSmFvNVZrT25HbldxOWcKblg0WVFDRVdtczZmVGo1SnMveHZvQ0k3UCtHeDQ2MlljNG89Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=&quot;
-  signerName: kubernetes.io/kube-apiserver-client
-  usages:
-  - client auth
-</code></pre>
-<ul>
-<li>Approve a CertficateSigningRrequest</li>
-</ul>
-<pre><code>kubectl certificate approve &lt;certificate_name&gt;
-</code></pre>
-<ul>
-<li>Deny/Reject a CertficateSigningRrequest</li>
-</ul>
-<pre><code>kubectl certificate deny &lt;certificate_name&gt;
+<h2 id="force-deletion">Force Deletion</h2>
+<p><strong>Force the deletion of a pod that is stuck terminating</strong></p>
+<pre><code class="language-bash">k delete pod &lt;pod-name&gt; --grace-period=0 --force
 </code></pre>
               
             </div>
