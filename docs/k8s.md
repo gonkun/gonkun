@@ -4,200 +4,174 @@
 ## Common Commands
 
 * Run pod
-```
+```bash
   kubectl run <pod_name> --image <image> -n <namespace>
 ```
-<br>
 
 * Run pod and passing a command
-```
+```bash
   kubectl run -i --tty <pod_name> --image=<image> -n <namespace> -- <command>
 ```
-<br>
 
 * Get info about cluster
-```
+```bash
   kubectl cluster-info
 ```
-<br>
 
 * Get all pods
-```
+```bash
   kubectl get pods -A
 ```
-<br>
 
 * Get resource yaml
-```
+```bash
   kubectl get <resource> -n <namespace> <resource_name> -o yaml
 ```
-<br>
 
 * Get list of CRD applied
-```
+```bash
   kubectl get customresourcedefinitions
 ```
-<br>
 
 * List pods Docker images in a specific namespace
-```
+```bash
   kubectl get pods -n <namespace> -o jsonpath="{.items[*].spec.containers[*].image}"
 ```
-<br>
 
 * Restart all deployments in a namespace
-```
+```bash
   kubectl rollout restart deployment -n <namespace>
 ```
-<br>
 
 * List all running pods in a specific namespace
-```
+```bash
   kubectl get pods -n <namespace> --field-selector=status.phase=Running
 ```
-<br>
 
 * List all non-running pods in a specific namespace
-```
+```bash
   kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete
 ```
-<br>
 
 * Create tunnel to a service using port-forward (like a SSH tunnel)
-```
+```bash
   kubectl port-forward -n <namespace> svc/<service_name> <localhost_port>:<service_port>
 ```
-<br>
 
 * List all PVC associated with their respective pod
+```bash
+  kubectl get po -o json --all-namespaces | \
+  jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | \
+  grep -v null
 ```
-  kubectl get po -o json --all-namespaces | jq -j '.items[] | "\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n"' | grep -v null
-```
-<br>
 
-* List aal pods with events related to them
-```
+* List all pods with events related to them
+```bash
   kubectl get pods --watch --output-watch-events -A
 ```
-<br>
 
 * List all events with filter "type=Warning"
-```
+```bash
   kubectl get events -w --field-selector=type=Warning -A
 ```
-<br>
 
-* List all environment variables of specific pod<br>
-```
+* List all environment variables of specific pod
+```bash
   kubectl set env -n <namespace> pod/<podname> --list
 ```
-<br>
 
 
 ## Advanced Commands
 
 * Run pod `multitool` for testing/debugging on k8s
-```
+```bash
   kubectl run multitool --namespace <namespace> --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh
 ```
-<br>
 
 * List of nodes and their memory size
-```
+```bash
   kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'
 ```
-<br>
 
 * List of nodes and the number of pods running on them
+```bash
+kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({"nodeName": .[0].spec.nodeName, "count": length}) | sort_by(.count)
 ```
-kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({"nodeName": .[0].spec.nodeName, "count": length}) | sort_by(.count)'
-```
-<br>
 
 * List all pods sort by memory usage
-```
+```bash
   k top pods -A --sort-by='memory'
 ``` 
-<br>
 
 * List all pods sorted by cpu usage
-```
+```bash
   k top pods -A --sort-by='cpu'
 ```
-<br>
 
 * Sorting list of pods (in this case, by the number of restarts)
-```
+```bash
   kubectl get pods --sort-by=.status.containerStatuses[0].restartCount
 ```
-<br>
 
 * Print **limits** and **requests** for each pod
-```
+```bash
   kubectl get pods -n <namespace> -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'
 ```
-<br>
 
 * Print all services and their respective nodePorts
+```bash
+  kubectl get --all-namespaces svc -o json | \
+  jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join("|"))]| @tsv'
 ```
-  kubectl get --all-namespaces svc -o json | jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join("|"))]| @tsv'
-```
-<br>
 
 * Copy secrets from a namespace to another
+```bash
+  kubectl get secrets -o json --namespace <namespace_source> | \
+  jq '.items[].metadata.namespace = "<namespace_destiny>"' | \
+  kubectl create -f -
 ```
-  kubectl get secrets -o json --namespace <namespace_source> | jq '.items[].metadata.namespace = "<namespace_destiny>"' | kubectl create-f  -
-```
-<br>
 
 
 ## Logging Commands
 
 ### Kubectl
 * Print logs with human-readable timestamp
-```
+```bash
   kubectl -n <namespace> logs -f <pod_name> --timestamps
 ```
-<br>
 
-* Getting logs from all pods using  alabel to filter
-```
+* Getting logs from all pods using a label to filter
+```bash
   kubectl -n <namespace> logs -f -l app=nginx
 ```
-<br>
 
 ### Kubetail
 * Tail logs specific container
-```
+```bash
   kubetail <pod_name> -c <container_name>
 ```
-<br>
 
 * Tail logs from all containers on specific namespace
-```
+```bash
   kubetail -n <namespace>
 ```
-<br>
 
 
 ### Stern
 * Tail logs all pods on specific namespace
-```
+```bash
   stern -n <namespace> .
 ```
-<br>
 
-* Tail logs all pods with excludeds
-```
+* Tail logs all pods with excluded
+```bash
   stern -n <namespace> --exclude-container <pattern_string> .
 ```
-<br>
 
 * Tail logs specific pods
-```
+```bash
   stern -n <namespace> --container <pattern_string>
 ```
-<br>
 
 
 ## Definitions
@@ -206,9 +180,9 @@ Service which manages DNS records, in our case, on Route53. External DNS check a
 External DNS search domain names on  `annotations` or `host` on `rules`  and creates a register on Hosted Zones which we configure or matching with domain name which we configured.
 
 ### AWS Load Balancer Controller
-Service which manages `Ingress` and `Services` k8s objects.<br>
-For `Ingress` it creates an ALB by default, but can be configured to create a NLB.<br>
-For `Service` it creates NLB only, no ALB.<br>
+Service which manages `Ingress` and `Services` k8s objects.
+For `Ingress` it creates an ALB by default, but can be configured to create a NLB.
+For `Service` it creates NLB only, no ALB.
 We can configure the Load Balancer parameters using `annotations`. On the other hand, for configure Listener Rules we use the parameter `rules` of `Ingress` object.
 
 ### Emissary Ingress

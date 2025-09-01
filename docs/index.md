@@ -1,5 +1,5 @@
 # Gon Personal Docs
 
-This documentation is a remainder of all tools and technologie sthat I use on my job.<br>
+This documentation is a personal collection of notes, commands, and solutions related to the tools and technologies I use in my daily work.
 
-Most of the documentation may be is a mix off commands and explanations that I wrote quickly and dirty, but it helps me to remind all this stuff.<br>
+While some of the content may have been written quickly, it serves as a valuable reference for me, and I hope it can be useful to others as well.
