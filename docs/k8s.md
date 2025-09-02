@@ -75,7 +75,7 @@
 ```
 <br>
 
-* List aal pods with events related to them
+* List all pods with events related to them
 ```
   kubectl get pods --watch --output-watch-events -A
 ```
@@ -90,6 +90,12 @@
 * List all environment variables of specific pod<br>
 ```
   kubectl set env -n <namespace> pod/<podname> --list
+```
+<br>
+
+* List all pods on specific namespace with a linkerd proxy inside<br>
+```
+  kubectl get pods -n <namespace> -o json | jq -r '.items[] | select(.spec.containers[].name == "linkerd-proxy") | .metadata.name'
 ```
 <br>
 
