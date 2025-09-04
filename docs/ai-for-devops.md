@@ -1,4 +1,4 @@
-# IA for DevOps
+# AI for DevOps
 
 
 ## K8sGPT
@@ -24,3 +24,5 @@ ChatGPT for DevOps. A lot of useful integrations like GitHub, AWS, K8s, Terrafor
 * [Kubiya Agents - Use-Case Review](https://www.youtube.com/watch?v=G1_SF0bHRUc)
 
 
+## Gemini CLI
+[Gemini CLI Tutotial Series](https://medium.com/google-cloud/gemini-cli-tutorial-series-77da7d494718)
