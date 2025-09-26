@@ -47,53 +47,35 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Kubernetes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#common-commands">Common Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#run-pod">Run pod</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#advanced-commands">Advanced Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#run-pod-and-passing-a-command">Run pod and passing a command</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#logging-commands">Logging Commands</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#kubectl">Kubectl</a>
+    <li class="toctree-l2"><a class="reference internal" href="#get-info-about-cluster">Get info about cluster</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#kubetail">Kubetail</a>
+    <li class="toctree-l2"><a class="reference internal" href="#get-all-pods">Get all pods</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stern">Stern</a>
+    <li class="toctree-l2"><a class="reference internal" href="#get-resource-yaml">Get resource yaml</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#get-list-of-crd-applied">Get list of CRD applied</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#definitions">Definitions</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#external-dns">External DNS</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-pods-docker-images-in-a-specific-namespace">List pods Docker images in a specific namespace</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#aws-load-balancer-controller">AWS Load Balancer Controller</a>
+    <li class="toctree-l2"><a class="reference internal" href="#restart-all-deployments-in-a-namespace">Restart all deployments in a namespace</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#emissary-ingress">Emissary Ingress</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-running-pods-in-a-specific-namespace">List all running pods in a specific namespace</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-non-running-pods-in-a-specific-namespace">List all non-running pods in a specific namespace</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#local-cluster">Local Cluster</a>
+    <li class="toctree-l2"><a class="reference internal" href="#create-tunnel-to-a-service-using-port-forward-like-a-ssh-tunnel">Create tunnel to a service using port-forward (like a SSH tunnel)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#load-balancing-strategies">Load Balancing Strategies</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-pvc-associated-with-their-respective-pod">List all PVC associated with their respective pod</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#debugging-kubernetes-issues">Debugging Kubernetes Issues</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-pods-with-events-related-to-them">List all pods with events related to them</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ingresses">Ingresses</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-events-with-filter-typewarning">List all events with filter "type=Warning"</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#certificates">Certificates</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dns">DNS</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#networking">Networking</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#secrets">Secrets</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#virtual-kubernetes">Virtual Kubernetes</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#list-all-environment-variables-of-specific-pod">List all environment variables of specific pod</a>
     </li>
     </ul>
                 </li>
@@ -103,7 +85,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                <li class="toctree-l1"><a class="reference internal" href="../kafka/">Kafka</a>
                 </li>
               </ul>
               <ul>
@@ -112,10 +94,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
                 </li>
               </ul>
               <ul>
@@ -161,172 +139,108 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="kubernetes">Kubernetes</h1>
-<h2 id="common-commands">Common Commands</h2>
-<ul>
-<li>Run pod</li>
-</ul>
-<pre><code class="language-bash">  kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;
+                <h2 id="common-commands">Common Commands</h2>
+<h4 id="run-pod">Run pod</h4>
+<pre><code class="language-bash">kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;
 </code></pre>
-<ul>
-<li>Run pod and passing a command</li>
-</ul>
-<pre><code class="language-bash">  kubectl run -i --tty &lt;pod_name&gt; --image=&lt;image&gt; -n &lt;namespace&gt; -- &lt;command&gt;
+<h4 id="run-pod-and-passing-a-command">Run pod and passing a command</h4>
+<pre><code class="language-bash">kubectl run -i --tty &lt;pod_name&gt; --image=&lt;image&gt; -n &lt;namespace&gt; -#### &lt;command&gt;
 </code></pre>
-<ul>
-<li>Get info about cluster</li>
-</ul>
-<pre><code class="language-bash">  kubectl cluster-info
+<h4 id="get-info-about-cluster">Get info about cluster</h4>
+<pre><code class="language-bash">kubectl cluster-info
 </code></pre>
-<ul>
-<li>Get all pods</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods -A
+<h4 id="get-all-pods">Get all pods</h4>
+<pre><code class="language-bash">kubectl get pods -A
 </code></pre>
-<ul>
-<li>Get resource yaml</li>
-</ul>
-<pre><code class="language-bash">  kubectl get &lt;resource&gt; -n &lt;namespace&gt; &lt;resource_name&gt; -o yaml
+<h4 id="get-resource-yaml">Get resource yaml</h4>
+<pre><code class="language-bash">kubectl get &lt;resource&gt; -n &lt;namespace&gt; &lt;resource_name&gt; -o yaml
 </code></pre>
-<ul>
-<li>Get list of CRD applied</li>
-</ul>
-<pre><code class="language-bash">  kubectl get customresourcedefinitions
+<h4 id="get-list-of-crd-applied">Get list of CRD applied</h4>
+<pre><code class="language-bash">kubectl get customresourcedefinitions
 </code></pre>
-<ul>
-<li>List pods Docker images in a specific namespace</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods -n &lt;namespace&gt; -o jsonpath=&quot;{.items[*].spec.containers[*].image}&quot;
+<h4 id="list-pods-docker-images-in-a-specific-namespace">List pods Docker images in a specific namespace</h4>
+<pre><code class="language-bash">kubectl get pods -n &lt;namespace&gt; -o jsonpath=&quot;{.items[*].spec.containers[*].image}&quot;
 </code></pre>
-<ul>
-<li>Restart all deployments in a namespace</li>
-</ul>
-<pre><code class="language-bash">  kubectl rollout restart deployment -n &lt;namespace&gt;
+<h4 id="restart-all-deployments-in-a-namespace">Restart all deployments in a namespace</h4>
+<pre><code class="language-bash">kubectl rollout restart deployment -n &lt;namespace&gt;
 </code></pre>
-<ul>
-<li>List all running pods in a specific namespace</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods -n &lt;namespace&gt; --field-selector=status.phase=Running
+<h4 id="list-all-running-pods-in-a-specific-namespace">List all running pods in a specific namespace</h4>
+<pre><code class="language-bash">kubectl get pods -n &lt;namespace&gt; --field-selector=status.phase=Running
 </code></pre>
-<ul>
-<li>List all non-running pods in a specific namespace</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete
+<h4 id="list-all-non-running-pods-in-a-specific-namespace">List all non-running pods in a specific namespace</h4>
+<pre><code class="language-bash">kubectl get pods -A --field-selector=status.phase!=Running | grep -v Complete
 </code></pre>
-<ul>
-<li>Create tunnel to a service using port-forward (like a SSH tunnel)</li>
-</ul>
-<pre><code class="language-bash">  kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;
+<h4 id="create-tunnel-to-a-service-using-port-forward-like-a-ssh-tunnel">Create tunnel to a service using port-forward (like a SSH tunnel)</h4>
+<pre><code class="language-bash">kubectl port-forward -n &lt;namespace&gt; svc/&lt;service_name&gt; &lt;localhost_port&gt;:&lt;service_port&gt;
 </code></pre>
-<ul>
-<li>List all PVC associated with their respective pod</li>
-</ul>
-<pre><code class="language-bash">  kubectl get po -o json --all-namespaces | \
+<h4 id="list-all-pvc-associated-with-their-respective-pod">List all PVC associated with their respective pod</h4>
+<pre><code class="language-bash">kubectl get po -o json --all-namespaces | \
   jq -j '.items[] | &quot;\(.metadata.namespace), \(.metadata.name), \(.spec.volumes[].persistentVolumeClaim.claimName)\n&quot;' | \
   grep -v null
 </code></pre>
-<ul>
-<li>List all pods with events related to them</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods --watch --output-watch-events -A
+<h4 id="list-all-pods-with-events-related-to-them">List all pods with events related to them</h4>
+<pre><code class="language-bash">kubectl get pods --watch --output-watch-events -A
 </code></pre>
-<ul>
-<li>List all events with filter "type=Warning"</li>
-</ul>
-<pre><code class="language-bash">  kubectl get events -w --field-selector=type=Warning -A
+<h4 id="list-all-events-with-filter-typewarning">List all events with filter "type=Warning"</h4>
+<pre><code class="language-bash">kubectl get events -w --field-selector=type=Warning -A
 </code></pre>
-<ul>
-<li>List all environment variables of specific pod</li>
-</ul>
-<pre><code class="language-bash">  kubectl set env -n &lt;namespace&gt; pod/&lt;podname&gt; --list
+<h4 id="list-all-environment-variables-of-specific-pod">List all environment variables of specific pod</h4>
+<pre><code class="language-bash">kubectl set env -n &lt;namespace&gt; pod/&lt;podname&gt; --list
 </code></pre>
 <h2 id="advanced-commands">Advanced Commands</h2>
-<ul>
-<li>Run pod <code>multitool</code> for testing/debugging on k8s</li>
-</ul>
-<pre><code class="language-bash">  kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh
+<h4 id="run-pod-multitool-for-testingdebugging-on-k8s">Run pod <code>multitool</code> for testing/debugging on k8s</h4>
+<pre><code class="language-bash">kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -#### sh
 </code></pre>
-<ul>
-<li>List of nodes and their memory size</li>
-</ul>
-<pre><code class="language-bash">  kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'
+<h4 id="list-of-nodes-and-their-memory-size">List of nodes and their memory size</h4>
+<pre><code class="language-bash">kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'
 </code></pre>
-<ul>
-<li>List of nodes and the number of pods running on them</li>
-</ul>
-<pre><code class="language-bash">kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({&quot;nodeName&quot;: .[0].spec.nodeName, &quot;count&quot;: length}) | sort_by(.count)
+<h4 id="list-of-nodes-and-the-number-of-pods-running-on-them">List of nodes and the number of pods running on them</h4>
+<pre><code class="language-bash">kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({&quot;nodeName&quot;: .[0].spec.nodeName, &quot;count&quot;: length}) | sort_by(.count)'
 </code></pre>
-<ul>
-<li>List all pods sort by memory usage</li>
-</ul>
-<pre><code class="language-bash">  k top pods -A --sort-by='memory'
+<h4 id="list-all-pods-sort-by-memory-usage">List all pods sort by memory usage</h4>
+<pre><code class="language-bash">k top pods -A --sort-by='memory'
 </code></pre>
-<ul>
-<li>List all pods sorted by cpu usage</li>
-</ul>
-<pre><code class="language-bash">  k top pods -A --sort-by='cpu'
+<h4 id="list-all-pods-sorted-by-cpu-usage">List all pods sorted by cpu usage</h4>
+<pre><code class="language-bash">k top pods -A --sort-by='cpu'
 </code></pre>
-<ul>
-<li>Sorting list of pods (in this case, by the number of restarts)</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods --sort-by=.status.containerStatuses[0].restartCount
+<h4 id="sorting-list-of-pods-in-this-case-by-the-number-of-restarts">Sorting list of pods (in this case, by the number of restarts)</h4>
+<pre><code class="language-bash">kubectl get pods --sort-by=.status.containerStatuses[0].restartCount
 </code></pre>
-<ul>
-<li>Print <strong>limits</strong> and <strong>requests</strong> for each pod</li>
-</ul>
-<pre><code class="language-bash">  kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'
+<h4 id="print-limits-and-requests-for-each-pod">Print <strong>limits</strong> and <strong>requests</strong> for each pod</h4>
+<pre><code class="language-bash">kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'
 </code></pre>
-<ul>
-<li>Print all services and their respective nodePorts</li>
-</ul>
-<pre><code class="language-bash">  kubectl get --all-namespaces svc -o json | \
+<h4 id="print-all-services-and-their-respective-nodeports">Print all services and their respective nodePorts</h4>
+<pre><code class="language-bash">kubectl get --all-namespaces svc -o json | \
   jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join(&quot;|&quot;))]| @tsv'
 </code></pre>
-<ul>
-<li>Copy secrets from a namespace to another</li>
-</ul>
-<pre><code class="language-bash">  kubectl get secrets -o json --namespace &lt;namespace_source&gt; | \
+<h4 id="copy-secrets-from-a-namespace-to-another">Copy secrets from a namespace to another</h4>
+<pre><code class="language-bash">kubectl get secrets -o json --namespace &lt;namespace_source&gt; | \
   jq '.items[].metadata.namespace = &quot;&lt;namespace_destiny&gt;&quot;' | \
   kubectl create -f -
 </code></pre>
 <h2 id="logging-commands">Logging Commands</h2>
-<h3 id="kubectl">Kubectl</h3>
-<ul>
-<li>Print logs with human-readable timestamp</li>
-</ul>
-<pre><code class="language-bash">  kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps
+<h4 id="print-logs-with-human-readable-timestamp">Print logs with human-readable timestamp</h4>
+<pre><code class="language-bash">kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps
 </code></pre>
-<ul>
-<li>Getting logs from all pods using a label to filter</li>
-</ul>
-<pre><code class="language-bash">  kubectl -n &lt;namespace&gt; logs -f -l app=nginx
+<h4 id="getting-logs-from-all-pods-using-a-label-to-filter">Getting logs from all pods using a label to filter</h4>
+<pre><code class="language-bash">kubectl -n &lt;namespace&gt; logs -f -l app=nginx
 </code></pre>
 <h3 id="kubetail">Kubetail</h3>
-<ul>
-<li>Tail logs specific container</li>
-</ul>
-<pre><code class="language-bash">  kubetail &lt;pod_name&gt; -c &lt;container_name&gt;
+<h4 id="tail-logs-specific-container">Tail logs specific container</h4>
+<pre><code class="language-bash">kubetail &lt;pod_name&gt; -c &lt;container_name&gt;
 </code></pre>
-<ul>
-<li>Tail logs from all containers on specific namespace</li>
-</ul>
-<pre><code class="language-bash">  kubetail -n &lt;namespace&gt;
+<h4 id="tail-logs-from-all-containers-on-specific-namespace">Tail logs from all containers on specific namespace</h4>
+<pre><code class="language-bash">kubetail -n &lt;namespace&gt;
 </code></pre>
 <h3 id="stern">Stern</h3>
-<ul>
-<li>Tail logs all pods on specific namespace</li>
-</ul>
-<pre><code class="language-bash">  stern -n &lt;namespace&gt; .
+<h4 id="tail-logs-all-pods-on-specific-namespace">Tail logs all pods on specific namespace</h4>
+<pre><code class="language-bash">stern -n &lt;namespace&gt; .
 </code></pre>
-<ul>
-<li>Tail logs all pods with excluded</li>
-</ul>
-<pre><code class="language-bash">  stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .
+<h4 id="tail-logs-all-pods-with-excluded">Tail logs all pods with excluded</h4>
+<pre><code class="language-bash">stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .
 </code></pre>
-<ul>
-<li>Tail logs specific pods</li>
-</ul>
-<pre><code class="language-bash">  stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;
+<h4 id="tail-logs-specific-pods">Tail logs specific pods</h4>
+<pre><code class="language-bash">stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;
 </code></pre>
 <h2 id="definitions">Definitions</h2>
 <h3 id="external-dns">External DNS</h3>
@@ -338,7 +252,7 @@ For <code>Ingress</code> it creates an ALB by default, but can be configured to 
 For <code>Service</code> it creates NLB only, no ALB.
 We can configure the Load Balancer parameters using <code>annotations</code>. On the other hand, for configure Listener Rules we use the parameter <code>rules</code> of <code>Ingress</code> object.</p>
 <h3 id="emissary-ingress">Emissary Ingress</h3>
-<p>IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes requests using different paths. It works like a AWS Listener Rule but with a lot of extra options. </p>
+<p>IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes requests using different paths. It works like a AWS Listener Rule but with a lot of extra options.</p>
 <h2 id="tutorials-and-guides">Tutorials and Guides</h2>
 <h3 id="local-cluster">Local Cluster</h3>
 <ul>
@@ -388,6 +302,124 @@ We can configure the Load Balancer parameters using <code>annotations</code>. On
 <li><a href="https://piotrminkowski.com/2023/06/29/testing-gitops-on-virtual-kubernetes-clusters-with-argocd/">Testing GitOps on Virtual Kubernetes Clusters with ArgoCD (Ephimeral k8s clusters)</a></li>
 </ul>
 <h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><a href="https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three?utm_source=devopsbulletin&amp;utm_id=newsletter">How to identify and troubleshoot common Kubernetes errors</a></li>
+</ul>
+<h2 id="advanced-commands_1">Advanced Commands</h2>
+<h4 id="run-pod-multitool-for-testingdebugging-on-k8s_1">Run pod <code>multitool</code> for testing/debugging on k8s</h4>
+<pre><code class="language-bash">  kubectl run multitool --namespace &lt;namespace&gt; --image=wbitt/network-multitool:extra -it --tty --rm --restart=Never -- sh
+</code></pre>
+<h4 id="list-of-nodes-and-their-memory-size_1">List of nodes and their memory size</h4>
+<pre><code class="language-bash">  kubectl get no -o json | jq -r '.items | sort_by(.status.capacity.memory)[]|[.metadata.name,.status.capacity.memory]| @tsv'
+</code></pre>
+<h4 id="list-of-nodes-and-the-number-of-pods-running-on-them_1">List of nodes and the number of pods running on them</h4>
+<pre><code class="language-bash">kubectl get pod -o json --all-namespaces | jq '.items | group_by(.spec.nodeName) | map({&quot;nodeName&quot;: .[0].spec.nodeName, &quot;count&quot;: length}) | sort_by(.count)
+</code></pre>
+<h4 id="list-all-pods-sort-by-memory-usage_1">List all pods sort by memory usage</h4>
+<pre><code class="language-bash">  k top pods -A --sort-by='memory'
+</code></pre>
+<h4 id="list-all-pods-sorted-by-cpu-usage_1">List all pods sorted by cpu usage</h4>
+<pre><code class="language-bash">  k top pods -A --sort-by='cpu'
+</code></pre>
+<h4 id="sorting-list-of-pods-in-this-case-by-the-number-of-restarts_1">Sorting list of pods (in this case, by the number of restarts)</h4>
+<pre><code class="language-bash">  kubectl get pods --sort-by=.status.containerStatuses[0].restartCount
+</code></pre>
+<h4 id="print-limits-and-requests-for-each-pod_1">Print <strong>limits</strong> and <strong>requests</strong> for each pod</h4>
+<pre><code class="language-bash">  kubectl get pods -n &lt;namespace&gt; -o=custom-columns='NAME:spec.containers[*].name,MEMREQ:spec.containers[*].resources.requests.memory,MEMLIM:spec.containers[*].resources.limits.memory,CPUREQ:spec.containers[*].resources.requests.cpu,CPULIM:spec.containers[*].resources.limits.cpu'
+</code></pre>
+<h4 id="print-all-services-and-their-respective-nodeports_1">Print all services and their respective nodePorts</h4>
+<pre><code class="language-bash">  kubectl get --all-namespaces svc -o json | \
+  jq -r '.items[] | [.metadata.name,([.spec.ports[].nodePort | tostring ] | join(&quot;|&quot;))]| @tsv'
+</code></pre>
+<h4 id="copy-secrets-from-a-namespace-to-another_1">Copy secrets from a namespace to another</h4>
+<pre><code class="language-bash">  kubectl get secrets -o json --namespace &lt;namespace_source&gt; | \
+  jq '.items[].metadata.namespace = &quot;&lt;namespace_destiny&gt;&quot;' | \
+  kubectl create -f -
+</code></pre>
+<h3 id="kubectl">Kubectl</h3>
+<h4 id="print-logs-with-human-readable-timestamp_1">Print logs with human-readable timestamp</h4>
+<pre><code class="language-bash">  kubectl -n &lt;namespace&gt; logs -f &lt;pod_name&gt; --timestamps
+</code></pre>
+<h4 id="getting-logs-from-all-pods-using-a-label-to-filter_1">Getting logs from all pods using a label to filter</h4>
+<pre><code class="language-bash">  kubectl -n &lt;namespace&gt; logs -f -l app=nginx
+</code></pre>
+<h3 id="kubetail_1">Kubetail</h3>
+<h4 id="tail-logs-specific-container_1">Tail logs specific container</h4>
+<pre><code class="language-bash">  kubetail &lt;pod_name&gt; -c &lt;container_name&gt;
+</code></pre>
+<h4 id="tail-logs-from-all-containers-on-specific-namespace_1">Tail logs from all containers on specific namespace</h4>
+<pre><code class="language-bash">  kubetail -n &lt;namespace&gt;
+</code></pre>
+<h3 id="stern_1">Stern</h3>
+<h4 id="tail-logs-all-pods-on-specific-namespace_1">Tail logs all pods on specific namespace</h4>
+<pre><code class="language-bash">  stern -n &lt;namespace&gt; .
+</code></pre>
+<h4 id="tail-logs-all-pods-with-excluded_1">Tail logs all pods with excluded</h4>
+<pre><code class="language-bash">  stern -n &lt;namespace&gt; --exclude-container &lt;pattern_string&gt; .
+</code></pre>
+<h4 id="tail-logs-specific-pods_1">Tail logs specific pods</h4>
+<pre><code class="language-bash">  stern -n &lt;namespace&gt; --container &lt;pattern_string&gt;
+</code></pre>
+<h2 id="definitions_1">Definitions</h2>
+<h3 id="external-dns_1">External DNS</h3>
+<p>Service which manages DNS records, in our case, on Route53. External DNS check annotations on <code>Service</code> and <code>Ingress</code> objects. On UserTesting we configured External DNS just for checking annotations on <code>Ingress</code> objects.
+External DNS search domain names on  <code>annotations</code> or <code>host</code> on <code>rules</code>  and creates a register on Hosted Zones which we configure or matching with domain name which we configured.</p>
+<h3 id="aws-load-balancer-controller_1">AWS Load Balancer Controller</h3>
+<p>Service which manages <code>Ingress</code> and <code>Services</code> k8s objects.
+For <code>Ingress</code> it creates an ALB by default, but can be configured to create a NLB.
+For <code>Service</code> it creates NLB only, no ALB.
+We can configure the Load Balancer parameters using <code>annotations</code>. On the other hand, for configure Listener Rules we use the parameter <code>rules</code> of <code>Ingress</code> object.</p>
+<h3 id="emissary-ingress_1">Emissary Ingress</h3>
+<p>IT DOESN'T MANAGE LOAD BALANCER. It's a kind of application firewall. It routes requests using different paths. It works like a AWS Listener Rule but with a lot of extra options.</p>
+<h2 id="tutorials-and-guides_1">Tutorials and Guides</h2>
+<h3 id="local-cluster_1">Local Cluster</h3>
+<ul>
+<li><a href="https://iamunnip.medium.com/building-a-local-kubernetes-cluster-using-k3d-3ec96a802e48">Create local cluster for gomelab with k3d</a></li>
+<li><a href="https://akyriako.medium.com/provision-a-high-availability-k3s-cluster-with-k3d-a7519f476c9c">Spin up a local cluster with k3d</a></li>
+<li><a href="https://www.ivankrizsan.se/2024/07/12/exposing-services-in-a-k3s-k3d-cluster-with-traefik/">Exposing services in k3d with traefik</a></li>
+</ul>
+<h3 id="load-balancing-strategies_1">Load Balancing Strategies</h3>
+<ul>
+<li><a href="https://cloudnativeengineer.substack.com/p/powerful-load-balancing-strategies-kubernetes">Powerful Load Balancing Strategies: Kubernetes Gateway API</a></li>
+<li><a href="https://community.traefik.io/t/getting-started-with-kubernetes-gateway-api-and-traefik/23601">Getting Started with Kubernetes Gateway API and Traefik</a></li>
+</ul>
+<h3 id="debugging-kubernetes-issues_1">Debugging Kubernetes Issues</h3>
+<ul>
+<li><a href="https://hervekhg.medium.com/debugging-kubernetes-issues-in-production-a-technical-guide-9e3d26e27180">Debugging Kubernetes Issues in Production: A technical guide</a></li>
+</ul>
+<h3 id="ingresses_1">Ingresses</h3>
+<ul>
+<li><a href="https://blog.antoinechoula.ga/native-eks-ingress-with-aws-load-balancer-controller">Native EKS Ingress with AWS Load Balancer Controller</a></li>
+<li><a href="https://blog.devops.dev/why-im-moving-from-kubernetes-ingress-to-gateway-api-9aa303127002">Why I'm moving from Kubernetes Ingress to Gateway API</a></li>
+</ul>
+<h3 id="certificates_1">Certificates</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=ZKrC261Rxqo">Ingress + Cert-Manager</a></li>
+</ul>
+<h3 id="dns_1">DNS</h3>
+<ul>
+<li><a href="https://www.nslookup.io/learning/the-life-of-a-dns-query-in-kubernetes/">The life of a DNS query in Kubernetes</a></li>
+</ul>
+<h3 id="networking_1">Networking</h3>
+<ul>
+<li><a href="https://www.tkng.io/">The Kubernetes Networking Guide</a></li>
+<li><a href="https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727">An Illustrated Guide to Kubernetes Networking [Part 1]</a></li>
+<li><a href="https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-2-13fdc6c4e24c">An Illustrated Guide to Kubernetes Networking [Part 2]</a></li>
+<li><a href="https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-3-f35957784c8e">An Illustrated Guide to Kubernetes Networking [Part 3]</a></li>
+<li><a href="https://medium.com/tensult/alb-ingress-controller-on-aws-eks-45bf8e36020d">ALB Ingress Controller on AWS EKS</a></li>
+<li><a href="https://iximiuz.com/en/posts/docker-publish-container-ports/?z=101&amp;utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=devopsbulletin&amp;utm_content=devopsbulletin">What Actually Happens When You Publish a Container Port</a></li>
+</ul>
+<h3 id="secrets_1">Secrets</h3>
+<ul>
+<li><a href="https://medium.com/4th-coffee/state-of-kubernetes-secrets-management-in-2022-6148af91e7b5">State of Kubernetes Secrets Management in 2022</a></li>
+<li><a href="https://blog.container-solutions.com/tutorial-how-to-set-external-secrets-with-aws">How to Set External-Secrets with AWS</a></li>
+<li><a href="https://blog.container-solutions.com/tutorialexternal-secrets-with-hashicorp-vault">How to Set External-Secrets with Hashicorp Vault</a></li>
+</ul>
+<h3 id="virtual-kubernetes_1">Virtual Kubernetes</h3>
+<ul>
+<li><a href="https://piotrminkowski.com/2023/06/29/testing-gitops-on-virtual-kubernetes-clusters-with-argocd/">Testing GitOps on Virtual Kubernetes Clusters with ArgoCD (Ephimeral k8s clusters)</a></li>
+</ul>
+<h3 id="troubleshooting_1">Troubleshooting</h3>
 <ul>
 <li><a href="https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three?utm_source=devopsbulletin&amp;utm_id=newsletter">How to identify and troubleshoot common Kubernetes errors</a></li>
 </ul>

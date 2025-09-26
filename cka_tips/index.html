@@ -52,22 +52,52 @@
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">CKA Tips</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#alias">Alias</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#set-a-shorter-alias-for-kubectl">Set a shorter alias for kubectl</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#autocompletion">Autocompletion</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#enable-kubectl-autocompletion-for-the-current-session">Enable kubectl autocompletion for the current session</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enable-kubectl-autocompletion-permanently">Enable kubectl autocompletion permanently</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enable-autocompletion-for-the-k-alias">Enable autocompletion for the 'k' alias</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#editor">Editor</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#set-your-preferred-editor-for-kubectl-edit">Set your preferred editor for kubectl edit</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#output-format">Output Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-pods-with-more-details">Get pods with more details</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-the-full-resource-definition-in-yaml">Get the full resource definition in YAML</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#-dry-run">--dry-run</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-the-yaml-for-a-resource-without-creating-it">Generate the YAML for a resource without creating it</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#force-deletion">Force Deletion</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#force-the-deletion-of-a-pod-that-is-stuck-terminating">Force the deletion of a pod that is stuck terminating</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                <li class="toctree-l1"><a class="reference internal" href="../kafka/">Kafka</a>
                 </li>
               </ul>
               <ul>
@@ -76,10 +106,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
                 </li>
               </ul>
               <ul>
@@ -125,39 +151,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cka-tips">CKA tips</h1>
+                <h1 id="cka-tips">CKA Tips</h1>
 <h2 id="alias">Alias</h2>
-<p><strong>Set a shorter alias for kubectl</strong></p>
+<h3 id="set-a-shorter-alias-for-kubectl">Set a shorter alias for kubectl</h3>
 <pre><code class="language-bash">alias k=kubectl
 </code></pre>
 <h2 id="autocompletion">Autocompletion</h2>
-<p><strong>Enable kubectl autocompletion for the current session</strong></p>
+<h3 id="enable-kubectl-autocompletion-for-the-current-session">Enable kubectl autocompletion for the current session</h3>
 <pre><code class="language-bash">source &lt;(kubectl completion bash)
 </code></pre>
-<p><strong>Enable kubectl autocompletion permanently</strong></p>
+<h3 id="enable-kubectl-autocompletion-permanently">Enable kubectl autocompletion permanently</h3>
 <pre><code class="language-bash">echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc
 </code></pre>
-<p><strong>Enable autocompletion for the 'k' alias</strong></p>
+<h3 id="enable-autocompletion-for-the-k-alias">Enable autocompletion for the 'k' alias</h3>
 <pre><code class="language-bash">source &lt;(kubectl completion bash | sed 's/kubectl/k/g')
 echo &quot;source &lt;(kubectl completion bash | sed 's/kubectl/k/g')&quot; &gt;&gt; ~/.bashrc
 </code></pre>
 <h2 id="editor">Editor</h2>
-<p><strong>Set your preferred editor for <code>kubectl edit</code></strong></p>
+<h3 id="set-your-preferred-editor-for-kubectl-edit">Set your preferred editor for <code>kubectl edit</code></h3>
 <pre><code class="language-bash">export KUBE_EDITOR=&quot;nano&quot;
 </code></pre>
 <h2 id="output-format">Output Format</h2>
-<p><strong>Get pods with more details</strong></p>
+<h3 id="get-pods-with-more-details">Get pods with more details</h3>
 <pre><code class="language-bash">k get pods -o wide
 </code></pre>
-<p><strong>Get the full resource definition in YAML</strong></p>
+<h3 id="get-the-full-resource-definition-in-yaml">Get the full resource definition in YAML</h3>
 <pre><code class="language-bash">k get pod &lt;pod-name&gt; -o yaml
 </code></pre>
 <h2 id="-dry-run">--dry-run</h2>
-<p><strong>Generate the YAML for a resource without creating it</strong></p>
+<h3 id="generate-the-yaml-for-a-resource-without-creating-it">Generate the YAML for a resource without creating it</h3>
 <pre><code class="language-bash">k run nginx --image=nginx --dry-run=client -o yaml
 </code></pre>
 <h2 id="force-deletion">Force Deletion</h2>
-<p><strong>Force the deletion of a pod that is stuck terminating</strong></p>
+<h3 id="force-the-deletion-of-a-pod-that-is-stuck-terminating">Force the deletion of a pod that is stuck terminating</h3>
 <pre><code class="language-bash">k delete pod &lt;pod-name&gt; --grace-period=0 --force
 </code></pre>
               
@@ -165,7 +191,7 @@ echo &quot;source &lt;(kubectl completion bash | sed 's/kubectl/k/g')&quot; &gt;
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../k8s/" class="btn btn-neutral float-left" title="Kubernetes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../dse/" class="btn btn-neutral float-right" title="DataStax">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../kafka/" class="btn btn-neutral float-right" title="Kafka">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -191,7 +217,7 @@ echo &quot;source &lt;(kubectl completion bash | sed 's/kubectl/k/g')&quot; &gt;
       <span><a href="../k8s/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../dse/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../kafka/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

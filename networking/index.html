@@ -53,7 +53,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                <li class="toctree-l1"><a class="reference internal" href="../kafka/">Kafka</a>
                 </li>
               </ul>
               <ul>
@@ -62,10 +62,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
                 </li>
               </ul>
               <ul>
@@ -149,10 +145,12 @@
 <p><img alt="Home Network Map" src="../images/home_network.png" title="Home Network Map" />
 This is the network map which I configured following this guide.</p>
 <h4 id="hard-reset">Hard Reset</h4>
-<p>This is optional. I did it because I configured this router years ago and I didn't remember which CIDR I've configured and credentials for login on it:
-1. With unplugged router, press "Reset" button and plug it again.
-2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. <a href="https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering">More info</a>
-3. After router reboots, I can access to router config with IP <code>192.168.88.1</code> and credentials <code>username: admin</code> and no password. We need to modify our IP and set another inside CIDR <code>192.168.88.0/24</code></p>
+<p>This is optional. I did it because I configured this router years ago and I didn't remember which CIDR I've configured and credentials for login on it:</p>
+<ol>
+<li>With unplugged router, press "Reset" button and plug it again.</li>
+<li>Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. <a href="https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering">More info</a></li>
+<li>After router reboots, I can access to router config with IP <code>192.168.88.1</code> and credentials <code>username: admin</code> and no password. We need to modify our IP and set another inside CIDR <code>192.168.88.0/24</code></li>
+</ol>
 <h4 id="change-default-ip-address">Change default IP address</h4>
 <p>Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
 I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.</p>
@@ -160,11 +158,9 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong></li>
 <li>Select interface with name <code>bridge</code></li>
-<li>Modify <strong>Address</strong> and <strong>Network</strong>. In this case:<ul>
+<li>Modify <strong>Address</strong> and <strong>Network</strong>. In this case:</li>
 <li><strong>Address</strong>: <code>192.168.2.1/24</code></li>
 <li><strong>Network</strong>: <code>192.168.2.0</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="Setting default IP" src="../images/change_default_IP.png" /></li>
 <li>Go to <strong>System</strong> &gt; <strong>Reboot</strong></li>
@@ -186,29 +182,30 @@ Columns: ADDRESS, NETWORK, INTERFACE
 0 192.168.2.1/24  192.168.2.0  bridge
 </code></pre>
 <h4 id="change-hgu-mode-to-bridge">Change HGU mode to bridge</h4>
-<p>We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
-* Connect to HGU web panel http://192.168.1.1/
-* Disable DHCP service and Wi-Fi
-* Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"
-* Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</p>
+<p>We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.</p>
+<ul>
+<li>Connect to HGU web panel http://192.168.1.1/</li>
+<li>Disable DHCP service and Wi-Fi</li>
+<li>Change mode form "<strong>Multipuesto</strong>" to "<strong>Monopuesto</strong>"</li>
+<li>Connect cable from <code>eth1</code>port of this router to <code>eth1</code>port of Mikrotik router</li>
+</ul>
 <h4 id="configure-vlan">Configure VLAN</h4>
 <p>Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is <code>6</code></p>
 <h5 id="winbox_1">WinBox</h5>
 <ul>
 <li>Go to <strong>Interfaces</strong> &gt; Select tab <strong>VLAN</strong></li>
 <li>Click on <strong>New</strong></li>
-<li>Set next parameters/config:<ul>
+<li>Set next parameters/config:</li>
 <li><strong>Name</strong>: <code>vlan_internet_movistar</code></li>
 <li><strong>MTU</strong>: <code>1492</code></li>
 <li><strong>VLAN ID</strong>: <code>6</code></li>
 <li><strong>Interface</strong>: <code>ether1</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="VLAN Config" src="../images/vlan_config.png" title="VLAN Config" /></p>
 <h5 id="cli_1">CLI</h5>
 <pre><code class="language-bash">interface/vlan/add name=vlan_internet_movistar mtu=1492 vlan-id=6 interface=ether1
+
 
 interface/vlan/print
 Flags: R - RUNNING
@@ -222,22 +219,19 @@ Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 <ul>
 <li>Go to <strong>PPP</strong> </li>
 <li>Click on <strong>New</strong> &gt; <strong>PPPoE Client</strong></li>
-<li>On tab/section <strong>General</strong>:<ul>
+<li>On tab/section <strong>General</strong>:</li>
 <li><strong>Name</strong>: <code>internet_movistar</code></li>
 <li><strong>Interface</strong>: <code>ether1</code></li>
-</ul>
-</li>
-<li>On tab/section <strong>Dial Out</strong>:<ul>
+<li>On tab/section <strong>Dial Out</strong>:</li>
 <li><strong>User</strong>: <code>adslppp@telefonicanetpa</code></li>
 <li><strong>Password</strong>: <code>adslppp</code></li>
 <li><strong>Enable option</strong> <code>Add Default Route</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="WAN with PPPoE Config" src="../images/wan_pppoe_config.png" title="WAN with PPPoE Config" /></li>
 </ul>
 <h5 id="cli_2">CLI</h5>
 <pre><code class="language-bash">interface/pppoe-client/add name=internet_movistar interface=ether1 user=adslppp@telefonicanetpa password=adslppp add-default-route=yes disabled=no
+
 
 interface/pppoe-client/print
 Flags: X - disabled, I - invalid; R - running
@@ -251,26 +245,23 @@ I just want to set range IP.</p>
 <h5 id="winbox_3">WinBox</h5>
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
-<li>Select tab <strong>Networks</strong> and select network with name <code>defconf</code>:<ul>
+<li>Select tab <strong>Networks</strong> and select network with name <code>defconf</code>:</li>
 <li><strong>Address</strong>: <code>192.168.2.0/24</code></li>
 <li><strong>Gateway</strong>: <code>192.168.2.1</code></li>
 <li><strong>DNS servers</strong>: <code>192.168.2.1</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="DHCP Server Config 1" src="../images/dhcp_server_config_1.png" title="DHCP Server Config 1" /></p>
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>Pool</strong></li>
-<li>Select IP pool named <code>dhcp-default</code>:<ul>
+<li>Select IP pool named <code>dhcp-default</code>:</li>
 <li><strong>Address</strong>: <code>192.168.2.10-192.168.2.254</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong></li>
 </ul>
 <p><img alt="DHCP Server Config 2" src="../images/dhcp_server_config_2.png" title="DHCP Server Config 2" /></p>
 <h5 id="cli_3">CLI</h5>
 <pre><code class="language-bash">ip/dhcp-server/network/set numbers=0 address=192.168.2.0/24 gateway=192.168.2.1 dns-server=192.168.2.1
+
 
 ip/dhcp-server/network/print
 Columns: ADDRESS, GATEWAY, DNS-SERVER
@@ -291,7 +282,7 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
 <li>Select tab <strong>NAT</strong></li>
-<li>Check if a rule exists with next config:<ul>
+<li>Check if a rule exists with next config:</li>
 <li>On <strong>General</strong><ul>
 <li><strong>Chain</strong>: <code>srcnat</code></li>
 <li><strong>Out. Interface List</strong>: <code>WAN</code></li>
@@ -303,13 +294,12 @@ Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
 </li>
 <li>Checkbox <strong>Enabled</strong> marked</li>
 </ul>
-</li>
-</ul>
 <p>If not exists, creates a new one with this config.
 <img alt="Firewall NAT rule Masquerade General" src="../images/firewall_NAT_rule_1.png" title="Firewall NAT rule Masquerade General" />
 <img alt="Firewall NAT rule Masquerade Action" src="../images/firewall_NAT_rule_2.png" title="Firewall NAT rule Masquerade Action" /></p>
 <h5 id="cli_4">CLI</h5>
 <pre><code class="language-bash">ip/firewall/nat/add chain=srcnat action=masquerade out-interface=WAN comment=&quot;defconf:masquerade&quot;
+
 
 ip/firewall/nat/print
 Flags: X - disabled, I - invalid; D - dynamic
@@ -321,7 +311,7 @@ Flags: X - disabled, I - invalid; D - dynamic
 <h5 id="winbox_5">WinBox</h5>
 <p>Configure DNS server</p>
 <ul>
-<li>Go to <strong>IP</strong> &gt; <strong>DNS</strong><ul>
+<li>Go to <strong>IP</strong> &gt; <strong>DNS</strong></li>
 <li>On <strong>Servers</strong> add next DNS servers:<ul>
 <li><code>1.1.1.1</code></li>
 <li><code>1.0.0.1</code></li>
@@ -333,12 +323,10 @@ Flags: X - disabled, I - invalid; D - dynamic
 <li><strong>Cache Max TTL</strong>: <code>06:00:00</code> (Optional)
 <img alt="DNS Server Config" src="../images/DNS_server_1.png" title="DNS Server Config" /></li>
 </ul>
-</li>
-</ul>
 <p>Add Firewall rules for DNS requests</p>
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>Firewall</strong></li>
-<li>Check or Add a rule allowing DNS traffic for TCP and UDP<ul>
+<li>Check or Add a rule allowing DNS traffic for TCP and UDP</li>
 <li>Click on <strong>New</strong>:<ul>
 <li><strong>Chain</strong>: <code>input</code></li>
 <li><strong>Protocol</strong>: <code>tcp</code></li>
@@ -358,22 +346,19 @@ Flags: X - disabled, I - invalid; D - dynamic
 <li>Check both new rules are after rule allowing ICMP requests
 <img alt="DNS Server Firewall Rules" src="../images/DNS_server_2.png" title="DNS Server Firewall Rules" /></li>
 </ul>
-</li>
-</ul>
 <p>Configure DNS by DHCP clients</p>
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>DHCP Server</strong></li>
 <li>Go to tab <strong>Networks</strong></li>
-<li>Select network <code>defconf</code><ul>
+<li>Select network <code>defconf</code></li>
 <li><strong>DNS Servers</strong>: <code>192.168.2.1</code> (Mikrotik local IP)</li>
 <li><strong>Domain</strong>: <code>lan</code></li>
-</ul>
-</li>
 <li>Click on <strong>Apply</strong> and <strong>OK</strong>
 <img alt="DNS Server DHCP Clients" src="../images/DNS_server_3.png" title="DNS Server DHCP Clients" /></li>
 </ul>
 <h5 id="cli_5">CLI</h5>
 <pre><code class="language-bash">ip/dns/set servers=&quot;1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4&quot; allow-remote-requests=yes cache-max-ttl=6h
+
 
 ip/dns/print
 
@@ -406,43 +391,37 @@ ip/dns/print
 <p>Mikrotik supports WireGuard VPNs since RouterOS version <strong>7.1</strong>, so we need to upgrade RouterOS before if our version is older.
 In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.</p>
 <p>This video help me a lot:
-https://www.youtube.com/watch?v=x409B6SO3as</p>
+<a href="https://www.youtube.com/watch?v=x409B6SO3as">Configurar VPN Wireguard - Mikrotik en tu telefono</a></p>
 <h5 id="winbox_6">WinBox</h5>
 <p>Starting configure a VPN WireGuard server.</p>
 <ul>
 <li>Go to <strong>WireGuard</strong> &gt; <strong>New</strong></li>
-<li>On tab <strong>General</strong>:<ul>
+<li>On tab <strong>General</strong>:</li>
 <li><strong>Name</strong>: <code>wireguard1</code></li>
 <li><strong>Listen Port</strong>: <code>13231</code></li>
 <li><strong>MTU</strong>: <code>1420</code></li>
 <li>Click on <strong>Apply</strong> and <strong>Private Key</strong> and <strong>Private Key</strong> will be generated randomly 
 <img alt="WireGuard Server" src="../images/WireGuard_server_1.png" title="WireGuard Server" /></li>
 </ul>
-</li>
-</ul>
 <p>Create Addres IP for new interface</p>
 <ul>
 <li>Go to <strong>IP</strong> &gt; <strong>Addresses</strong> &gt; <strong>New</strong></li>
-<li>Configure next parameters:<ul>
+<li>Configure next parameters:</li>
 <li><strong>Enabled</strong>: marked</li>
 <li><strong>Address</strong>:<code>192.168.100.1/24</code></li>
 <li><strong>Network</strong>: <code>192.189.100.0</code></li>
 <li><strong>Interface</strong>: <code>wireguard1</code></li>
 </ul>
-</li>
-</ul>
 <p>Create Peers on server.
 In this case I created a peer for my mobile phone, so I've created a peer on my mobile phone. </p>
 <ul>
 <li>Go to <strong>WireGuard</strong></li>
-<li>On tab <strong>Peers</strong> &gt; <strong>New</strong><ul>
+<li>On tab <strong>Peers</strong> &gt; <strong>New</strong></li>
 <li><strong>Enabled</strong>: marked</li>
 <li><strong>Name</strong>: <code>realme_gon</code></li>
 <li><strong>interface</strong>: <code>wireguard1</code></li>
 <li><strong>Public Key</strong>: <code>&lt;Public Key client created on my mobile phoen when I created a peer there&gt;</code></li>
 <li><strong>Allowed Address</strong>: <code>192.168.100.10/32</code> This IP I assigned on my phone when I created a peer there</li>
-</ul>
-</li>
 </ul>
               
             </div>
