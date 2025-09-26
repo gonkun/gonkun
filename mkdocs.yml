@@ -7,10 +7,9 @@ nav:
   - Home: index.md
   - Kubernetes: k8s.md
   - CKA Tips: cka_tips.md
-  - DataStax: dse.md
+  - Kafka: kafka.md
   - Terraform: terraform.md
   - AWS: aws.md
-  - Istio: istio.md
   - BASH: bash.md
   - GitHub Actions: github-actions.md
   - AI for DevOps: ai-for-devops.md

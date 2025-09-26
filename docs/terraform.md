@@ -1,7 +1,7 @@
 # Terraform
 
-
 ## Tutorials and Guides
+
 - [Nathan Nellan's Terraform Guide](https://github.com/nnellans/terraform-guide)
 - [Terraform Official Documentation](https://developer.hashicorp.com/terraform/docs)
 - [Elevate Your Terraform Game by leveraging for loops in Terraform](https://medium.com/@akhilesh-mishra/elevate-your-terraform-game-by-leveraging-for-loops-in-terraform-5fe32e76847a)
@@ -11,4 +11,5 @@
 - [GitHub Actions: Terraform deployments with a review of planned changes](https://itnext.io/github-actions-terraform-deployments-with-a-review-of-planned-changes-30143358bb5c)
 
 ## Best Practices
+
 - [Terraform Practices: The Good, the Bad and the Ugly by Hila Fish](https://www.youtube.com/watch?v=xGYPbrbHBls)
