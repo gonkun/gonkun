@@ -53,7 +53,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dse/">DataStax</a>
+                <li class="toctree-l1"><a class="reference internal" href="../kafka/">Kafka</a>
                 </li>
               </ul>
               <ul>
@@ -64,10 +64,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../aws/">AWS</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../istio/">Istio</a>
-                </li>
-              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">BASH</a>
     <ul class="current">
@@ -75,7 +71,13 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#for">For</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#simple-for-loop">Simple for loop</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#for-loop-to-list-files">For loop to list files</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#while">While</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#read-a-file-line-by-line">Read a file line by line</a>
     </li>
         </ul>
     </li>
@@ -83,25 +85,103 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#if">If</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-if-a-file-exists">Check if a file exists</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-if-a-directory-exists">Check if a directory exists</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-if-a-variable-is-empty">Check if a variable is empty</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-if-a-variable-is-not-empty">Check if a variable is not empty</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#integer-comparisons">Integer comparisons</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#variable-expansion-examples">Variable expansion examples</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#variable-assignment-and-expansion">Variable assignment and expansion</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#arrays">Arrays</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#array-definition-and-usage">Array definition and usage</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#simple-function-definition">Simple function definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-with-an-argument">Function with an argument</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#awk">Awk</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#print-the-first-column-of-a-file">Print the first column of a file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-the-last-column-of-a-file">Print the last column of a file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-the-first-column-from-files-containing-a-specific-word">Print the first column from files containing a specific word</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#sed">Sed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#replace-the-first-occurrence-of-a-string">Replace the first occurrence of a string</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#replace-all-occurrences-of-a-string-global-replacement">Replace all occurrences of a string (global replacement)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#replace-a-string-and-modify-the-file-in-place">Replace a string and modify the file in-place</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-lines-containing-a-specific-string">Delete lines containing a specific string</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#grep">Grep</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#search-for-a-string-in-a-single-file">Search for a string in a single file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#search-for-a-string-in-all-files-in-the-current-directory">Search for a string in all files in the current directory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#search-for-a-string-recursively-starting-from-the-current-directory">Search for a string recursively starting from the current directory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#search-recursively-and-display-only-the-names-of-files-that-contain-the-string">Search recursively and display only the names of files that contain the string</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#find">Find</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#find-files-by-name">Find files by name</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#find-directories-by-name">Find directories by name</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#find-files-by-permissions">Find files by permissions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#find-files-modified-within-the-last-7-days">Find files modified within the last 7 days</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#find-files-larger-than-1mb">Find files larger than 1MB</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#xargs">xargs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#build-and-execute-commands-from-standard-input">Build and execute commands from standard input</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#curl">curl</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#make-a-simple-get-request">Make a simple GET request</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#make-a-post-request-with-url-encoded-data">Make a POST request with URL-encoded data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#make-a-post-request-with-a-json-file">Make a POST request with a JSON file</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -148,45 +228,45 @@
                 <h1 id="bash">BASH</h1>
 <h2 id="loops">Loops</h2>
 <h3 id="for">For</h3>
-<p><strong>Simple for loop</strong></p>
+<h3 id="simple-for-loop">Simple for loop</h3>
 <pre><code class="language-bash">for i in {1..10}; do
   echo $i
 done
 </code></pre>
-<p><strong>For loop to list files</strong></p>
+<h3 id="for-loop-to-list-files">For loop to list files</h3>
 <pre><code class="language-bash">for i in $(ls); do
   echo $i
 done
 </code></pre>
 <h3 id="while">While</h3>
-<p><strong>Read a file line by line</strong></p>
+<h3 id="read-a-file-line-by-line">Read a file line by line</h3>
 <pre><code class="language-bash">while read -r line; do
   echo $line
 done &lt; file.txt
 </code></pre>
 <h2 id="conditionals">Conditionals</h2>
 <h3 id="if">If</h3>
-<p><strong>Check if a file exists</strong></p>
+<h3 id="check-if-a-file-exists">Check if a file exists</h3>
 <pre><code class="language-bash">if [ -f file.txt ]; then
   echo &quot;file exists&quot;
 fi
 </code></pre>
-<p><strong>Check if a directory exists</strong></p>
+<h3 id="check-if-a-directory-exists">Check if a directory exists</h3>
 <pre><code class="language-bash">if [ -d /tmp ]; then
   echo &quot;directory exists&quot;
 fi
 </code></pre>
-<p><strong>Check if a variable is empty</strong></p>
+<h3 id="check-if-a-variable-is-empty">Check if a variable is empty</h3>
 <pre><code class="language-bash">if [ -z &quot;&quot; ]; then
   echo &quot;variable is empty&quot;
 fi
 </code></pre>
-<p><strong>Check if a variable is not empty</strong></p>
+<h3 id="check-if-a-variable-is-not-empty">Check if a variable is not empty</h3>
 <pre><code class="language-bash">if [ -n &quot;hello&quot; ]; then
   echo &quot;variable is not empty&quot;
 fi
 </code></pre>
-<p><strong>Integer comparisons</strong></p>
+<h3 id="integer-comparisons">Integer comparisons</h3>
 <pre><code class="language-bash">if [ 1 -eq 1 ]; then
   echo &quot;are equal&quot;
 fi
@@ -212,14 +292,19 @@ if [ 1 -le 1 ]; then
 fi
 </code></pre>
 <h2 id="variables">Variables</h2>
-<p><strong>Variable assignment and expansion</strong></p>
+<h3 id="variable-expansion-examples">Variable expansion examples</h3>
+<pre><code class="language-bash">echo $variable
+echo ${variable}
+echo &quot;the value of the variable is ${variable}&quot;
+</code></pre>
+<h3 id="variable-assignment-and-expansion">Variable assignment and expansion</h3>
 <pre><code class="language-bash">variable=&quot;hello&quot;
 echo $variable
 echo ${variable}
 echo &quot;the value of the variable is ${variable}&quot;
 </code></pre>
 <h2 id="arrays">Arrays</h2>
-<p><strong>Array definition and usage</strong></p>
+<h3 id="array-definition-and-usage">Array definition and usage</h3>
 <pre><code class="language-bash"># Define an array
 array=(&quot;one&quot; &quot;two&quot; &quot;three&quot;)
 
@@ -235,7 +320,7 @@ echo ${array[@]}
 echo ${#array[@]}
 </code></pre>
 <h2 id="functions">Functions</h2>
-<p><strong>Simple function definition</strong></p>
+<h3 id="simple-function-definition">Simple function definition</h3>
 <pre><code class="language-bash">function hello {
   echo &quot;hello&quot;
 }
@@ -243,7 +328,7 @@ echo ${#array[@]}
 # Call the function
 hello
 </code></pre>
-<p><strong>Function with an argument</strong></p>
+<h3 id="function-with-an-argument">Function with an argument</h3>
 <pre><code class="language-bash">function goodbye {
   echo &quot;goodbye $1&quot;
 }
@@ -252,77 +337,77 @@ hello
 goodbye world
 </code></pre>
 <h2 id="awk">Awk</h2>
-<p><strong>Print the first column of a file</strong></p>
+<h3 id="print-the-first-column-of-a-file">Print the first column of a file</h3>
 <pre><code class="language-bash">awk '{print $1}' file.txt
 </code></pre>
-<p><strong>Print the last column of a file</strong></p>
+<h3 id="print-the-last-column-of-a-file">Print the last column of a file</h3>
 <pre><code class="language-bash">awk '{print $NF}' file.txt
 </code></pre>
-<p><strong>Print the first column from files containing a specific word</strong></p>
+<h3 id="print-the-first-column-from-files-containing-a-specific-word">Print the first column from files containing a specific word</h3>
 <pre><code class="language-bash">grep -l &quot;hello&quot; * | xargs awk '{print $1}'
 </code></pre>
 <h2 id="sed">Sed</h2>
-<p><strong>Replace the first occurrence of a string</strong></p>
+<h3 id="replace-the-first-occurrence-of-a-string">Replace the first occurrence of a string</h3>
 <pre><code class="language-bash">sed 's/hello/goodbye/' file.txt
 </code></pre>
-<p><strong>Replace all occurrences of a string (global replacement)</strong></p>
+<h3 id="replace-all-occurrences-of-a-string-global-replacement">Replace all occurrences of a string (global replacement)</h3>
 <pre><code class="language-bash">sed 's/hello/goodbye/g' file.txt
 </code></pre>
-<p><strong>Replace a string and modify the file in-place</strong></p>
+<h3 id="replace-a-string-and-modify-the-file-in-place">Replace a string and modify the file in-place</h3>
 <pre><code class="language-bash">sed -i 's/hello/goodbye/' file.txt
 </code></pre>
-<p><strong>Delete lines containing a specific string</strong></p>
+<h3 id="delete-lines-containing-a-specific-string">Delete lines containing a specific string</h3>
 <pre><code class="language-bash">sed '/hello/d' file.txt
 </code></pre>
 <h2 id="grep">Grep</h2>
-<p><strong>Search for a string in a single file</strong></p>
+<h3 id="search-for-a-string-in-a-single-file">Search for a string in a single file</h3>
 <pre><code class="language-bash">grep &quot;hello&quot; file.txt
 </code></pre>
-<p><strong>Search for a string in all files in the current directory</strong></p>
+<h3 id="search-for-a-string-in-all-files-in-the-current-directory">Search for a string in all files in the current directory</h3>
 <pre><code class="language-bash">grep &quot;hello&quot; *
 </code></pre>
-<p><strong>Search for a string recursively starting from the current directory</strong></p>
+<h3 id="search-for-a-string-recursively-starting-from-the-current-directory">Search for a string recursively starting from the current directory</h3>
 <pre><code class="language-bash">grep -r &quot;hello&quot; .
 </code></pre>
-<p><strong>Search recursively and display only the names of files that contain the string</strong></p>
+<h3 id="search-recursively-and-display-only-the-names-of-files-that-contain-the-string">Search recursively and display only the names of files that contain the string</h3>
 <pre><code class="language-bash">grep -rl &quot;hello&quot; .
 </code></pre>
 <h2 id="find">Find</h2>
-<p><strong>Find files by name</strong></p>
+<h3 id="find-files-by-name">Find files by name</h3>
 <pre><code class="language-bash">find . -name &quot;file.txt&quot;
 </code></pre>
-<p><strong>Find directories by name</strong></p>
+<h3 id="find-directories-by-name">Find directories by name</h3>
 <pre><code class="language-bash">find . -type d -name &quot;directory&quot;
 </code></pre>
-<p><strong>Find files by permissions</strong></p>
+<h3 id="find-files-by-permissions">Find files by permissions</h3>
 <pre><code class="language-bash">find . -type f -perm 777
 </code></pre>
-<p><strong>Find files modified within the last 7 days</strong></p>
+<h3 id="find-files-modified-within-the-last-7-days">Find files modified within the last 7 days</h3>
 <pre><code class="language-bash">find . -type f -mtime -7
 </code></pre>
-<p><strong>Find files larger than 1MB</strong></p>
+<h3 id="find-files-larger-than-1mb">Find files larger than 1MB</h3>
 <pre><code class="language-bash">find . -type f -size +1M
 </code></pre>
 <h2 id="xargs">xargs</h2>
-<p><strong>Build and execute commands from standard input</strong></p>
+<h3 id="build-and-execute-commands-from-standard-input">Build and execute commands from standard input</h3>
 <pre><code class="language-bash"># Warning: This command can be dangerous. It will delete files listed by 'ls'.
 ls | xargs rm
 </code></pre>
 <h2 id="curl">curl</h2>
-<p><strong>Make a simple GET request</strong></p>
+<h3 id="make-a-simple-get-request">Make a simple GET request</h3>
 <pre><code class="language-bash">curl https://google.com
 </code></pre>
-<p><strong>Make a POST request with URL-encoded data</strong></p>
+<h3 id="make-a-post-request-with-url-encoded-data">Make a POST request with URL-encoded data</h3>
 <pre><code class="language-bash">curl -X POST -d &quot;param1=value1&amp;param2=value2&quot; https://google.com
 </code></pre>
-<p><strong>Make a POST request with a JSON file</strong></p>
+<h3 id="make-a-post-request-with-a-json-file">Make a POST request with a JSON file</h3>
 <pre><code class="language-bash">curl -X POST -H &quot;Content-Type: application/json&quot; -d @file.json https://google.com
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../istio/" class="btn btn-neutral float-left" title="Istio"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../aws/" class="btn btn-neutral float-left" title="AWS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../github-actions/" class="btn btn-neutral float-right" title="GitHub Actions">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -346,7 +431,7 @@ ls | xargs rm
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../istio/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../aws/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../github-actions/" style="color: #fcfcfc">Next &raquo;</a></span>
