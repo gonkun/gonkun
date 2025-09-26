@@ -47,35 +47,203 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Kubernetes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#run-pod">Run pod</a>
+    <li class="toctree-l2"><a class="reference internal" href="#common-commands">Common Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-pod">Run pod</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#run-pod-and-passing-a-command">Run pod and passing a command</a>
+    <li class="toctree-l3"><a class="reference internal" href="#run-pod-and-passing-a-command">Run pod and passing a command</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-info-about-cluster">Get info about cluster</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-info-about-cluster">Get info about cluster</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-all-pods">Get all pods</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-all-pods">Get all pods</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-resource-yaml">Get resource yaml</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-resource-yaml">Get resource yaml</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-list-of-crd-applied">Get list of CRD applied</a>
+    <li class="toctree-l3"><a class="reference internal" href="#get-list-of-crd-applied">Get list of CRD applied</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-pods-docker-images-in-a-specific-namespace">List pods Docker images in a specific namespace</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-pods-docker-images-in-a-specific-namespace">List pods Docker images in a specific namespace</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#restart-all-deployments-in-a-namespace">Restart all deployments in a namespace</a>
+    <li class="toctree-l3"><a class="reference internal" href="#restart-all-deployments-in-a-namespace">Restart all deployments in a namespace</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-running-pods-in-a-specific-namespace">List all running pods in a specific namespace</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-running-pods-in-a-specific-namespace">List all running pods in a specific namespace</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-non-running-pods-in-a-specific-namespace">List all non-running pods in a specific namespace</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-non-running-pods-in-a-specific-namespace">List all non-running pods in a specific namespace</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#create-tunnel-to-a-service-using-port-forward-like-a-ssh-tunnel">Create tunnel to a service using port-forward (like a SSH tunnel)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#create-tunnel-to-a-service-using-port-forward-like-a-ssh-tunnel">Create tunnel to a service using port-forward (like a SSH tunnel)</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-pvc-associated-with-their-respective-pod">List all PVC associated with their respective pod</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pvc-associated-with-their-respective-pod">List all PVC associated with their respective pod</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-pods-with-events-related-to-them">List all pods with events related to them</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pods-with-events-related-to-them">List all pods with events related to them</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-events-with-filter-typewarning">List all events with filter "type=Warning"</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-events-with-filter-typewarning">List all events with filter "type=Warning"</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-all-environment-variables-of-specific-pod">List all environment variables of specific pod</a>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-environment-variables-of-specific-pod">List all environment variables of specific pod</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-commands">Advanced Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-pod-multitool-for-testingdebugging-on-k8s">Run pod multitool for testing/debugging on k8s</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-of-nodes-and-their-memory-size">List of nodes and their memory size</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-of-nodes-and-the-number-of-pods-running-on-them">List of nodes and the number of pods running on them</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pods-sort-by-memory-usage">List all pods sort by memory usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pods-sorted-by-cpu-usage">List all pods sorted by cpu usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sorting-list-of-pods-in-this-case-by-the-number-of-restarts">Sorting list of pods (in this case, by the number of restarts)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-limits-and-requests-for-each-pod">Print limits and requests for each pod</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-all-services-and-their-respective-nodeports">Print all services and their respective nodePorts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#copy-secrets-from-a-namespace-to-another">Copy secrets from a namespace to another</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#logging-commands">Logging Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#print-logs-with-human-readable-timestamp">Print logs with human-readable timestamp</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-logs-from-all-pods-using-a-label-to-filter">Getting logs from all pods using a label to filter</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#kubetail">Kubetail</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-specific-container">Tail logs specific container</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-from-all-containers-on-specific-namespace">Tail logs from all containers on specific namespace</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stern">Stern</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-all-pods-on-specific-namespace">Tail logs all pods on specific namespace</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-all-pods-with-excluded">Tail logs all pods with excluded</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-specific-pods">Tail logs specific pods</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#definitions">Definitions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#external-dns">External DNS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#aws-load-balancer-controller">AWS Load Balancer Controller</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#emissary-ingress">Emissary Ingress</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides">Tutorials and Guides</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#local-cluster">Local Cluster</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#load-balancing-strategies">Load Balancing Strategies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#debugging-kubernetes-issues">Debugging Kubernetes Issues</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ingresses">Ingresses</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#certificates">Certificates</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dns">DNS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#networking">Networking</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#secrets">Secrets</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtual-kubernetes">Virtual Kubernetes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-commands_1">Advanced Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-pod-multitool-for-testingdebugging-on-k8s_1">Run pod multitool for testing/debugging on k8s</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-of-nodes-and-their-memory-size_1">List of nodes and their memory size</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-of-nodes-and-the-number-of-pods-running-on-them_1">List of nodes and the number of pods running on them</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pods-sort-by-memory-usage_1">List all pods sort by memory usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-all-pods-sorted-by-cpu-usage_1">List all pods sorted by cpu usage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sorting-list-of-pods-in-this-case-by-the-number-of-restarts_1">Sorting list of pods (in this case, by the number of restarts)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-limits-and-requests-for-each-pod_1">Print limits and requests for each pod</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-all-services-and-their-respective-nodeports_1">Print all services and their respective nodePorts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#copy-secrets-from-a-namespace-to-another_1">Copy secrets from a namespace to another</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#kubectl">Kubectl</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#print-logs-with-human-readable-timestamp_1">Print logs with human-readable timestamp</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#getting-logs-from-all-pods-using-a-label-to-filter_1">Getting logs from all pods using a label to filter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#kubetail_1">Kubetail</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-specific-container_1">Tail logs specific container</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-from-all-containers-on-specific-namespace_1">Tail logs from all containers on specific namespace</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stern_1">Stern</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-all-pods-on-specific-namespace_1">Tail logs all pods on specific namespace</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-all-pods-with-excluded_1">Tail logs all pods with excluded</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#tail-logs-specific-pods_1">Tail logs specific pods</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#definitions_1">Definitions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#external-dns_1">External DNS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#aws-load-balancer-controller_1">AWS Load Balancer Controller</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#emissary-ingress_1">Emissary Ingress</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials-and-guides_1">Tutorials and Guides</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#local-cluster_1">Local Cluster</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#load-balancing-strategies_1">Load Balancing Strategies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#debugging-kubernetes-issues_1">Debugging Kubernetes Issues</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ingresses_1">Ingresses</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#certificates_1">Certificates</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dns_1">DNS</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#networking_1">Networking</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#secrets_1">Secrets</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtual-kubernetes_1">Virtual Kubernetes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#troubleshooting_1">Troubleshooting</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -139,7 +307,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="common-commands">Common Commands</h2>
+                <h1 id="kubernetes">Kubernetes</h1>
+<h2 id="common-commands">Common Commands</h2>
 <h4 id="run-pod">Run pod</h4>
 <pre><code class="language-bash">kubectl run &lt;pod_name&gt; --image &lt;image&gt; -n &lt;namespace&gt;
 </code></pre>
