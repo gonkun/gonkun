@@ -122,7 +122,7 @@
                 <h1 id="python">Python</h1>
 <h2 id="useful-snippets">Useful Snippets</h2>
 <h3 id="edit-file-content-from-multiline-to-one-line-with-rn">Edit file content from multiline to one line with '\r\n'</h3>
-<pre><code class="language-Python">with open(&quot;crt_with_intermediate.crt&quot;, &quot;r&quot;) as f:
+<pre><code class="language-Python">with open(&quot;text_file.txt&quot;, &quot;r&quot;) as f:
   lines = f.read().splitlines()
 
 one_line = &quot;\\r\\n&quot;.join(lines)
