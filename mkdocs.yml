@@ -11,6 +11,7 @@ nav:
   - Terraform: terraform.md
   - AWS: aws.md
   - BASH: bash.md
+  - Python: python.md
   - GitHub Actions: github-actions.md
   - AI for DevOps: ai-for-devops.md
   - Networking: networking.md
@@ -21,3 +22,4 @@ theme:
   highlightjs: true
   hljs_languages:
     - yaml
+
