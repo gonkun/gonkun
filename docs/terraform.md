@@ -10,6 +10,7 @@
 - [Tools for Managing Terraform drift](https://www.tinystacks.com/blog-post/tools-for-managing-terraform-drift/)
 - [GitHub Actions: Terraform deployments with a review of planned changes](https://itnext.io/github-actions-terraform-deployments-with-a-review-of-planned-changes-30143358bb5c)
 - [Terraform Actions: Deep-Dive](https://mattias.engineer/blog/2025/terraform-actions-deep-dive/)
+- [The only Terraform pipeline you will ever need: GitHub Actions for Multi-Environment Deployments](https://medium.com/zencore/the-only-terraform-pipeline-you-will-ever-need-github-actions-for-multi-environment-deployments-a2cb25d72473)
 
 ## Best Practices
 
