@@ -1,4 +1,8 @@
-# SKILLS
+---
+name: mkdocs
+description: Herramientas y comandos para MkDocs.
+---
+# MkDocs
 
 Herramientas y comandos para MkDocs.
 

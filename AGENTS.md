@@ -11,7 +11,7 @@ Guia para agentes en Gon Docs (sitio personal con MkDocs).
 
 ## Entorno y requisitos
 - SO objetivo: Linux
-- Tooling base y editores: ver `SKILLS.md`
+- Tooling base y editores: ver `.opencode/skills/mkdocs/SKILL.md`
 
 ## Convenciones
 - Mantener cambios acotados y explicar como ejecutar el proyecto tocado.
