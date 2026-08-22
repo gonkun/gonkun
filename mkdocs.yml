@@ -17,6 +17,7 @@ nav:
   - Networking: networking.md
   - PostgreSQL: postgresql.md
   - Others: others.md
+  - Git: git.md
 
 theme:
   name: readthedocs
