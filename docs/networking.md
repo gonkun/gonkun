@@ -4,25 +4,27 @@
 
 ### Configure Router Mikrotik Replacing Router HGU Movistar/O2
 
-This guide explains different steps for configure my router Miktrotik hEX S replacing Movistar/O2 router HGU. this one will be used as ONT only.
+This guide documents how I configured a MikroTik hEX S as the main router behind a Movistar/O2 HGU. The HGU remains the optical endpoint in `Monopuesto` mode, while the MikroTik terminates PPPoE and provides routing, firewall, DHCP, DNS, and VPN services.
 
 #### Home Network Map
 
+[Open the interactive home network diagram](./home-network.html).
+
 ![Home Network Map](./images/home_network.png "Home Network Map")
-This is the network map which I configured following this guide.
+
+The image above is the original static map. The interactive diagram is a reviewed, source-backed version with guided views for Internet access, LAN services, and WireGuard remote access.
 
 #### Hard Reset
 
-This is optional. I did it because I configured this router years ago and I didn't remember which CIDR I've configured and credentials for login on it:
+This is optional. I reset the router because it had been configured years earlier and I no longer knew its management subnet or credentials:
 
-1. With unplugged router, press "Reset" button and plug it again.
-2. Release the button when green SFP LED starts flashing to reset RouterOS configuration to defaults. [More info](https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering)
-3. After router reboots, I can access to router config with IP `192.168.88.1` and credentials `username: admin` and no password. We need to modify our IP and set another inside CIDR `192.168.88.0/24`
+1. With the router unplugged, press and hold the **Reset** button, then reconnect the power.
+2. Release the button when the green SFP LED starts flashing to reset RouterOS to its defaults. [More info](https://help.mikrotik.com/docs/spaces/UM/pages/18350173/hEX+S#hEXS-Powering)
+3. After the router reboots, connect to `192.168.88.1` with user `admin` and no password. Temporarily configure the client with an address in `192.168.88.0/24`, then set a strong router password before continuing.
 
 #### Change default IP address
 
-Before start to configure anything, ust to reminder that we can manage a mikrotik router with a GUI like WinBox o WebFig, or using a command line terminal.
-I recommend to use WinBox but I added CLI commands for apply same config just doing copy-paste.
+MikroTik routers can be managed through WinBox, WebFig, or the RouterOS CLI. This guide uses WinBox screenshots and includes equivalent CLI commands.
 
 ##### WinBox
 
@@ -37,7 +39,7 @@ I recommend to use WinBox but I added CLI commands for apply same config just do
 
 ##### CLI
 
-Setting up a new Default IP for router on `bridge` interface using its id which is `0`
+Set the router's LAN address on the `bridge` interface. In this configuration, the existing address entry has ID `0`.
 
 ```bash
 ip/address/print where interface=bridge
@@ -55,48 +57,52 @@ Columns: ADDRESS, NETWORK, INTERFACE
 0 192.168.2.1/24  192.168.2.0  bridge
 ```
 
-#### Change HGU mode to bridge
+#### Change the HGU to Monopuesto mode
 
-We need to change how our Movistar/O2 HGU router is working. At the moment is working as ONT + Router. We want to change it its mode to just working as ONT.
+Change the HGU from its default routing mode to `Monopuesto` so the downstream MikroTik can establish the PPPoE session. The HGU still provides the optical termination and its management interface; it is not an unmanaged ONT.
 
-* Connect to HGU web panel http://192.168.1.1/
-* Disable DHCP service and Wi-Fi
-* Change mode form "**Multipuesto**" to "**Monopuesto**"
-* Connect cable from `eth1`port of this router to `eth1`port of Mikrotik router
+- Open the HGU web panel at [http://192.168.1.1/](http://192.168.1.1/).
+- Disable its DHCP service and Wi-Fi.
+- Change the mode from **Multipuesto** to **Monopuesto**.
+- Connect the HGU's `eth1` port to the MikroTik's `ether1` port.
 
-#### Configure VLAN
+#### Configure VLAN for a tagged handoff
 
-Movistar/O2 uses VLANs for offer data traffic, VoIP and TV services. We just need data traffic which its VLAN ID is `6`
+Movistar/O2 uses VLANs for Internet, VoIP, and TV services; Internet traffic uses VLAN ID `6`. Only create this interface when the handoff to the MikroTik is tagged, such as with a direct ONT. In the captured configuration, `internet_movistar` is running directly on `ether1`, so `vlan_internet_movistar` exists but is not part of the active PPPoE path.
+
+RouterOS recommends keeping the VLAN Layer 3 MTU at `1500`. PPPoE negotiates its own lower effective MTU; the screenshot below shows an older VLAN MTU value of `1492`.
 
 ##### WinBox
 
-* Go to **Interfaces** > Select tab **VLAN**
-* Click on **New**
-* Set next parameters/config:
+- Go to **Interfaces** and select the **VLAN** tab.
+- Click **New**.
+- Set these parameters:
   - **Name**: `vlan_internet_movistar`
-  - **MTU**: `1492`
+  - **MTU**: `1500`
   - **VLAN ID**: `6`
   - **Interface**: `ether1`
-* Click on **Apply** and **OK**
+- Click **Apply** and **OK**.
 
 ![VLAN Config](./images/vlan_config.png "VLAN Config")
 
 ##### CLI
 
 ```bash
-interface/vlan/add name=vlan_internet_movistar mtu=1492 vlan-id=6 interface=ether1
+interface/vlan/add name=vlan_internet_movistar vlan-id=6 interface=ether1
 
 
 interface/vlan/print
 Flags: R - RUNNING
 Columns: NAME, MTU, ARP, VLAN-ID, INTERFACE
 #   NAME                     MTU  ARP      VLAN-ID  INTERFACE
-0 R vlan_internet_movistar  1492  enabled        6  ether1
+0 R vlan_internet_movistar  1500  enabled        6  ether1
 ```
 
 #### Configure PPPoE Client (WAN)
 
-**PPPoE** (Point-to-Point Protocol over Ethernet) is used by many ISP, Movistar/O2 too. Configuring our Mikrotik with PPPoE we're establishing an individual and authenticed session with Movistar, which will provide me a publick IP address.
+**PPPoE** (Point-to-Point Protocol over Ethernet) establishes the authenticated session with Movistar/O2 and assigns the MikroTik a public IP address.
+
+The captured HGU `Monopuesto` setup exposes untagged PPPoE, so it uses `ether1`. For a tagged handoff, bind the PPPoE client to `vlan_internet_movistar` instead.
 
 ##### WinBox
 
@@ -120,15 +126,16 @@ interface/pppoe-client/add name=internet_movistar interface=ether1 user=adslppp@
 
 interface/pppoe-client/print
 Flags: X - disabled, I - invalid; R - running
- 0  R name="internet_movistar" max-mtu=auto max-mru=auto mrru=disabled interface=ether1 user="adslppp@telefonicanetpa>
+ 0  R name="internet_movistar" max-mtu=auto max-mru=auto mrru=disabled interface=ether1 user="adslppp@telefonicanetpa"
       password="adslppp" profile=default keepalive-timeout=10 service-name="" ac-name="" add-default-route=yes
       default-route-distance=1 dial-on-demand=no use-peer-dns=no allow=pap,chap,mschap1,mschap2
 ```
 
 #### Configure DHCP Server on LAN
 
-Configure DHCP range IP which router Mikrotik will lease to different hosts. Mikrotik offer a DHCP Server configured on virtual interface `bridge`.
-I just want to set range IP.
+Configure the address range that the MikroTik DHCP server leases to LAN clients. The default DHCP server runs on the `bridge` interface.
+
+The original map labels `192.168.2.10` through `192.168.2.26` as fixed client addresses, while the captured pool starts at `192.168.2.10`. The steps below use a non-overlapping dynamic range. Alternatively, keep the original range and convert every labelled client address to a static DHCP lease.
 
 ##### WinBox
 
@@ -143,10 +150,12 @@ I just want to set range IP.
 
 * Go to **IP** > **Pool**
 * Select IP pool named `dhcp-default`:
-  - **Address**: `192.168.2.10-192.168.2.254`
+  - **Address**: `192.168.2.100-192.168.2.254`
 * Click on **Apply** and **OK**
 
 ![DHCP Server Config 2](./images/dhcp_server_config_2.png "DHCP Server Config 2")
+
+The screenshot records the previous `192.168.2.10-192.168.2.254` pool.
 
 ##### CLI
 
@@ -160,17 +169,17 @@ Columns: ADDRESS, GATEWAY, DNS-SERVER
 ;;; defconf
 0 192.168.2.0/24  192.168.2.1  192.168.2.1
 
-ip/pool/set numbers=0 ranges=192.168.2.10-192.168.2.254
+ip/pool/set numbers=0 ranges=192.168.2.100-192.168.2.254
 
 ip/pool/print
 Columns: NAME, RANGES, TOTAL, USED, AVAILABLE
-#  NAME          RANGES                      TOTAL  USED  AVAILABLE
-0  default-dhcp  192.168.2.10-192.168.2.254    245     8        237
+#  NAME          RANGES                        TOTAL  USED  AVAILABLE
+0  default-dhcp  192.168.2.100-192.168.2.254    155     0        155
 ```
 
 #### Configure NAT on Firewall
 
-Just check if a NAT rule for Masquerade is configured
+Check that a source NAT masquerade rule exists for traffic leaving through the `WAN` interface list.
 
 ##### WinBox
 
@@ -184,14 +193,14 @@ Just check if a NAT rule for Masquerade is configured
     * **Action**: `masquerade`
   * Checkbox **Enabled** marked
 
-If not exists, creates a new one with this config.
+If it does not exist, create it with this configuration.
 ![Firewall NAT rule Masquerade General](./images/firewall_NAT_rule_1.png "Firewall NAT rule Masquerade General")
 ![Firewall NAT rule Masquerade Action](./images/firewall_NAT_rule_2.png "Firewall NAT rule Masquerade Action")
 
 ##### CLI
 
 ```bash
-ip/firewall/nat/add chain=srcnat action=masquerade out-interface=WAN comment="defconf:masquerade"
+ip/firewall/nat/add chain=srcnat action=masquerade out-interface-list=WAN comment="defconf:masquerade"
 
 
 ip/firewall/nat/print
@@ -202,7 +211,7 @@ Flags: X - disabled, I - invalid; D - dynamic
 
 #### Configure DNS Server
 
-Configure router Mikrotik as DNS server
+Configure the MikroTik as a caching DNS server for known LAN clients.
 
 ##### WinBox
 
@@ -218,24 +227,22 @@ Configure DNS server
   * **Cache Max TTL**: `06:00:00` (Optional)
 ![DNS Server Config](./images/DNS_server_1.png "DNS Server Config")
 
-Add Firewall rules for DNS requests
+Add firewall rules for DNS requests. Restrict both rules to the LAN; `allow-remote-requests=yes` without a source restriction can expose the router as an open resolver.
 
-* Go to **IP** > **Firewall**
-* Check or Add a rule allowing DNS traffic for TCP and UDP
-  * Click on **New**:
-    * **Chain**: `input`
-    * **Protocol**: `tcp`
-    * **Dst. Port**: `53`
-    * **Action**: `accept`
-  * Click on **Apply** and **OK**
-  * Click on **New**:
-    * **Chain**: `input`
-    * **Protocol**: `udp`
-    * **Dst. Port**: `53`
-    * **Action**: `accept`
-  * Click on **Apply** and **OK**
-  * Check both new rules are after rule allowing ICMP requests
+- Go to **IP** > **Firewall**.
+- Check or add rules allowing DNS traffic over TCP and UDP:
+  - Click **New**:
+    - **Chain**: `input`
+    - **In. Interface List**: `LAN`
+    - **Protocol**: `tcp`
+    - **Dst. Port**: `53`
+    - **Action**: `accept`
+  - Click **Apply** and **OK**.
+  - Create an equivalent rule with **Protocol** set to `udp`.
+  - Place both rules after the ICMP allow rule and before the rule that drops input not coming from the LAN.
 ![DNS Server Firewall Rules](./images/DNS_server_2.png "DNS Server Firewall Rules")
+
+The screenshot shows the earlier rules without an input-interface restriction. Do not reproduce that part of the captured configuration. If WireGuard clients should also use this resolver, add equivalent rules limited to `src-address=192.168.100.0/24`.
 
 Configure DNS by DHCP clients
 
@@ -250,10 +257,11 @@ Configure DNS by DHCP clients
 ##### CLI
 
 ```bash
+ip/firewall/filter/add chain=input action=accept in-interface-list=LAN protocol=udp dst-port=53 comment="allow LAN DNS over UDP" place-before=[find where comment="defconf: drop all not coming from LAN"]
+ip/firewall/filter/add chain=input action=accept in-interface-list=LAN protocol=tcp dst-port=53 comment="allow LAN DNS over TCP" place-before=[find where comment="defconf: drop all not coming from LAN"]
+
 ip/dns/set servers="1.1.1.1,1.0.0.1,8.8.8.8,8.8.4.4" allow-remote-requests=yes cache-max-ttl=6h
 
-
-ip/dns/print
 
 ip/dns/print
                       servers: 1.1.1.1
@@ -283,40 +291,49 @@ ip/dns/print
 
 #### Configure WireGuard VPN
 
-Mikrotik supports WireGuard VPNs since RouterOS version **7.1**, so we need to upgrade RouterOS before if our version is older.
-In this case, we configure a VPN connection between router Mikrotik and my Smart PHone but it could be configure with any device which supports WireGuard.
+MikroTik supports WireGuard from RouterOS **7.1** onward. Upgrade RouterOS first if the installed version is older.
 
-This video help me a lot:
+This example connects a phone to the MikroTik, but the same approach works with any WireGuard-compatible client.
+
+This video was a useful reference:
 [Configurar VPN Wireguard - Mikrotik en tu telefono](https://www.youtube.com/watch?v=x409B6SO3as)
 
 ##### WinBox
 
-Starting configure a VPN WireGuard server.
+Create the WireGuard interface:
 
 * Go to **WireGuard** > **New**
 * On tab **General**:
   * **Name**: `wireguard1`
   * **Listen Port**: `13231`
   * **MTU**: `1420`
-  * Click on **Apply** and **Private Key** and **Private Key** will be generated randomly 
+  * Click **Apply**. RouterOS generates the private and public keys.
 ![WireGuard Server](./images/WireGuard_server_1.png "WireGuard Server")
 
-Create Addres IP for new interface
+Assign an IP address to the new interface:
 
 * Go to **IP** > **Addresses** > **New**
-* Configure next parameters:
+* Configure these parameters:
   * **Enabled**: marked
-  * **Address**:`192.168.100.1/24`
-  * **Network**: `192.189.100.0`
+  * **Address**: `192.168.100.1/24`
+  * **Network**: `192.168.100.0`
   * **Interface**: `wireguard1`
 
-Create Peers on server.
-In this case I created a peer for my mobile phone, so I've created a peer on my mobile phone. 
+Create a peer on the server. This example uses a mobile phone whose WireGuard address is `192.168.100.10/32`.
 
 * Go to **WireGuard**
 * On tab **Peers** > **New**
   * **Enabled**: marked
   * **Name**: `realme_gon`
-  * **interface**: `wireguard1`
-  * **Public Key**: `<Public Key client created on my mobile phoen when I created a peer there>`
-  * **Allowed Address**: `192.168.100.10/32` This IP I assigned on my phone when I created a peer there
+  * **Interface**: `wireguard1`
+  * **Public Key**: `<public key generated by the WireGuard client>`
+  * **Allowed Address**: `192.168.100.10/32`
+
+The server also needs a WAN input rule for UDP port `13231` and a forward rule from the WireGuard subnet to the home LAN. Place both before the relevant drop rules:
+
+```bash
+ip/firewall/filter/add chain=input action=accept in-interface-list=WAN protocol=udp dst-port=13231 comment="allow WireGuard" place-before=[find where comment="defconf: drop all not coming from LAN"]
+ip/firewall/filter/add chain=forward action=accept src-address=192.168.100.0/24 dst-address=192.168.2.0/24 comment="allow WireGuard to LAN" place-before=[find where comment="defconf: fasttrack"]
+```
+
+On the phone, configure its tunnel address as `192.168.100.10/32`, use the MikroTik's WireGuard public key, set the endpoint to the router's public IP or DNS name on UDP port `13231`, and include `192.168.2.0/24` in `AllowedIPs`. Use `192.168.2.1` as DNS only after adding the VPN-specific DNS firewall rules described above.

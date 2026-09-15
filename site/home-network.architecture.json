@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Gon's Home Network",
+    "output": "home-network.html",
+    "quality_profile": "showcase",
+    "viewBox": [1280, 720],
+    "repository": {
+      "url": "https://github.com/gonkun/gonkun",
+      "provider": "github",
+      "revision": "e1c43c99bc3c0dd17d39e1ad56619b9c7cd62533"
+    },
+    "views": [
+      {
+        "id": "internet-path",
+        "label": "Internet path",
+        "focus": ["internet", "hgu", "mikrotik", "wired-clients", "asus-ap", "wifi-fixed", "wifi-dynamic"],
+        "note": "Follow Internet access from the Movistar/O2 edge to wired and wireless clients."
+      },
+      {
+        "id": "network-services",
+        "label": "LAN services",
+        "focus": ["mikrotik", "asus-ap", "dns-resolvers", "wired-clients", "wifi-fixed", "wifi-dynamic"],
+        "note": "The MikroTik provides routing, NAT, DHCP and DNS; the ASUS provides switching and Wi-Fi."
+      },
+      {
+        "id": "remote-access",
+        "label": "Remote access",
+        "focus": ["vpn-phone", "mikrotik"],
+        "note": "A phone reaches the home LAN through the WireGuard subnet."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "internet",
+      "type": "external",
+      "label": "Internet",
+      "sublabel": "Movistar / O2",
+      "pos": [40, 285],
+      "size": [130, 64]
+    },
+    {
+      "id": "hgu",
+      "type": "cloud",
+      "label": "HGU O2",
+      "sublabel": "ONT / Monopuesto",
+      "tag": "192.168.1.1",
+      "pos": [245, 285],
+      "size": [150, 72],
+      "sources": [
+        {"path": "docs/networking.md", "line": 58, "end_line": 65, "label": "Bridge-mode setup"},
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "setup-laptop",
+      "type": "external",
+      "label": "Setup laptop",
+      "sublabel": "Temporary ONT access",
+      "tag": "192.168.1.10",
+      "pos": [245, 500],
+      "size": [150, 72],
+      "sources": [
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "mikrotik",
+      "type": "security",
+      "label": "MikroTik hEX S",
+      "sublabel": "Router / firewall",
+      "tag": "LAN gateway 192.168.2.1",
+      "pos": [505, 285],
+      "size": [180, 78],
+      "sources": [
+        {"path": "docs/networking.md", "line": 22, "end_line": 56, "label": "LAN gateway"},
+        {"path": "docs/networking.md", "line": 128, "end_line": 201, "label": "DHCP and NAT"},
+        {"path": "docs/images/change_default_IP.png", "label": "RouterOS addresses"}
+      ]
+    },
+    {
+      "id": "vpn-phone",
+      "type": "external",
+      "label": "Realme Gon",
+      "sublabel": "WireGuard peer",
+      "tag": "192.168.100.10",
+      "pos": [520, 55],
+      "size": [150, 72],
+      "sources": [
+        {"path": "docs/networking.md", "line": 284, "end_line": 322, "label": "WireGuard setup"},
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "asus-ap",
+      "type": "cloud",
+      "label": "ASUS RT-N66U",
+      "sublabel": "Access point + switch",
+      "tag": "192.168.2.2",
+      "pos": [770, 155],
+      "size": [170, 76],
+      "sources": [
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "wired-clients",
+      "type": "frontend",
+      "label": "Wired clients",
+      "sublabel": "TV / desktop / laptop / console",
+      "tag": "192.168.2.10 - .13",
+      "pos": [1035, 350],
+      "size": [190, 82],
+      "sources": [
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "wifi-fixed",
+      "type": "frontend",
+      "label": "Wi-Fi fixed clients",
+      "sublabel": "iPad / laptop / Thermomix",
+      "tag": "192.168.2.21 / .22 / .26",
+      "pos": [1035, 95],
+      "size": [190, 82],
+      "sources": [
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "wifi-dynamic",
+      "type": "frontend",
+      "label": "Wi-Fi dynamic clients",
+      "sublabel": "Phones and watches",
+      "tag": "DHCP leases",
+      "pos": [1035, 210],
+      "size": [190, 78],
+      "sources": [
+        {"path": "docs/networking.md", "line": 128, "end_line": 169, "label": "DHCP pool"},
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
+      "id": "dns-resolvers",
+      "type": "external",
+      "label": "Public DNS resolvers",
+      "sublabel": "Cloudflare + Google",
+      "tag": "1.1.1.1 / 8.8.8.8",
+      "pos": [770, 505],
+      "size": [170, 76],
+      "sources": [
+        {"path": "docs/networking.md", "line": 203, "end_line": 280, "label": "DNS setup"},
+        {"path": "docs/images/DNS_server_1.png", "label": "RouterOS DNS"}
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "HGU management network | 192.168.1.0/24",
+      "wraps": ["hgu", "setup-laptop"],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Home LAN | 192.168.2.0/24",
+      "wraps": ["mikrotik", "asus-ap", "wired-clients", "wifi-fixed", "wifi-dynamic"],
+      "pad": 24
+    },
+    {
+      "kind": "security-group",
+      "label": "WireGuard | 192.168.100.0/24",
+      "wraps": ["vpn-phone"],
+      "pad": 20
+    }
+  ],
+  "connections": [
+    {
+      "id": "internet-to-hgu",
+      "from": "internet",
+      "to": "hgu",
+      "label": "fiber access",
+      "variant": "emphasis"
+    },
+    {
+      "id": "hgu-to-mikrotik",
+      "from": "hgu",
+      "to": "mikrotik",
+      "label": "Ethernet / PPPoE",
+      "variant": "emphasis"
+    },
+    {
+      "id": "hgu-to-setup",
+      "from": "hgu",
+      "to": "setup-laptop",
+      "label": "temporary management",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [320, 371]
+    },
+    {
+      "id": "mikrotik-to-wired",
+      "from": "mikrotik",
+      "to": "wired-clients",
+      "label": "Ethernet / static leases"
+    },
+    {
+      "id": "mikrotik-to-asus",
+      "from": "mikrotik",
+      "to": "asus-ap",
+      "label": "LAN uplink"
+    },
+    {
+      "id": "asus-to-fixed",
+      "from": "asus-ap",
+      "to": "wifi-fixed",
+      "label": "Wi-Fi / fixed addresses",
+      "labelAt": [965, 135]
+    },
+    {
+      "id": "asus-to-dynamic",
+      "from": "asus-ap",
+      "to": "wifi-dynamic",
+      "label": "Wi-Fi / DHCP"
+    },
+    {
+      "id": "vpn-to-mikrotik",
+      "from": "vpn-phone",
+      "to": "mikrotik",
+      "label": "WireGuard UDP 13231",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [595, 141]
+    },
+    {
+      "id": "mikrotik-to-dns",
+      "from": "mikrotik",
+      "to": "dns-resolvers",
+      "label": "recursive DNS forwarding",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Routing",
+      "items": [
+        "The HGU remains the optical endpoint in Monopuesto mode",
+        "The MikroTik terminates PPPoE and provides NAT for the home LAN"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "LAN services",
+      "items": [
+        "DHCP pool: 192.168.2.10-192.168.2.254",
+        "DNS gateway: 192.168.2.1 with Cloudflare and Google upstreams",
+        "The ASUS operates only as an access point and switch"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Review note",
+      "items": [
+        "RouterOS shows vlan_internet_movistar on ether1",
+        "The PPPoE screenshot binds internet_movistar directly to ether1, so the VLAN interface is not on the documented traffic path"
+      ]
+    }
+  ]
+}
