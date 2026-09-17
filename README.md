@@ -20,7 +20,7 @@ Most of my expertise has been acquired through hands-on experience and continuou
 
 ## 📫 Contact
 
-- **Email:** gonzalo.sanchter@gmail.com
+- **Email:** gsanchez@protonmail.com
 - **LinkedIn:** [gsanchezterrones](https://www.linkedin.com/in/gsanchezterrones/?locale=en_US)
 
 ---
