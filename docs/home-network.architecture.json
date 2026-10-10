@@ -22,7 +22,7 @@
         "id": "network-services",
         "label": "LAN services",
         "focus": ["mikrotik", "asus-ap", "dns-resolvers", "wired-clients", "wifi-fixed", "wifi-dynamic"],
-        "note": "The MikroTik provides routing, NAT, DHCP and DNS; the ASUS provides switching and Wi-Fi."
+        "note": "The MikroTik provides routing, NAT, DHCP and DNS; the TP-Link provides switching and Wi-Fi."
       },
       {
         "id": "remote-access",
@@ -96,7 +96,7 @@
     {
       "id": "asus-ap",
       "type": "cloud",
-      "label": "ASUS RT-N66U",
+      "label": "TP-Link Archer BE3600 WiFi 7",
       "sublabel": "Access point + switch",
       "tag": "192.168.2.2",
       "pos": [770, 155],
@@ -121,7 +121,7 @@
       "id": "wifi-fixed",
       "type": "frontend",
       "label": "Wi-Fi fixed clients",
-      "sublabel": "iPad / laptop / Thermomix",
+      "sublabel": "iPad / Gon Desktop Wireless / Thermomix",
       "tag": "192.168.2.21 / .22 / .26",
       "pos": [1035, 95],
       "size": [190, 82],
@@ -259,7 +259,7 @@
       "items": [
         "DHCP pool: 192.168.2.10-192.168.2.254",
         "DNS gateway: 192.168.2.1 with Cloudflare and Google upstreams",
-        "The ASUS operates only as an access point and switch"
+        "The TP-Link operates only as an access point and switch"
       ]
     },
     {

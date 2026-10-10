@@ -12,7 +12,11 @@ This guide documents how I configured a MikroTik hEX S as the main router behind
 
 ![Home Network Map](./images/home_network.png "Home Network Map")
 
-The image above is the original static map. The interactive diagram is a reviewed, source-backed version with guided views for Internet access, LAN services, and WireGuard remote access.
+The image above is the static map. The interactive diagram is a reviewed, source-backed version with guided views for Internet access, LAN services, and WireGuard remote access.
+
+The network uses a TP-Link Archer BE3600 WiFi 7 in access point and switch mode
+at `192.168.2.2`. Gon Desktop Wireless is a fixed Wi-Fi client at
+`192.168.2.22`.
 
 #### Hard Reset
 
