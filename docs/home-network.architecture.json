@@ -257,7 +257,7 @@
       "dot": "emerald",
       "title": "LAN services",
       "items": [
-        "DHCP pool: 192.168.2.10-192.168.2.254",
+        "DHCP pool: 192.168.2.100-192.168.2.254",
         "DNS gateway: 192.168.2.1 with Cloudflare and Google upstreams",
         "The TP-Link operates only as an access point and switch"
       ]
