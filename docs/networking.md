@@ -18,6 +18,10 @@ The network uses a TP-Link Archer BE3600 WiFi 7 in access point and switch mode
 at `192.168.2.2`. Gon Desktop Wireless is a fixed Wi-Fi client at
 `192.168.2.22`.
 
+Only the TV (`192.168.2.10`) is wired directly to the MikroTik. The desktop,
+laptop, and console (`192.168.2.11` through `192.168.2.13`) connect to the
+TP-Link's switch instead.
+
 #### Hard Reset
 
 This is optional. I reset the router because it had been configured years earlier and I no longer knew its management subnet or credentials:

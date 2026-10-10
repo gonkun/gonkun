@@ -15,20 +15,20 @@
       {
         "id": "internet-path",
         "label": "Internet path",
-        "focus": ["internet", "hgu", "mikrotik", "wired-clients", "asus-ap", "wifi-fixed", "wifi-dynamic"],
+        "focus": ["internet", "hgu", "mikrotik", "tv", "wired-clients", "asus-ap", "wifi-fixed", "wifi-dynamic"],
         "note": "Follow Internet access from the Movistar/O2 edge to wired and wireless clients."
       },
       {
         "id": "network-services",
         "label": "LAN services",
-        "focus": ["mikrotik", "asus-ap", "dns-resolvers", "wired-clients", "wifi-fixed", "wifi-dynamic"],
+        "focus": ["mikrotik", "asus-ap", "dns-resolvers", "tv", "wired-clients", "wifi-fixed", "wifi-dynamic"],
         "note": "The MikroTik provides routing, NAT, DHCP and DNS; the TP-Link provides switching and Wi-Fi."
       },
       {
         "id": "remote-access",
         "label": "Remote access",
         "focus": ["vpn-phone", "mikrotik"],
-        "note": "A phone reaches the home LAN through the WireGuard subnet."
+        "note": "A remote phone reaches the home LAN over the Internet through WireGuard."
       }
     ]
   },
@@ -84,9 +84,9 @@
       "id": "vpn-phone",
       "type": "external",
       "label": "Realme Gon",
-      "sublabel": "WireGuard peer",
+      "sublabel": "Remote WireGuard peer",
       "tag": "192.168.100.10",
-      "pos": [520, 55],
+      "pos": [245, 55],
       "size": [150, 72],
       "sources": [
         {"path": "docs/networking.md", "line": 284, "end_line": 322, "label": "WireGuard setup"},
@@ -106,11 +106,23 @@
       ]
     },
     {
+      "id": "tv",
+      "type": "frontend",
+      "label": "LG OLED 65\" TV",
+      "sublabel": "Wired static client",
+      "tag": "192.168.2.10",
+      "pos": [505, 400],
+      "size": [180, 72],
+      "sources": [
+        {"path": "docs/images/home_network.png", "label": "Original map"}
+      ]
+    },
+    {
       "id": "wired-clients",
       "type": "frontend",
-      "label": "Wired clients",
-      "sublabel": "TV / desktop / laptop / console",
-      "tag": "192.168.2.10 - .13",
+      "label": "Wired static clients",
+      "sublabel": "Desktop / laptop / console",
+      "tag": "192.168.2.11 - .13",
       "pos": [1035, 350],
       "size": [190, 82],
       "sources": [
@@ -120,7 +132,7 @@
     {
       "id": "wifi-fixed",
       "type": "frontend",
-      "label": "Wi-Fi fixed clients",
+      "label": "Wi-Fi static clients",
       "sublabel": "iPad / Gon Desktop Wireless / Thermomix",
       "tag": "192.168.2.21 / .22 / .26",
       "pos": [1035, 95],
@@ -166,7 +178,7 @@
     {
       "kind": "region",
       "label": "Home LAN | 192.168.2.0/24",
-      "wraps": ["mikrotik", "asus-ap", "wired-clients", "wifi-fixed", "wifi-dynamic"],
+      "wraps": ["mikrotik", "asus-ap", "tv", "wired-clients", "wifi-fixed", "wifi-dynamic"],
       "pad": 24
     },
     {
@@ -202,10 +214,13 @@
       "labelAt": [320, 371]
     },
     {
-      "id": "mikrotik-to-wired",
+      "id": "mikrotik-to-tv",
       "from": "mikrotik",
-      "to": "wired-clients",
-      "label": "Ethernet / static leases"
+      "to": "tv",
+      "label": "Ethernet / static IP",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [660, 385]
     },
     {
       "id": "mikrotik-to-asus",
@@ -217,7 +232,7 @@
       "id": "asus-to-fixed",
       "from": "asus-ap",
       "to": "wifi-fixed",
-      "label": "Wi-Fi / fixed addresses",
+      "label": "Wi-Fi / static IPs",
       "labelAt": [965, 135]
     },
     {
@@ -230,18 +245,28 @@
       "id": "vpn-to-mikrotik",
       "from": "vpn-phone",
       "to": "mikrotik",
-      "label": "WireGuard UDP 13231",
+      "label": "WireGuard over Internet / UDP 13231",
       "variant": "security",
       "fromSide": "bottom",
       "toSide": "top",
-      "labelAt": [595, 141]
+      "labelAt": [455, 185]
     },
     {
       "id": "mikrotik-to-dns",
       "from": "mikrotik",
       "to": "dns-resolvers",
       "label": "recursive DNS forwarding",
-      "variant": "dashed"
+      "variant": "dashed",
+      "labelAt": [810, 485]
+    },
+    {
+      "id": "asus-to-wired",
+      "from": "asus-ap",
+      "to": "wired-clients",
+      "label": "Ethernet / static IPs",
+      "fromSide": "bottom",
+      "toSide": "left",
+      "labelAt": [905, 325]
     }
   ],
   "cards": [
